@@ -29,8 +29,8 @@ export const ListSection: React.FC<SectionProps> = ({
   const getBackgroundColor = () => {
     const colorMap = {
       green: 'bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800',
-      blue: 'bg-gradient-to-br from-blue-50/50 to-cyan-50/50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800',
-      purple: 'bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-200 dark:border-purple-800',
+      blue: 'bg-gradient-to-br from-green-50/50 to-green-50/50 dark:from-green-900/20 dark:to-green-900/20 border-green-200 dark:border-green-800',
+      green: 'bg-gradient-to-br from-green-50/50 to-green-50/50 dark:from-green-900/20 dark:to-green-900/20 border-green-200 dark:border-green-800',
       orange: 'bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-900/20 dark:to-yellow-900/20 border-orange-200 dark:border-orange-800',
       gray: 'bg-gradient-to-br from-gray-50/50 to-slate-50/50 dark:from-gray-900/20 dark:to-slate-900/20 border-gray-200 dark:border-gray-800',
     };

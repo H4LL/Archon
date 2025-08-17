@@ -2,10 +2,10 @@ import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 interface ThemeToggleProps {
-  accentColor?: 'purple' | 'green' | 'pink' | 'blue';
+  accentColor?: 'green' | 'green';
 }
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({
-  accentColor = 'blue'
+  accentColor = 'green'
 }) => {
   const {
     theme,
@@ -15,11 +15,11 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
   const accentColorMap = {
-    purple: {
-      border: 'border-purple-300 dark:border-purple-500/30',
-      hover: 'hover:border-purple-400 dark:hover:border-purple-500/60',
-      text: 'text-purple-600 dark:text-purple-500',
-      bg: 'from-purple-100/80 to-purple-50/60 dark:from-white/10 dark:to-black/30'
+    green: {
+      border: 'border-green-300 dark:border-green-500/30',
+      hover: 'hover:border-green-400 dark:hover:border-green-500/60',
+      text: 'text-green-600 dark:text-green-500',
+      bg: 'from-green-100/80 to-green-50/60 dark:from-white/10 dark:to-black/30'
     },
     green: {
       border: 'border-emerald-300 dark:border-emerald-500/30',
@@ -27,21 +27,21 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
       text: 'text-emerald-600 dark:text-emerald-500',
       bg: 'from-emerald-100/80 to-emerald-50/60 dark:from-white/10 dark:to-black/30'
     },
-    pink: {
-      border: 'border-pink-300 dark:border-pink-500/30',
-      hover: 'hover:border-pink-400 dark:hover:border-pink-500/60',
-      text: 'text-pink-600 dark:text-pink-500',
-      bg: 'from-pink-100/80 to-pink-50/60 dark:from-white/10 dark:to-black/30'
+    green: {
+      border: 'border-green-300 dark:border-green-500/30',
+      hover: 'hover:border-green-400 dark:hover:border-green-500/60',
+      text: 'text-green-600 dark:text-green-500',
+      bg: 'from-green-100/80 to-green-50/60 dark:from-white/10 dark:to-black/30'
     },
     blue: {
-      border: 'border-blue-300 dark:border-blue-500/30',
-      hover: 'hover:border-blue-400 dark:hover:border-blue-500/60',
-      text: 'text-blue-600 dark:text-blue-500',
-      bg: 'from-blue-100/80 to-blue-50/60 dark:from-white/10 dark:to-black/30'
+      border: 'border-green-300 dark:border-green-500/30',
+      hover: 'hover:border-green-400 dark:hover:border-green-500/60',
+      text: 'text-green-600 dark:text-green-500',
+      bg: 'from-green-100/80 to-green-50/60 dark:from-white/10 dark:to-black/30'
     }
   };
   return <button onClick={toggleTheme} className={`
-        relative p-2 rounded-md backdrop-blur-md 
+        relative p-2 rounded-md bg-white dark:bg-black 
         bg-gradient-to-b ${accentColorMap[accentColor].bg}
         border ${accentColorMap[accentColor].border} ${accentColorMap[accentColor].hover}
         ${accentColorMap[accentColor].text}

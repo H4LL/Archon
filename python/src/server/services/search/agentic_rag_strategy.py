@@ -12,6 +12,7 @@ Key features:
 - Programming language and framework-aware search
 """
 
+import os
 from typing import Any
 
 from supabase import Client
@@ -88,8 +89,11 @@ class AgenticRAGStrategy:
             "agentic_code_search", query_length=len(query), match_count=match_count
         ) as span:
             try:
+                # Get the LLM provider to use correct embedding model
+                provider = os.getenv("LLM_PROVIDER", "openai")
+                
                 # Create embedding for the query (no enhancement)
-                query_embedding = await create_embedding(query)
+                query_embedding = await create_embedding(query, provider=provider)
 
                 if not query_embedding:
                     logger.error("Failed to create embedding for code example query")

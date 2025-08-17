@@ -31,11 +31,11 @@ export const ClientCard = ({
   // Status-based styling
   const statusConfig = {
     online: {
-      color: isArchonClient ? 'archon' : 'cyan',
-      glow: isArchonClient ? 'shadow-[0_0_25px_rgba(59,130,246,0.7),0_0_15px_rgba(168,85,247,0.5)] dark:shadow-[0_0_35px_rgba(59,130,246,0.8),0_0_20px_rgba(168,85,247,0.7)]' : 'shadow-[0_0_15px_rgba(34,211,238,0.5)] dark:shadow-[0_0_20px_rgba(34,211,238,0.7)]',
-      border: isArchonClient ? 'border-blue-400/60 dark:border-blue-500/60' : 'border-cyan-400/50 dark:border-cyan-500/40',
-      badge: isArchonClient ? 'bg-blue-500/30 text-blue-400 border-blue-500/40' : 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
-      pulse: isArchonClient ? 'bg-blue-400' : 'bg-cyan-400'
+      color: isArchonClient ? 'archon' : 'green',
+      glow: isArchonClient ? 'shadow-[0_0_25px_rgba(#50c878,0.7),0_0_15px_rgba(#50c878,0.5)] dark:shadow-[0_0_35px_rgba(#50c878,0.8),0_0_20px_rgba(#50c878,0.7)]' : 'shadow-[0_0_15px_rgba(34,211,238,0.5)] dark:shadow-[0_0_20px_rgba(34,211,238,0.7)]',
+      border: isArchonClient ? 'border-green-400/60 dark:border-green-500/60' : 'border-green-400/50 dark:border-green-500/40',
+      badge: isArchonClient ? 'bg-green-500/30 text-green-400 border-green-500/40' : 'bg-green-500/20 text-green-400 border-green-500/30',
+      pulse: isArchonClient ? 'bg-green-400' : 'bg-green-400'
     },
     offline: {
       color: 'gray',
@@ -45,11 +45,11 @@ export const ClientCard = ({
       pulse: 'bg-gray-400'
     },
     error: {
-      color: 'pink',
-      glow: 'shadow-[0_0_15px_rgba(236,72,153,0.5)] dark:shadow-[0_0_20px_rgba(236,72,153,0.7)]',
-      border: 'border-pink-400/50 dark:border-pink-500/40',
-      badge: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
-      pulse: 'bg-pink-400'
+      color: 'green',
+      glow: 'shadow-[0_0_15px_rgba(80,200,120,0.5)] dark:shadow-[0_0_20px_rgba(80,200,120,0.7)]',
+      border: 'border-green-400/50 dark:border-green-500/40',
+      badge: 'bg-green-500/20 text-green-400 border-green-500/30',
+      pulse: 'bg-green-400'
     }
   };
 
@@ -235,7 +235,7 @@ export const ClientCard = ({
   };
 
   // Special background for Archon client
-  const archonBackground = isArchonClient ? 'bg-gradient-to-b from-white/80 via-blue-50/30 to-white/60 dark:from-white/10 dark:via-blue-900/10 dark:to-black/30' : 'bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30';
+  const archonBackground = isArchonClient ? 'bg-gradient-to-b from-white/80 via-green-50/30 to-white/60 dark:from-white/10 dark:via-green-900/10 dark:to-black/30' : 'bg-white dark:bg-black dark:from-white/10 dark:to-black/30';
 
   return (
     <div 
@@ -248,7 +248,7 @@ export const ClientCard = ({
       <div className={`relative w-full h-full transition-all duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-y-180' : ''} ${isHovered && !isFlipped ? 'hover-lift' : ''}`}>
         {/* Front Side */}
         <div 
-          className={`absolute w-full h-full backface-hidden backdrop-blur-md ${archonBackground} rounded-xl p-5 ${currentStatus.border} ${currentStatus.glow} transition-all duration-300 ${isArchonClient ? 'archon-card-border overflow-hidden' : ''}`} 
+          className={`absolute w-full h-full backface-hidden bg-white dark:bg-black ${archonBackground} rounded-xl p-5 ${currentStatus.border} ${currentStatus.glow} transition-all duration-300 ${isArchonClient ? 'archon-card-border overflow-hidden' : ''}`} 
           ref={isArchonClient ? particlesRef : undefined}
         >
           {/* Particle container for Archon client */}
@@ -261,7 +261,7 @@ export const ClientCard = ({
           {/* Subtle aurora glow effect for Archon client */}
           {isArchonClient && (
             <div className="absolute inset-0 rounded-xl overflow-hidden opacity-20">
-              <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(59,130,246,0.8)_0%,rgba(168,85,247,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
+              <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(#50c878,0.8)_0%,rgba(#50c878,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
             </div>
           )}
 
@@ -273,7 +273,7 @@ export const ClientCard = ({
               client.status === 'offline' 
                 ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' 
                 : 'bg-orange-200/50 dark:bg-orange-900/50 hover:bg-orange-300/50 dark:hover:bg-orange-800/50'
-            } transition-colors transform hover:scale-110 transition-transform duration-200 z-20 ${isConnecting ? 'animate-pulse' : ''}`} 
+            } transition-colors transform hover:scale-105 transition-transform duration-200 z-20 ${isConnecting ? 'animate-pulse' : ''}`} 
             title={client.status === 'offline' ? 'Connect client' : 'Disconnect client'}
           >
             {client.status === 'offline' ? (
@@ -287,10 +287,10 @@ export const ClientCard = ({
           {onEdit && (
             <button 
               onClick={handleEdit} 
-              className={`absolute top-3 right-12 p-1.5 rounded-full ${isArchonClient ? 'bg-blue-200/50 dark:bg-blue-900/50 hover:bg-blue-300/50 dark:hover:bg-blue-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-110 transition-transform duration-200 z-20`} 
+              className={`absolute top-3 right-12 p-1.5 rounded-full ${isArchonClient ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-105 transition-transform duration-200 z-20`} 
               title="Edit client configuration"
             >
-              <Settings className={`w-4 h-4 ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`} />
+              <Settings className={`w-4 h-4 ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
             </button>
           )}
 
@@ -301,7 +301,7 @@ export const ClientCard = ({
                 e.stopPropagation();
                 onDelete(client);
               }} 
-              className="absolute top-3 right-[84px] p-1.5 rounded-full bg-red-200/50 dark:bg-red-900/50 hover:bg-red-300/50 dark:hover:bg-red-800/50 transition-colors transform hover:scale-110 transition-transform duration-200 z-20"
+              className="absolute top-3 right-[84px] p-1.5 rounded-full bg-red-200/50 dark:bg-red-900/50 hover:bg-red-300/50 dark:hover:bg-red-800/50 transition-colors transform hover:scale-105 transition-transform duration-200 z-20"
               title="Delete client"
             >
               <Trash2 className="w-4 h-4 text-red-600 dark:text-red-400" />
@@ -311,9 +311,9 @@ export const ClientCard = ({
           {/* Client info */}
           <div className="flex items-start">
             {isArchonClient ? (
-              <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 mr-3 relative pulse-soft">
-                <img src="/logo-neon.svg" alt="Archon" className="w-6 h-6 drop-shadow-[0_0_8px_rgba(59,130,246,0.8)] animate-glow-pulse" />
-                <div className="absolute inset-0 rounded-lg bg-blue-500/10 animate-pulse opacity-60"></div>
+              <div className="p-3 rounded-lg bg-gradient-to-br from-green-500/20 to-green-500/20 mr-3 relative pulse-soft">
+                <img src="/xanadu-logo.svg" alt="Archon" className="w-6 h-6 drop-shadow-[0_0_8px_rgba(#50c878,0.8)] animate-glow-pulse" />
+                <div className="absolute inset-0 rounded-lg bg-green-500/10 animate-pulse opacity-60"></div>
               </div>
             ) : (
               <div className={`p-3 rounded-lg bg-${currentStatus.color}-500/10 text-${currentStatus.color}-400 mr-3 pulse-soft`}>
@@ -322,7 +322,7 @@ export const ClientCard = ({
             )}
             
             <div>
-              <h3 className={`font-bold text-gray-800 dark:text-white text-lg ${isArchonClient ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text animate-text-shimmer' : ''}`}>
+              <h3 className={`font-bold text-gray-800 dark:text-white text-lg ${isArchonClient ? 'bg-gradient-to-r from-green-400 to-green-500 text-transparent bg-clip-text animate-text-shimmer' : ''}`}>
                 {client.name}
               </h3>
               <p className="text-gray-500 dark:text-gray-400 text-sm">
@@ -342,14 +342,14 @@ export const ClientCard = ({
             <div className="flex items-center text-sm">
               <Activity className="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2" />
               <span className="text-gray-700 dark:text-gray-300">Version:</span>
-              <span className={`text-gray-600 dark:text-gray-400 ml-auto ${isArchonClient ? 'font-medium text-blue-600 dark:text-blue-400' : ''}`}>
+              <span className={`text-gray-600 dark:text-gray-400 ml-auto ${isArchonClient ? 'font-medium text-green-600 dark:text-green-400' : ''}`}>
                 {client.version}
               </span>
             </div>
             <div className="flex items-center text-sm">
               <Hammer className="w-4 h-4 text-gray-500 dark:text-gray-400 mr-2" />
               <span className="text-gray-700 dark:text-gray-300">Tools:</span>
-              <span className={`text-gray-600 dark:text-gray-400 ml-auto ${isArchonClient ? 'font-medium text-blue-600 dark:text-blue-400' : ''}`}>
+              <span className={`text-gray-600 dark:text-gray-400 ml-auto ${isArchonClient ? 'font-medium text-green-600 dark:text-green-400' : ''}`}>
                 {client.tools.length} available
               </span>
             </div>
@@ -384,19 +384,19 @@ export const ClientCard = ({
           {/* Tools button - with Hammer icon */}
           <button 
             onClick={toggleFlip} 
-            className={`absolute bottom-4 right-4 p-1.5 rounded-full ${isArchonClient ? 'bg-blue-200/50 dark:bg-blue-900/50 hover:bg-blue-300/50 dark:hover:bg-blue-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-110 transition-transform duration-200 z-10`} 
+            className={`absolute bottom-4 right-4 p-1.5 rounded-full ${isArchonClient ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-105 transition-transform duration-200 z-10`} 
             title="View available tools"
           >
-            <Hammer className={`w-4 h-4 ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`} />
+            <Hammer className={`w-4 h-4 ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
           </button>
         </div>
 
         {/* Back Side */}
-        <div className={`absolute w-full h-full backface-hidden backdrop-blur-md ${archonBackground} rounded-xl p-5 rotate-y-180 ${currentStatus.border} ${currentStatus.glow} transition-all duration-300 ${isArchonClient ? 'archon-card-border' : ''}`}>
+        <div className={`absolute w-full h-full backface-hidden bg-white dark:bg-black ${archonBackground} rounded-xl p-5 rotate-y-180 ${currentStatus.border} ${currentStatus.glow} transition-all duration-300 ${isArchonClient ? 'archon-card-border' : ''}`}>
           {/* Subtle aurora glow effect for Archon client */}
           {isArchonClient && (
             <div className="absolute inset-0 rounded-xl overflow-hidden opacity-20">
-              <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(59,130,246,0.8)_0%,rgba(168,85,247,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
+              <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(#50c878,0.8)_0%,rgba(#50c878,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
             </div>
           )}
 
@@ -408,7 +408,7 @@ export const ClientCard = ({
               client.status === 'offline' 
                 ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' 
                 : 'bg-orange-200/50 dark:bg-orange-900/50 hover:bg-orange-300/50 dark:hover:bg-orange-800/50'
-            } transition-colors transform hover:scale-110 transition-transform duration-200 z-20 ${isConnecting ? 'animate-pulse' : ''}`} 
+            } transition-colors transform hover:scale-105 transition-transform duration-200 z-20 ${isConnecting ? 'animate-pulse' : ''}`} 
             title={client.status === 'offline' ? 'Connect client' : 'Disconnect client'}
           >
             {client.status === 'offline' ? (
@@ -422,10 +422,10 @@ export const ClientCard = ({
           {onEdit && (
             <button 
               onClick={handleEdit} 
-              className={`absolute top-3 right-12 p-1.5 rounded-full ${isArchonClient ? 'bg-blue-200/50 dark:bg-blue-900/50 hover:bg-blue-300/50 dark:hover:bg-blue-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-110 transition-transform duration-200 z-20`} 
+              className={`absolute top-3 right-12 p-1.5 rounded-full ${isArchonClient ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-105 transition-transform duration-200 z-20`} 
               title="Edit client configuration"
             >
-              <Settings className={`w-4 h-4 ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`} />
+              <Settings className={`w-4 h-4 ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
             </button>
           )}
 
@@ -436,15 +436,15 @@ export const ClientCard = ({
                 e.stopPropagation();
                 onDelete(client);
               }} 
-              className="absolute top-3 right-[84px] p-1.5 rounded-full bg-red-200/50 dark:bg-red-900/50 hover:bg-red-300/50 dark:hover:bg-red-800/50 transition-colors transform hover:scale-110 transition-transform duration-200 z-20"
+              className="absolute top-3 right-[84px] p-1.5 rounded-full bg-red-200/50 dark:bg-red-900/50 hover:bg-red-300/50 dark:hover:bg-red-800/50 transition-colors transform hover:scale-105 transition-transform duration-200 z-20"
               title="Delete client"
             >
               <Trash2 className="w-4 h-4 text-red-600 dark:text-red-400" />
             </button>
           )}
 
-          <h3 className={`font-bold text-gray-800 dark:text-white mb-3 flex items-center ${isArchonClient ? 'bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text animate-text-shimmer' : ''}`}>
-            <Hammer className={`w-4 h-4 mr-2 ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`} />
+          <h3 className={`font-bold text-gray-800 dark:text-white mb-3 flex items-center ${isArchonClient ? 'bg-gradient-to-r from-green-400 to-green-500 text-transparent bg-clip-text animate-text-shimmer' : ''}`}>
+            <Hammer className={`w-4 h-4 mr-2 ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
             Available Tools ({client.tools.length})
           </h3>
 
@@ -461,10 +461,10 @@ export const ClientCard = ({
               client.tools.map(tool => (
                 <div 
                   key={tool.id} 
-                  className={`p-2 rounded-md ${isArchonClient ? 'bg-blue-50/50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/50 hover:border-blue-300 dark:hover:border-blue-600/50' : 'bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 hover:border-gray-300 dark:hover:border-gray-600/50'} transition-colors transform hover:translate-x-1 transition-transform duration-200`}
+                  className={`p-2 rounded-md ${isArchonClient ? 'bg-green-50/50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/50 hover:border-green-300 dark:hover:border-green-600/50' : 'bg-gray-100/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 hover:border-gray-300 dark:hover:border-gray-600/50'} transition-colors transform hover:translate-x-1 transition-transform duration-200`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`font-mono text-xs ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                    <span className={`font-mono text-xs ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-green-600 dark:text-green-400'}`}>
                       {tool.name}
                     </span>
                     <ChevronRight className="w-3 h-3 text-gray-400" />
@@ -496,10 +496,10 @@ export const ClientCard = ({
           {/* Flip button - back to front */}
           <button 
             onClick={toggleFlip} 
-            className={`absolute bottom-4 right-4 p-1.5 rounded-full ${isArchonClient ? 'bg-blue-200/50 dark:bg-blue-900/50 hover:bg-blue-300/50 dark:hover:bg-blue-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-110 transition-transform duration-200 z-10`} 
+            className={`absolute bottom-4 right-4 p-1.5 rounded-full ${isArchonClient ? 'bg-green-200/50 dark:bg-green-900/50 hover:bg-green-300/50 dark:hover:bg-green-800/50' : 'bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300/50 dark:hover:bg-gray-700/50'} transition-colors transform hover:scale-105 transition-transform duration-200 z-10`} 
             title="Show client details"
           >
-            <Server className={`w-4 h-4 ${isArchonClient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`} />
+            <Server className={`w-4 h-4 ${isArchonClient ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
           </button>
         </div>
       </div>

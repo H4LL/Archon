@@ -139,7 +139,7 @@ export const ProviderStep = ({ onSaved, onSkip }: ProviderStepProps) => {
               href="https://platform.openai.com/api-keys"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+              className="text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300 flex items-center gap-1"
             >
               Get an API key from OpenAI
               <ExternalLink className="w-3 h-3" />
@@ -173,8 +173,8 @@ export const ProviderStep = ({ onSaved, onSkip }: ProviderStepProps) => {
       {/* Non-OpenAI Provider Message */}
       {provider !== 'openai' && (
         <div className="space-y-4">
-          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
+          <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <p className="text-sm text-green-800 dark:text-green-200">
               {provider === 'google' && 'Google Gemini configuration will be available in Settings after setup.'}
               {provider === 'ollama' && 'Ollama configuration will be available in Settings after setup. Make sure Ollama is running locally.'}
             </p>

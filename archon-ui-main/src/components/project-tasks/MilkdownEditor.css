@@ -20,7 +20,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #a855f7);
+  background: linear-gradient(90deg, #50c878, #50c878);
   opacity: 0.8;
 }
 
@@ -97,13 +97,13 @@
 
 /* Links */
 .milkdown-crepe-editor a {
-  color: #3b82f6;
+  color: #50c878;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .milkdown-crepe-editor a:hover {
-  color: #2563eb;
+  color: #50c878;
   text-decoration: underline;
 }
 
@@ -155,7 +155,7 @@
 
 /* Blockquotes */
 .milkdown-crepe-editor blockquote {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid #50c878;
   padding-left: 1rem;
   margin: 1rem 0;
   color: #6b7280;
@@ -222,8 +222,8 @@
 }
 
 .milkdown-crepe-editor .toolbar-item:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: #50c878;
+  border-color: #50c878;
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);

@@ -48,14 +48,14 @@ export const MarkdownSectionRenderer: React.FC<MarkdownSectionRendererProps> = (
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             {section.title}
           </h2>
-          <div className="mt-1 h-0.5 w-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+          <div className="mt-1 h-0.5 w-16 bg-gradient-to-r from-green-500 to-green-500 rounded-full"></div>
         </div>
 
         {/* Section Content */}
         <div className="relative">
           {/* Subtle background for sections with complex content */}
           {(section.type === 'code' || section.type === 'mixed') && (
-            <div className="absolute inset-0 bg-gray-50/30 dark:bg-gray-900/20 rounded-xl -m-4 backdrop-blur-sm border border-gray-200/30 dark:border-gray-700/30"></div>
+            <div className="absolute inset-0 bg-gray-50/30 dark:bg-gray-900/20 rounded-xl -m-4 bg-white dark:bg-black border border-gray-200/30 dark:border-gray-700/30"></div>
           )}
           
           <div className="relative z-10">

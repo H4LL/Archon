@@ -3,14 +3,14 @@ import '../../styles/toggle.css';
 interface ToggleProps {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
-  accentColor?: 'purple' | 'green' | 'pink' | 'blue' | 'orange';
+  accentColor?: 'green' | 'green' | 'orange';
   icon?: React.ReactNode;
   disabled?: boolean;
 }
 export const Toggle: React.FC<ToggleProps> = ({
   checked,
   onCheckedChange,
-  accentColor = 'blue',
+  accentColor = 'green',
   icon,
   disabled = false
 }) => {

@@ -309,7 +309,7 @@ export const MCPClients = memo(() => {
     return (
       <div className="relative min-h-[80vh] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading MCP clients...</p>
         </div>
       </div>
@@ -343,7 +343,7 @@ export const MCPClients = memo(() => {
           onClick={() => setIsAddClientModalOpen(true)}
           variant="primary"
           accentColor="cyan"
-          className="shadow-cyan-500/20 shadow-sm"
+          className="shadow-green-500/20 shadow-sm"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Client
@@ -497,9 +497,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onSubm
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white/90 dark:bg-black/90 border border-gray-200 dark:border-gray-800 rounded-lg p-6 w-full max-w-md relative backdrop-blur-lg">
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.6)]"></div>
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-center justify-center z-50">
+      <div className="bg-white/90 dark:bg-black/90 border border-gray-200 dark:border-gray-800 rounded-lg p-6 w-full max-w-md relative bg-white dark:bg-black">
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-green-600 shadow-[0_0_10px_rgba(34,211,238,0.6)]"></div>
         
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
           Add New MCP Client
@@ -515,7 +515,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onSubm
               type="text" 
               value={formData.name}
               onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
               placeholder="Enter client name" 
               required
             />
@@ -530,7 +530,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onSubm
               type="text" 
               value={formData.url}
               onChange={(e) => setFormData(prev => ({ ...prev, url: e.target.value }))}
-              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
               placeholder="http://host.docker.internal:8051/mcp" 
               required
             />
@@ -726,15 +726,15 @@ const EditClientDrawer: React.FC<EditClientDrawerProps> = ({ client, isOpen, onC
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end justify-center z-50" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-end justify-center z-50" onClick={onClose}>
       <div 
-        className="bg-white/90 dark:bg-black/90 border border-gray-200 dark:border-gray-800 rounded-t-lg p-6 w-full max-w-2xl relative backdrop-blur-lg animate-slide-up max-h-[90vh] overflow-y-auto"
+        className="bg-white/90 dark:bg-black/90 border border-gray-200 dark:border-gray-800 rounded-t-lg p-6 w-full max-w-2xl relative bg-white dark:bg-black animate-slide-up max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.6)]"></div>
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-green-600 shadow-[0_0_10px_rgba(34,211,238,0.6)]"></div>
         
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-          <Settings className="w-5 h-5 mr-2 text-cyan-500" />
+          <Settings className="w-5 h-5 mr-2 text-green-500" />
           Edit Client Configuration
         </h3>
         
@@ -748,7 +748,7 @@ const EditClientDrawer: React.FC<EditClientDrawerProps> = ({ client, isOpen, onC
               type="text" 
               value={editFormData.name}
               onChange={(e) => setEditFormData(prev => ({ ...prev, name: e.target.value }))}
-              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
               required
             />
           </div>
@@ -762,7 +762,7 @@ const EditClientDrawer: React.FC<EditClientDrawerProps> = ({ client, isOpen, onC
               type="text" 
               value={editFormData.url}
               onChange={(e) => setEditFormData(prev => ({ ...prev, url: e.target.value }))}
-              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500" 
+              className="w-full px-3 py-2 bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
               placeholder="http://host.docker.internal:8051/mcp" 
               required
             />
@@ -821,7 +821,7 @@ const EditClientDrawer: React.FC<EditClientDrawerProps> = ({ client, isOpen, onC
               <Button 
                 type="button"
                 variant="ghost" 
-                accentColor="pink"
+                accentColor="green"
                 onClick={handleDelete}
               >
                 Delete Client

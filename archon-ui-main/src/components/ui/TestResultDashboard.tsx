@@ -56,7 +56,7 @@ const TestSummaryCard: React.FC<TestSummaryCardProps> = ({ results, isLoading })
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
-          <Activity className="w-5 h-5 animate-pulse text-blue-500" />
+          <Activity className="w-5 h-5 animate-pulse text-green-500" />
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
             Loading Test Results...
           </h3>
@@ -108,7 +108,7 @@ const TestSummaryCard: React.FC<TestSummaryCardProps> = ({ results, isLoading })
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <TestTube className="w-6 h-6 text-blue-500" />
+          <TestTube className="w-6 h-6 text-green-500" />
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
             Test Summary
           </h3>
@@ -344,7 +344,7 @@ export const TestResultDashboard: React.FC<TestResultDashboardProps> = ({
       {/* Header with refresh */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Target className="w-6 h-6 text-blue-500" />
+          <Target className="w-6 h-6 text-green-500" />
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
             Test Results Dashboard
           </h2>
@@ -358,7 +358,7 @@ export const TestResultDashboard: React.FC<TestResultDashboardProps> = ({
           <button
             onClick={loadTestData}
             disabled={loading}
-            className="flex items-center gap-2 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors disabled:opacity-50"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             Refresh

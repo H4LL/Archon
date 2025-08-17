@@ -10,6 +10,7 @@ import { credentialsService } from '../../services/credentialsService';
 interface RAGSettingsProps {
   ragSettings: {
     MODEL_CHOICE: string;
+    RAG_AGENT_MODEL?: string;
     USE_CONTEXTUAL_EMBEDDINGS: boolean;
     CONTEXTUAL_EMBEDDINGS_MAX_WORKERS: number;
     USE_HYBRID_SEARCH: boolean;
@@ -112,7 +113,7 @@ export const RAGSettings = ({
         </div>
 
         {/* Model Settings Row */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-3 gap-4 mb-6">
           <div>
             <Input 
               label="Chat Model" 
@@ -123,6 +124,19 @@ export const RAGSettings = ({
               })} 
               placeholder={getModelPlaceholder(ragSettings.LLM_PROVIDER || 'openai')}
               accentColor="green" 
+            />
+          </div>
+          <div>
+            <Input
+              label="RAG Agent Model"
+              value={ragSettings.RAG_AGENT_MODEL || ''}
+              onChange={e => setRagSettings({
+                ...ragSettings,
+                RAG_AGENT_MODEL: e.target.value
+              })}
+              placeholder="e.g. openai:gpt-4o-mini or ollama:llama3.2"
+              accentColor="green"
+              title="Model used by the RAG agent for chat responses"
             />
           </div>
           <div>
@@ -140,7 +154,7 @@ export const RAGSettings = ({
         </div>
         
         {/* Second row: Contextual Embeddings, Max Workers, and description */}
-        <div className="grid grid-cols-8 gap-4 mb-4 p-4 rounded-lg border border-green-500/20 shadow-[0_2px_8px_rgba(34,197,94,0.1)]">
+        <div className="grid grid-cols-8 gap-4 mb-4 p-4 rounded-lg border border-green-500/20 shadow-sm">
           <div className="col-span-4">
             <CustomCheckbox 
               id="contextualEmbeddings" 
@@ -167,7 +181,7 @@ export const RAGSettings = ({
                         CONTEXTUAL_EMBEDDINGS_MAX_WORKERS: parseInt(e.target.value, 10) || 3
                       })}
                       className="w-14 h-10 pl-1 pr-7 text-center font-medium rounded-md 
-                        bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black 
+                        bg-white dark:bg-black dark:from-gray-900 dark:to-black 
                         border border-green-500/30 
                         text-gray-900 dark:text-white
                         focus:border-green-500 focus:shadow-[0_0_15px_rgba(34,197,94,0.4)]
@@ -221,7 +235,7 @@ export const RAGSettings = ({
             </div>
           <div className="col-span-3">
             {ragSettings.USE_CONTEXTUAL_EMBEDDINGS && (
-              <p className="text-xs text-green-900 dark:text-blue-600 mt-2">
+              <p className="text-xs text-green-900 dark:text-green-600 mt-2">
                 Controls parallel processing for embeddings (1-10)
               </p>
             )}
@@ -530,7 +544,7 @@ const CustomCheckbox = ({
         <label 
           htmlFor={id}
           className="relative w-5 h-5 rounded-md transition-all duration-200 cursor-pointer
-            bg-gradient-to-b from-white/80 to-white/60 dark:from-white/5 dark:to-black/40
+            bg-white dark:bg-black dark:from-white/5 dark:to-black/40
             border border-gray-300 dark:border-gray-700
             peer-checked:border-green-500 dark:peer-checked:border-green-500/50
             peer-checked:bg-gradient-to-b peer-checked:from-green-500/20 peer-checked:to-green-600/20

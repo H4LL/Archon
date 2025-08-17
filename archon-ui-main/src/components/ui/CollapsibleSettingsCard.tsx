@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PowerButton } from './PowerButton';
+import { ChevronDown } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface CollapsibleSettingsCardProps {
   title: string;
   icon: LucideIcon;
-  accentColor?: 'purple' | 'green' | 'pink' | 'blue' | 'cyan' | 'orange';
   children: React.ReactNode;
   defaultExpanded?: boolean;
   storageKey?: string;
@@ -15,13 +14,11 @@ interface CollapsibleSettingsCardProps {
 export const CollapsibleSettingsCard: React.FC<CollapsibleSettingsCardProps> = ({
   title,
   icon: Icon,
-  accentColor = 'blue',
   children,
   defaultExpanded = true,
   storageKey
 }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const [isFlickering, setIsFlickering] = useState(false);
 
   // Load saved state from localStorage
   useEffect(() => {
@@ -34,95 +31,51 @@ export const CollapsibleSettingsCard: React.FC<CollapsibleSettingsCardProps> = (
   }, [storageKey]);
 
   const handleToggle = () => {
-    if (isExpanded) {
-      // Start flicker animation when collapsing
-      setIsFlickering(true);
-      setTimeout(() => {
-        setIsExpanded(false);
-        setIsFlickering(false);
-        if (storageKey) {
-          localStorage.setItem(`settings-card-${storageKey}`, 'false');
-        }
-      }, 300); // Duration of flicker animation
-    } else {
-      // No flicker when expanding
-      setIsExpanded(true);
-      if (storageKey) {
-        localStorage.setItem(`settings-card-${storageKey}`, 'true');
-      }
+    const newState = !isExpanded;
+    setIsExpanded(newState);
+    if (storageKey) {
+      localStorage.setItem(`settings-card-${storageKey}`, String(newState));
     }
   };
 
-  const iconColorMap = {
-    purple: 'text-purple-500 filter drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]',
-    green: 'text-green-500 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]',
-    pink: 'text-pink-500 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.8)]',
-    blue: 'text-blue-500 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]',
-    cyan: 'text-cyan-500 filter drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]',
-    orange: 'text-orange-500 filter drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]'
-  };
-
   return (
-    <motion.div
-      animate={isFlickering ? {
-        opacity: [1, 0.3, 1, 0.5, 1, 0.2, 1],
-      } : {}}
-      transition={{
-        duration: 0.3,
-        times: [0, 0.1, 0.2, 0.3, 0.6, 0.8, 1],
-      }}
-    >
-      <div>
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center">
-            <Icon className={`mr-2 ${iconColorMap[accentColor]} size-5`} />
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-              {title}
-            </h2>
-          </div>
-          <PowerButton
-            isOn={isExpanded}
-            onClick={handleToggle}
-            color={accentColor}
-            size={36}
-          />
+    <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden transition-all duration-300">
+      {/* Header */}
+      <button
+        onClick={handleToggle}
+        className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors duration-200"
+      >
+        <div className="flex items-center">
+          <Icon className="mr-3 text-green-500 size-5" />
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+            {title}
+          </h2>
         </div>
+        <motion.div
+          animate={{ rotate: isExpanded ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown className="size-5 text-gray-400" />
+        </motion.div>
+      </button>
 
-        {/* Content */}
-        <AnimatePresence mode="wait">
-          {isExpanded && !isFlickering && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{
-                height: {
-                  duration: 0.3,
-                  ease: [0.04, 0.62, 0.23, 0.98]
-                },
-                opacity: {
-                  duration: 0.2,
-                  ease: "easeInOut"
-                }
-              }}
-              style={{ overflow: 'hidden' }}
-            >
-              <motion.div
-                initial={{ y: -20 }}
-                animate={{ y: 0 }}
-                exit={{ y: -20 }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeOut"
-                }}
-              >
+      {/* Content */}
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <div className="px-6 pb-6 border-t border-gray-100 dark:border-gray-800">
+              <div className="pt-4">
                 {children}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };

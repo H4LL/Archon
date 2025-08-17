@@ -92,14 +92,14 @@ export const DraggableTaskCard = ({
   
   // Subtle highlight effect for related tasks - applied to the card, not parent
   const highlightGlow = isHighlighted 
-    ? 'border-cyan-400/50 shadow-[0_0_8px_rgba(34,211,238,0.2)]' 
+    ? 'border-green-400/50 shadow-[0_0_8px_rgba(34,211,238,0.2)]' 
     : '';
     
   // Simplified hover effect - just a glowing border
-  const hoverEffectClasses = 'group-hover:border-cyan-400/70 dark:group-hover:border-cyan-500/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] dark:group-hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]';
+  const hoverEffectClasses = 'group-hover:border-green-400/70 dark:group-hover:border-green-500/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] dark:group-hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]';
   
   // Base card styles with proper rounded corners
-  const cardBaseStyles = 'bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-gray-700 rounded-lg';
+  const cardBaseStyles = 'bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-gray-700 rounded-lg';
   
   // Transition settings
   const transitionStyles = 'transition-all duration-200 ease-in-out';
@@ -126,7 +126,7 @@ export const DraggableTaskCard = ({
           {/* Content container with fixed padding - exactly matching back side structure */}
           <div className="flex flex-col h-full p-3">
             <div className="flex items-center gap-2 mb-2 pl-1.5">
-              <div className="px-2 py-1 rounded-md text-xs font-medium flex items-center gap-1 backdrop-blur-md" 
+              <div className="px-2 py-1 rounded-md text-xs font-medium flex items-center gap-1 bg-white dark:bg-black" 
                    style={{
                      backgroundColor: `${task.featureColor}20`,
                      color: task.featureColor,
@@ -158,13 +158,13 @@ export const DraggableTaskCard = ({
                     e.stopPropagation();
                     onView();
                   }} 
-                  className="w-5 h-5 rounded-full flex items-center justify-center bg-cyan-100/80 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-200 dark:hover:bg-cyan-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
+                  className="w-5 h-5 rounded-full flex items-center justify-center bg-green-100/80 dark:bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
                 >
                   <Edit className="w-3 h-3" />
                 </button>
                 <button 
                   onClick={toggleFlip} 
-                  className="w-5 h-5 rounded-full flex items-center justify-center bg-cyan-100/80 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-200 dark:hover:bg-cyan-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
+                  className="w-5 h-5 rounded-full flex items-center justify-center bg-green-100/80 dark:bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
                 >
                   <RefreshCw className="w-3 h-3" />
                 </button>
@@ -180,7 +180,7 @@ export const DraggableTaskCard = ({
             
             <div className="flex items-center justify-between mt-auto pt-2 pl-1.5 pr-3">
               <div className="flex items-center gap-2">
-                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white/80 dark:bg-black/70 border border-gray-300/50 dark:border-gray-700/50 backdrop-blur-md" 
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-white/80 dark:bg-black/70 border border-gray-300/50 dark:border-gray-700/50 bg-white dark:bg-black" 
                      style={{boxShadow: getAssigneeGlow(task.assignee?.name || 'User')}}
                 >
                   {getAssigneeIcon(task.assignee?.name || 'User')}
@@ -223,7 +223,7 @@ export const DraggableTaskCard = ({
               </h4>
               <button 
                 onClick={toggleFlip} 
-                className="ml-auto w-5 h-5 rounded-full flex items-center justify-center bg-cyan-100/80 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-200 dark:hover:bg-cyan-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
+                className="ml-auto w-5 h-5 rounded-full flex items-center justify-center bg-green-100/80 dark:bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
               >
                 <RefreshCw className="w-3 h-3" />
               </button>

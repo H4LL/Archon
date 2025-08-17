@@ -9,6 +9,7 @@ import { DocsTab } from '../components/project-tasks/DocsTab';
 import { TasksTab } from '../components/project-tasks/TasksTab';
 import { Button } from '../components/ui/Button';
 import { ChevronRight, ShoppingCart, Code, Briefcase, Layers, Plus, X, AlertCircle, Loader2, Heart, BarChart3, Trash2, Pin, ListTodo, Activity, CheckCircle2, Clipboard } from 'lucide-react';
+import { XanaduLogo } from '../components/ui/XanaduLogo';
 
 // Import our service layer and types
 import { projectService } from '../services/projectService';
@@ -60,7 +61,7 @@ export function ProjectPage({
   const [newProjectForm, setNewProjectForm] = useState({
     title: '',
     description: '',
-    color: 'blue' as const
+    color: 'green' as const
   });
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   
@@ -645,14 +646,14 @@ export function ProjectPage({
       {/* Page Header with New Project Button */}
       <motion.div className="flex items-center justify-between mb-8" variants={itemVariants}>
         <motion.h1 className="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-3" variants={titleVariants}>
-          <img src="/logo-neon.svg" alt="Projects" className="w-7 h-7 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+          <XanaduLogo className="text-green-500 dark:text-white" />
           Projects
         </motion.h1>
         <Button 
           onClick={() => setIsNewProjectModalOpen(true)} 
           variant="primary" 
-          accentColor="purple" 
-          className="shadow-lg shadow-purple-500/20"
+          accentColor="green" 
+          className="shadow-lg shadow-green-500/20"
         >
           <Plus className="w-4 h-4 mr-2 inline" />
           <span>New Project</span>
@@ -664,7 +665,7 @@ export function ProjectPage({
         <motion.div variants={itemVariants} className="mb-10">
           <div className="flex items-center justify-center py-12">
             <div className="text-center">
-              <Loader2 className="w-8 h-8 text-purple-500 mx-auto mb-4 animate-spin" />
+              <Loader2 className="w-8 h-8 text-green-500 mx-auto mb-4 animate-spin" />
               <p className="text-gray-600 dark:text-gray-400">Loading your projects...</p>
             </div>
           </div>
@@ -677,7 +678,7 @@ export function ProjectPage({
             <div className="text-center">
               <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-4" />
               <p className="text-red-600 dark:text-red-400 mb-4">{projectsError}</p>
-              <Button onClick={loadProjects} variant="primary" accentColor="purple">
+              <Button onClick={loadProjects} variant="primary" accentColor="green">
                 Try Again
               </Button>
             </div>
@@ -733,24 +734,24 @@ export function ProjectPage({
                   variants={itemVariants} 
                   onClick={() => handleProjectSelect(project)} 
                   className={`
-                    relative p-4 rounded-xl backdrop-blur-md w-72 cursor-pointer overflow-hidden
+                    relative p-4 rounded-xl bg-white dark:bg-black w-72 cursor-pointer overflow-hidden
                     ${project.pinned
-                      ? 'bg-gradient-to-b from-purple-100/80 via-purple-50/30 to-purple-100/50 dark:from-purple-900/30 dark:via-purple-900/20 dark:to-purple-900/10'
+                      ? 'bg-gradient-to-b from-green-100/80 via-green-50/30 to-green-100/50 dark:from-green-900/30 dark:via-green-900/20 dark:to-green-900/10'
                       : selectedProject?.id === project.id 
-                        ? 'bg-gradient-to-b from-white/70 via-purple-50/20 to-white/50 dark:from-white/5 dark:via-purple-900/5 dark:to-black/20' 
-                        : 'bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30'
+                        ? 'bg-gradient-to-b from-white/70 via-green-50/20 to-white/50 dark:from-white/5 dark:via-green-900/5 dark:to-black/20' 
+                        : 'bg-white dark:bg-black dark:from-white/10 dark:to-black/30'
                     }
                     border ${project.pinned
-                      ? 'border-purple-500/80 dark:border-purple-500/80 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                      ? 'border-green-500/80 dark:border-green-500/80 shadow-[0_0_15px_rgba(#50c878,0.3)]'
                       : selectedProject?.id === project.id 
-                        ? 'border-purple-400/60 dark:border-purple-500/60' 
-                        : 'border-gray-200 dark:border-zinc-800/50'
+                        ? 'border-green-400/60 dark:border-green-500/60' 
+                        : 'border-gray-200 dark:border-gray-200 dark:border-gray-800'
                     }
                     ${selectedProject?.id === project.id
-                      ? 'shadow-[0_0_15px_rgba(168,85,247,0.4),0_0_10px_rgba(147,51,234,0.3)] dark:shadow-[0_0_20px_rgba(168,85,247,0.5),0_0_15px_rgba(147,51,234,0.4)]'
-                      : 'shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]'
+                      ? 'shadow-[0_0_15px_rgba(#50c878,0.4),0_0_10px_rgba(147,51,234,0.3)] dark:shadow-[0_0_20px_rgba(#50c878,0.5),0_0_15px_rgba(147,51,234,0.4)]'
+                      : 'shadow-sm dark:shadow-sm'
                     }
-                    hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_15px_40px_-15px_rgba(0,0,0,0.9)]
+                    hover:shadow-sm dark:hover:shadow-sm
                     transition-all duration-300
                     ${selectedProject?.id === project.id ? 'translate-y-[-2px]' : 'hover:translate-y-[-2px]'}
                   `}
@@ -758,7 +759,7 @@ export function ProjectPage({
                   {/* Subtle aurora glow effect for selected card */}
                   {selectedProject?.id === project.id && (
                     <div className="absolute inset-0 rounded-xl overflow-hidden opacity-30 dark:opacity-40">
-                      <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(168,85,247,0.8)_0%,rgba(147,51,234,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
+                      <div className="absolute -inset-[100px] bg-[radial-gradient(circle,rgba(#50c878,0.8)_0%,rgba(147,51,234,0.6)_40%,transparent_70%)] blur-3xl animate-[pulse_8s_ease-in-out_infinite]"></div>
                     </div>
                   )}
 
@@ -776,36 +777,36 @@ export function ProjectPage({
                       {/* Neon pill boxes for task counts */}
                       {/* Todo pill */}
                       <div className="relative flex-1">
-                        <div className={`absolute inset-0 bg-pink-600 rounded-full blur-md ${selectedProject?.id === project.id ? 'opacity-30 dark:opacity-75' : 'opacity-0'}`}></div>
-                        <div className={`relative flex items-center h-12 backdrop-blur-sm rounded-full border shadow-sm transition-all duration-300 ${
+                        <div className={`absolute inset-0 bg-green-600 rounded-full blur-md ${selectedProject?.id === project.id ? 'opacity-30 dark:opacity-75' : 'opacity-0'}`}></div>
+                        <div className={`relative flex items-center h-12 bg-white dark:bg-black rounded-full border shadow-sm transition-all duration-300 ${
                           selectedProject?.id === project.id 
-                            ? 'bg-white/70 dark:bg-zinc-900/90 border-pink-300 dark:border-pink-500/50 dark:shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(236,72,153,0.7)]' 
+                            ? 'bg-white/70 dark:bg-zinc-900/90 border-green-300 dark:border-green-500/50 dark:shadow-[0_0_10px_rgba(80,200,120,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(80,200,120,0.7)]' 
                             : 'bg-white/30 dark:bg-zinc-900/30 border-gray-300/50 dark:border-gray-700/50'
                         }`}>
                           <div className="flex flex-col items-center justify-center px-2 min-w-[40px]">
-                            <ListTodo className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`} />
-                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`}>ToDo</span>
+                            <ListTodo className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`} />
+                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>ToDo</span>
                           </div>
-                          <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-pink-300 dark:border-pink-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
-                            <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.todo || 0}</span>
+                          <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-green-300 dark:border-green-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
+                            <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.todo || 0}</span>
                           </div>
                         </div>
                       </div>
                       
                       {/* Doing pill */}
                       <div className="relative flex-1">
-                        <div className={`absolute inset-0 bg-blue-600 rounded-full blur-md ${selectedProject?.id === project.id ? 'opacity-30 dark:opacity-75' : 'opacity-0'}`}></div>
-                        <div className={`relative flex items-center h-12 backdrop-blur-sm rounded-full border shadow-sm transition-all duration-300 ${
+                        <div className={`absolute inset-0 bg-green-600 rounded-full blur-md ${selectedProject?.id === project.id ? 'opacity-30 dark:opacity-75' : 'opacity-0'}`}></div>
+                        <div className={`relative flex items-center h-12 bg-white dark:bg-black rounded-full border shadow-sm transition-all duration-300 ${
                           selectedProject?.id === project.id 
-                            ? 'bg-white/70 dark:bg-zinc-900/90 border-blue-300 dark:border-blue-500/50 dark:shadow-[0_0_10px_rgba(59,130,246,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(59,130,246,0.7)]' 
+                            ? 'bg-white/70 dark:bg-zinc-900/90 border-green-300 dark:border-green-500/50 dark:shadow-[0_0_10px_rgba(#50c878,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(#50c878,0.7)]' 
                             : 'bg-white/30 dark:bg-zinc-900/30 border-gray-300/50 dark:border-gray-700/50'
                         }`}>
                           <div className="flex flex-col items-center justify-center px-2 min-w-[40px]">
-                            <Activity className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`} />
-                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`}>Doing</span>
+                            <Activity className={`w-4 h-4 ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`} />
+                            <span className={`text-[8px] font-medium ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>Doing</span>
                           </div>
-                          <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-blue-300 dark:border-blue-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
-                            <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.doing || 0}</span>
+                          <div className={`flex-1 flex items-center justify-center border-l ${selectedProject?.id === project.id ? 'border-green-300 dark:border-green-500/30' : 'border-gray-300/50 dark:border-gray-700/50'}`}>
+                            <span className={`text-lg font-bold ${selectedProject?.id === project.id ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-600'}`}>{projectTaskCounts[project.id]?.doing || 0}</span>
                           </div>
                         </div>
                       </div>
@@ -813,7 +814,7 @@ export function ProjectPage({
                       {/* Done pill */}
                       <div className="relative flex-1">
                         <div className={`absolute inset-0 bg-green-600 rounded-full blur-md ${selectedProject?.id === project.id ? 'opacity-30 dark:opacity-75' : 'opacity-0'}`}></div>
-                        <div className={`relative flex items-center h-12 backdrop-blur-sm rounded-full border shadow-sm transition-all duration-300 ${
+                        <div className={`relative flex items-center h-12 bg-white dark:bg-black rounded-full border shadow-sm transition-all duration-300 ${
                           selectedProject?.id === project.id 
                             ? 'bg-white/70 dark:bg-zinc-900/90 border-green-300 dark:border-green-500/50 dark:shadow-[0_0_10px_rgba(34,197,94,0.5)] hover:shadow-md dark:hover:shadow-[0_0_15px_rgba(34,197,94,0.7)]' 
                             : 'bg-white/30 dark:bg-zinc-900/30 border-gray-300/50 dark:border-gray-700/50'
@@ -834,7 +835,7 @@ export function ProjectPage({
                       {/* Pin button */}
                       <button
                         onClick={(e) => handleTogglePin(e, project)}
-                        className={`p-1.5 rounded-full ${project.pinned === true ? 'bg-purple-100 text-purple-700 dark:bg-purple-700/30 dark:text-purple-400' : 'bg-gray-100 text-gray-500 dark:bg-gray-800/70 dark:text-gray-400'} hover:bg-purple-200 hover:text-purple-800 dark:hover:bg-purple-800/50 dark:hover:text-purple-300 transition-colors`}
+                        className={`p-1.5 rounded-full ${project.pinned === true ? 'bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-400' : 'bg-gray-100 text-gray-500 dark:bg-gray-800/70 dark:text-gray-400'} hover:bg-green-200 hover:text-green-800 dark:hover:bg-green-800/50 dark:hover:text-green-300 transition-colors`}
                         title={project.pinned === true ? 'Unpin project' : 'Pin project'}
                         aria-label={project.pinned === true ? 'Unpin project' : 'Pin project'}
                         data-pinned={project.pinned}
@@ -890,10 +891,10 @@ export function ProjectPage({
               <TabsTrigger value="docs" className="py-3 font-mono transition-all duration-300" color="blue">
                 Docs
               </TabsTrigger>
-              {/* <TabsTrigger value="features" className="py-3 font-mono transition-all duration-300" color="purple">
+              {/* <TabsTrigger value="features" className="py-3 font-mono transition-all duration-300" color="green">
                 Features
               </TabsTrigger>
-              <TabsTrigger value="data" className="py-3 font-mono transition-all duration-300" color="pink">
+              <TabsTrigger value="data" className="py-3 font-mono transition-all duration-300" color="green">
                 Data
               </TabsTrigger> */}
               <TabsTrigger value="tasks" className="py-3 font-mono transition-all duration-300" color="orange">
@@ -935,7 +936,7 @@ export function ProjectPage({
                                                    <Button 
                            onClick={() => loadTasksForProject(selectedProject.id)} 
                            variant="primary" 
-                           accentColor="purple"
+                           accentColor="green"
                          >
                           Retry
                         </Button>
@@ -962,21 +963,21 @@ export function ProjectPage({
 
       {/* New Project Modal */}
       {isNewProjectModalOpen && (
-        <div className="fixed inset-0 bg-black/50 dark:bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm">
-          <div className="relative p-6 rounded-md backdrop-blur-md w-full max-w-md
-              bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-              border border-gray-200 dark:border-zinc-800/50
-              shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/80 flex items-center justify-center z-50 bg-white dark:bg-black">
+          <div className="relative p-6 rounded-md bg-white dark:bg-black w-full max-w-md
+              bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+              border border-gray-200 dark:border-gray-200 dark:border-gray-800
+              shadow-sm dark:shadow-sm
               before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] 
-              before:rounded-t-[4px] before:bg-purple-500 
-              before:shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]
+              before:rounded-t-[4px] before:bg-green-500 
+              before:shadow-lg dark:before:shadow-lg
               after:content-[''] after:absolute after:top-0 after:left-0 after:right-0 after:h-16
-              after:bg-gradient-to-b after:from-purple-100 after:to-white dark:after:from-purple-500/20 dark:after:to-purple-500/5
+              after:bg-gradient-to-b after:from-green-100 after:to-white dark:after:from-green-500/20 dark:after:to-green-500/5
               after:rounded-t-md after:pointer-events-none">
             <div className="relative z-10">
               {/* Project Creation Form */}
                   <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-fuchsia-500 text-transparent bg-clip-text">
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-green-400 to-fuchsia-500 text-transparent bg-clip-text">
                       Create New Project
                     </h3>
                     <button 
@@ -997,7 +998,7 @@ export function ProjectPage({
                         placeholder="Enter project name..." 
                         value={newProjectForm.title}
                         onChange={(e) => setNewProjectForm((prev) => ({ ...prev, title: e.target.value }))}
-                        className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-purple-400 focus:shadow-[0_0_10px_rgba(168,85,247,0.2)] transition-all duration-300" 
+                        className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(#50c878,0.2)] transition-all duration-300" 
                       />
                     </div>
                     <div>
@@ -1009,7 +1010,7 @@ export function ProjectPage({
                         rows={4} 
                         value={newProjectForm.description}
                         onChange={(e) => setNewProjectForm((prev) => ({ ...prev, description: e.target.value }))}
-                        className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-purple-400 focus:shadow-[0_0_10px_rgba(168,85,247,0.2)] transition-all duration-300" 
+                        className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(#50c878,0.2)] transition-all duration-300" 
                       />
                     </div>
                   </div>
@@ -1025,8 +1026,8 @@ export function ProjectPage({
                     <Button 
                       onClick={handleCreateProject} 
                       variant="primary" 
-                      accentColor="purple" 
-                      className="shadow-lg shadow-purple-500/20"
+                      accentColor="green" 
+                      className="shadow-lg shadow-green-500/20"
                       disabled={isCreatingProject || !newProjectForm.title.trim()}
                     >
                       {isCreatingProject ? (
@@ -1083,14 +1084,14 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({ itemName
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="relative p-6 rounded-md backdrop-blur-md w-full max-w-md
-          bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-          border border-gray-200 dark:border-zinc-800/50
-          shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-center justify-center z-50">
+      <div className="relative p-6 rounded-md bg-white dark:bg-black w-full max-w-md
+          bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+          border border-gray-200 dark:border-gray-200 dark:border-gray-800
+          shadow-sm dark:shadow-sm
           before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] 
           before:rounded-t-[4px] before:bg-red-500 
-          before:shadow-[0_0_10px_2px_rgba(239,68,68,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(239,68,68,0.7)]">
+          before:shadow-lg dark:before:shadow-lg">
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-4">

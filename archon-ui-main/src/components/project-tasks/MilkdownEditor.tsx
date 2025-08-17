@@ -486,20 +486,20 @@ export const MilkdownEditor: React.FC<MilkdownEditorProps> = ({
 
   return (
     <div className={`milkdown-editor ${className}`}>
-      <div className="mb-6 flex items-center justify-between bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+      <div className="mb-6 flex items-center justify-between bg-white/50 dark:bg-black/30 bg-white dark:bg-black rounded-lg p-4 border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-3">
-          <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h3 className="text-xl font-semibold bg-gradient-to-r from-green-600 to-green-600 bg-clip-text text-transparent">
             {doc.title}
           </h3>
           <div className="flex items-center gap-2">
             {isLoading ? (
-              <span className="text-sm text-blue-600 dark:text-blue-400 flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-green-600 dark:text-green-400 flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 Saving...
               </span>
             ) : isReverted ? (
-              <span className="text-sm text-purple-600 dark:text-purple-400 flex items-center gap-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span className="text-sm text-green-600 dark:text-green-400 flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 Reverted
               </span>
             ) : hasChanges ? (
@@ -533,7 +533,7 @@ export const MilkdownEditor: React.FC<MilkdownEditorProps> = ({
               px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 
               flex items-center gap-2 border
               ${hasChanges 
-                ? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 save-button-pulse' 
+                ? 'bg-green-500 hover:bg-green-600 text-white border-green-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 save-button-pulse' 
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border-gray-300 dark:border-gray-700 cursor-not-allowed'
               }
               disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none

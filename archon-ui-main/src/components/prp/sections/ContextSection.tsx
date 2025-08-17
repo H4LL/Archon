@@ -11,7 +11,7 @@ export const ContextSection: React.FC<SectionProps> = ({
   title,
   data,
   icon,
-  accentColor = 'blue',
+  accentColor = 'green',
   defaultOpen = true,
   isDarkMode = false,
 }) => {
@@ -20,8 +20,8 @@ export const ContextSection: React.FC<SectionProps> = ({
   const renderContextItem = (key: string, value: any) => {
     const getItemIcon = (itemKey: string) => {
       const normalizedKey = itemKey.toLowerCase();
-      if (normalizedKey.includes('scope')) return <Target className="w-4 h-4 text-blue-500" />;
-      if (normalizedKey.includes('background')) return <BookOpen className="w-4 h-4 text-purple-500" />;
+      if (normalizedKey.includes('scope')) return <Target className="w-4 h-4 text-green-500" />;
+      if (normalizedKey.includes('background')) return <BookOpen className="w-4 h-4 text-green-500" />;
       if (normalizedKey.includes('objective')) return <Sparkles className="w-4 h-4 text-green-500" />;
       if (normalizedKey.includes('requirement')) return <CheckCircle2 className="w-4 h-4 text-orange-500" />;
       return <CheckCircle2 className="w-4 h-4 text-gray-500" />;
@@ -29,8 +29,8 @@ export const ContextSection: React.FC<SectionProps> = ({
     
     const getItemColor = (itemKey: string) => {
       const normalizedKey = itemKey.toLowerCase();
-      if (normalizedKey.includes('scope')) return 'blue';
-      if (normalizedKey.includes('background')) return 'purple';
+      if (normalizedKey.includes('scope')) return 'green';
+      if (normalizedKey.includes('background')) return 'green';
       if (normalizedKey.includes('objective')) return 'green';
       if (normalizedKey.includes('requirement')) return 'orange';
       return 'gray';
@@ -38,8 +38,8 @@ export const ContextSection: React.FC<SectionProps> = ({
     
     const color = getItemColor(key);
     const colorMap = {
-      blue: 'bg-blue-50/50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
-      purple: 'bg-purple-50/50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
+      blue: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+      green: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
       green: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
       orange: 'bg-orange-50/50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800',
       gray: 'bg-gray-50/50 dark:bg-gray-900/20 border-gray-200 dark:border-gray-800',

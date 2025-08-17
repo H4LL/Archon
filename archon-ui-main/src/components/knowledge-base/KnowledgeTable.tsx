@@ -88,8 +88,8 @@ interface KnowledgeTableProps {
 export const KnowledgeTable: React.FC<KnowledgeTableProps> = ({ items, onDelete }) => {
   const statusColorMap = {
     active: 'green',
-    processing: 'blue',
-    error: 'pink'
+    processing: 'green',
+    error: 'green'
   };
 
   // Group items by domain
@@ -102,9 +102,9 @@ export const KnowledgeTable: React.FC<KnowledgeTableProps> = ({ items, onDelete 
     } else if (frequency === 1) {
       return { icon: <RefreshCw className="w-3 h-3" />, text: 'Daily', color: 'text-green-500' };
     } else if (frequency === 7) {
-      return { icon: <RefreshCw className="w-3 h-3" />, text: 'Weekly', color: 'text-blue-500' };
+      return { icon: <RefreshCw className="w-3 h-3" />, text: 'Weekly', color: 'text-green-500' };
     } else if (frequency === 30) {
-      return { icon: <RefreshCw className="w-3 h-3" />, text: 'Monthly', color: 'text-purple-500' };
+      return { icon: <RefreshCw className="w-3 h-3" />, text: 'Monthly', color: 'text-green-500' };
     } else {
       return { icon: <RefreshCw className="w-3 h-3" />, text: `Every ${frequency} days`, color: 'text-gray-500 dark:text-zinc-500' };
     }
@@ -182,7 +182,7 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
   
   // Get the type icon
   const TypeIcon = firstItem.metadata.knowledge_type === 'technical' ? BoxIcon : Brain;
-  const typeIconColor = firstItem.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-purple-500';
+  const typeIconColor = firstItem.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
 
   // Generate tooltip content for grouped items
   const tooltipContent = isGrouped ? (
@@ -213,17 +213,17 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
         <div className="flex items-center gap-2">
           {firstItem.metadata.source_type === 'url' ? (
             <LinkIcon className={`w-4 h-4 flex-shrink-0 ${
-              firstItem.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500'
+              firstItem.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500'
             }`} />
           ) : (
             <Upload className={`w-4 h-4 flex-shrink-0 ${
-              firstItem.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500'
+              firstItem.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500'
             }`} />
           )}
           <TypeIcon className={`w-4 h-4 flex-shrink-0 ${
             firstItem.metadata.source_type === 'url'
-              ? firstItem.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500'
-              : firstItem.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500'
+              ? firstItem.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500'
+              : firstItem.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500'
           }`} />
           <div className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[200px]" title={isGrouped ? groupedItem.domain : firstItem.title}>
             {isGrouped ? groupedItem.domain : firstItem.title}
@@ -231,7 +231,7 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-zinc-400">
-        <Badge color={firstItem.metadata.knowledge_type === 'technical' ? 'blue' : 'pink'}>
+        <Badge color={firstItem.metadata.knowledge_type === 'technical' ? 'green' : 'green'}>
           {firstItem.metadata.knowledge_type}
         </Badge>
       </td>
@@ -243,7 +243,7 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
             onMouseLeave={() => setShowTagsTooltip(false)}
           >
             {groupedItem.metadata.tags?.slice(0, 3).map(tag => (
-              <Badge key={tag} color="purple" variant="outline">
+              <Badge key={tag} color="green" variant="outline">
                 {tag}
               </Badge>
             ))}
@@ -257,10 +257,10 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
           {/* Tags Tooltip */}
           {showTagsTooltip && (groupedItem.metadata.tags?.length || 0) > 3 && (
             <div className="absolute bottom-full mb-2 left-0 bg-black dark:bg-zinc-800 text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 max-w-xs">
-              <div className="font-semibold text-purple-300 mb-1">All Tags:</div>
+              <div className="font-semibold text-green-300 mb-1">All Tags:</div>
               <div className="flex flex-wrap gap-1">
                 {groupedItem.metadata.tags?.map((tag, index) => (
-                  <span key={index} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">
+                  <span key={index} className="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">
                     {tag}
                   </span>
                 ))}
@@ -277,15 +277,15 @@ const GroupedKnowledgeTableRow: React.FC<GroupedKnowledgeTableRowProps> = ({
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
           >
-            <div className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
-              <Globe className="w-3 h-3 text-blue-400" />
-              <span className="text-xs text-blue-400 font-medium">{groupedItem.items.length}</span>
+            <div className="flex items-center gap-1 px-2 py-1 bg-green-500/20 border border-green-500/40 rounded-full bg-white dark:bg-black shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)] transition-all duration-300">
+              <Globe className="w-3 h-3 text-green-400" />
+              <span className="text-xs text-green-400 font-medium">{groupedItem.items.length}</span>
             </div>
             
             {/* Tooltip */}
             {showTooltip && (
               <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black dark:bg-zinc-800 text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 whitespace-nowrap max-w-xs">
-                <div className="font-semibold text-blue-300 mb-1">Grouped Sources:</div>
+                <div className="font-semibold text-green-300 mb-1">Grouped Sources:</div>
                 {groupedItem.items.map((item, index) => (
                   <div key={index} className="text-gray-300">
                     {index + 1}. {item.source_id}

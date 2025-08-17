@@ -59,7 +59,7 @@ export const OnboardingPage = () => {
               key={step}
               className={`h-2 w-16 rounded-full transition-colors duration-300 ${
                 step <= currentStep
-                  ? 'bg-blue-500'
+                  ? 'bg-green-500'
                   : 'bg-gray-200 dark:bg-zinc-800'
               }`}
             />
@@ -71,13 +71,13 @@ export const OnboardingPage = () => {
           <motion.div variants={itemVariants}>
             <Card className="p-12 text-center">
               <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
                   <Sparkles className="w-10 h-10 text-white" />
                 </div>
               </div>
               
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                Welcome to Archon
+                Welcome to Xanadu Archon
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-zinc-400 mb-8 max-w-md mx-auto">
@@ -103,7 +103,7 @@ export const OnboardingPage = () => {
           <motion.div variants={itemVariants}>
             <Card className="p-12">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center mr-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mr-4">
                   <Key className="w-6 h-6 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -132,7 +132,7 @@ export const OnboardingPage = () => {
                     stiffness: 260,
                     damping: 20
                   }}
-                  className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"
+                  className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center"
                 >
                   <Check className="w-10 h-10 text-white" />
                 </motion.div>
@@ -143,7 +143,7 @@ export const OnboardingPage = () => {
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-zinc-400 mb-8 max-w-md mx-auto">
-                You're ready to start using Archon. Begin by adding knowledge sources through website crawling or document uploads.
+                You're ready to start using Xanadu Archon. Begin by adding knowledge sources through website crawling or document uploads.
               </p>
               
               <Button
@@ -152,7 +152,7 @@ export const OnboardingPage = () => {
                 onClick={handleComplete}
                 className="min-w-[200px]"
               >
-                Start Using Archon
+                Start Using Xanadu Archon
               </Button>
             </Card>
           </motion.div>

@@ -4,6 +4,10 @@ module.exports = {content: [
 ],
   darkMode: "selector",
   theme: {
+    fontFamily: {
+      'sans': ['Roboto', 'system-ui', 'sans-serif'],
+      'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",

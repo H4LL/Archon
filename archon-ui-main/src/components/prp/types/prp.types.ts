@@ -102,13 +102,13 @@ export interface SectionComponentProps extends SectionProps {
 
 // Color maps for consistent theming
 export const sectionColorMap: Record<string, string> = {
-  metadata: 'blue',
-  context: 'purple',
-  personas: 'pink',
+  metadata: 'green',
+  context: 'green',
+  personas: 'green',
   flows: 'orange',
   metrics: 'green',
-  plan: 'cyan',
-  technical: 'indigo',
+  plan: 'green',
+  technical: 'green',
   validation: 'emerald',
   generic: 'gray'
 };

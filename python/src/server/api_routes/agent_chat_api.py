@@ -154,6 +154,12 @@ async def process_agent_response(session_id: str, message: str, context: dict):
         return
 
     agent_type = sessions[session_id].get("agent_type", "rag")
+    
+    # Check if we should use Ollama RAG agent
+    llm_provider = os.getenv("LLM_PROVIDER", "openai").lower()
+    if agent_type == "rag" and llm_provider == "ollama":
+        agent_type = "ollama_rag"
+    
     room = f"chat_{session_id}"
 
     # Emit typing indicator

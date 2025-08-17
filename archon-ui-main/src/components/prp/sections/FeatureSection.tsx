@@ -11,31 +11,31 @@ export const FeatureSection: React.FC<PRPSectionProps> = ({
   title, 
   data, 
   icon = <Package className="w-5 h-5" />,
-  accentColor = 'blue',
+  accentColor = 'green',
   isDarkMode = false,
   defaultOpen = true 
 }) => {
   if (!data || typeof data !== 'object') return null;
 
   const colorMap = {
-    blue: 'from-blue-400 to-blue-600',
-    purple: 'from-purple-400 to-purple-600',
+    blue: 'from-green-400 to-green-600',
+    green: 'from-green-400 to-green-600',
     green: 'from-green-400 to-green-600',
     orange: 'from-orange-400 to-orange-600',
-    pink: 'from-pink-400 to-pink-600',
-    cyan: 'from-cyan-400 to-cyan-600',
-    indigo: 'from-indigo-400 to-indigo-600',
+    green: 'from-green-400 to-green-600',
+    cyan: 'from-green-400 to-green-600',
+    indigo: 'from-green-400 to-green-600',
     emerald: 'from-emerald-400 to-emerald-600',
   };
 
   const bgColorMap = {
-    blue: 'bg-blue-50 dark:bg-blue-950',
-    purple: 'bg-purple-50 dark:bg-purple-950',
+    blue: 'bg-green-50 dark:bg-green-950',
+    green: 'bg-green-50 dark:bg-green-950',
     green: 'bg-green-50 dark:bg-green-950',
     orange: 'bg-orange-50 dark:bg-orange-950',
-    pink: 'bg-pink-50 dark:bg-pink-950',
-    cyan: 'bg-cyan-50 dark:bg-cyan-950',
-    indigo: 'bg-indigo-50 dark:bg-indigo-950',
+    green: 'bg-green-50 dark:bg-green-950',
+    cyan: 'bg-green-50 dark:bg-green-950',
+    indigo: 'bg-green-50 dark:bg-green-950',
     emerald: 'bg-emerald-50 dark:bg-emerald-950',
   };
 
@@ -43,7 +43,7 @@ export const FeatureSection: React.FC<PRPSectionProps> = ({
     if (!features || typeof features !== 'object') return null;
 
     const IconComponent = isPremium ? Star : FileText;
-    const iconColor = isPremium ? 'text-yellow-500' : 'text-blue-500';
+    const iconColor = isPremium ? 'text-yellow-500' : 'text-green-500';
 
     return (
       <div key={groupName} className="mb-6">
@@ -95,7 +95,7 @@ export const FeatureSection: React.FC<PRPSectionProps> = ({
         <ul className="space-y-2">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-              <Package className="w-4 h-4 text-blue-500 mt-1 flex-shrink-0" />
+              <Package className="w-4 h-4 text-green-500 mt-1 flex-shrink-0" />
               <span className="text-gray-700 dark:text-gray-300">{formatValue(feature)}</span>
             </li>
           ))}
@@ -117,7 +117,7 @@ export const FeatureSection: React.FC<PRPSectionProps> = ({
             
             return (
               <div key={key} className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                <Package className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
+                <Package className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
                 <div className="flex-1">
                   <h4 className="font-medium text-gray-800 dark:text-white mb-1">
                     {formatKey(key)}
@@ -138,7 +138,7 @@ export const FeatureSection: React.FC<PRPSectionProps> = ({
 
   return (
     <div className="space-y-4">
-      <div className={`rounded-lg p-6 ${bgColorMap[accentColor as keyof typeof bgColorMap] || bgColorMap.blue} border-l-4 border-blue-500`}>
+      <div className={`rounded-lg p-6 ${bgColorMap[accentColor as keyof typeof bgColorMap] || bgColorMap.blue} border-l-4 border-green-500`}>
         <div className="flex items-center gap-3 mb-6">
           <div className={`p-2 rounded-lg bg-gradient-to-br ${colorMap[accentColor as keyof typeof colorMap] || colorMap.blue} text-white shadow-lg`}>
             {icon}

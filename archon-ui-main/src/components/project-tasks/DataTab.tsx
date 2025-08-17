@@ -56,16 +56,16 @@ const DataCard = ({ data }: { data: any }) => {
   const IconComponent = iconMap[data.icon] || Database;
   
   const colorClasses = {
-    cyan: 'from-cyan-900/40 to-cyan-800/30 border-cyan-500/50 text-cyan-400',
-    blue: 'from-blue-900/40 to-blue-800/30 border-blue-500/50 text-blue-400',
-    purple: 'from-purple-900/40 to-purple-800/30 border-purple-500/50 text-purple-400',
-    pink: 'from-pink-900/40 to-pink-800/30 border-pink-500/50 text-pink-400'
+    cyan: 'from-green-900/40 to-green-800/30 border-green-500/50 text-green-400',
+    blue: 'from-green-900/40 to-green-800/30 border-green-500/50 text-green-400',
+    green: 'from-green-900/40 to-green-800/30 border-green-500/50 text-green-400',
+    green: 'from-green-900/40 to-green-800/30 border-green-500/50 text-green-400'
   };
   
   const colorClass = colorClasses[data.color as keyof typeof colorClasses] || colorClasses.cyan;
   
   return (
-    <div className={`p-6 rounded-lg bg-gradient-to-r ${colorClass} backdrop-blur-md border min-w-[300px] transition-all duration-300 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] group`}>
+    <div className={`p-6 rounded-lg bg-gradient-to-r ${colorClass} bg-white dark:bg-black border min-w-[300px] transition-all duration-300 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] group`}>
       <div className="flex items-center gap-3 mb-4">
         <IconComponent className="w-6 h-6" />
         <div className="text-lg font-bold">Project Data Overview</div>
@@ -384,11 +384,11 @@ export const DataTab = ({ project }: DataTabProps) => {
   const nodeTypes = useMemo(() => ({
     table: ({ data, id }: any) => (
       <div 
-        className="p-3 rounded-lg bg-gradient-to-r from-cyan-900/40 to-cyan-800/30 backdrop-blur-md border border-cyan-500/50 min-w-[220px] transition-all duration-300 hover:border-cyan-500/70 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] group"
+        className="p-3 rounded-lg bg-gradient-to-r from-green-900/40 to-green-800/30 bg-white dark:bg-black border border-green-500/50 min-w-[220px] transition-all duration-300 hover:border-green-500/70 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] group"
       >
         <div className="flex items-center justify-between gap-2 mb-2">
           <div className="flex items-center gap-2">
-            <Database className="w-4 h-4 text-cyan-400" />
+            <Database className="w-4 h-4 text-green-400" />
             <div className="text-sm font-bold text-white border-b border-gray-600 pb-2">
               {data.label}
             </div>
@@ -410,26 +410,26 @@ export const DataTab = ({ project }: DataTabProps) => {
                   handleNodeClick(e, actualNode);
                 }
               }}
-              className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-cyan-600/20 rounded"
+              className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-green-600/20 rounded"
               title="Edit table"
             >
-              <Edit className="w-3 h-3 text-cyan-400 hover:text-cyan-300" />
+              <Edit className="w-3 h-3 text-green-400 hover:text-green-300" />
             </button>
           </div>
         </div>
-        <div className="text-xs text-left text-cyan-600">
+        <div className="text-xs text-left text-green-600">
           {data.columns.map((col: string, i: number) => {
             const isPK = col.includes('PK');
             const isFK = col.includes('FK');
             return (
-              <div key={i} className={`py-1 relative ${isPK ? 'text-cyan-400 font-bold' : ''} ${isFK ? 'text-fuchsia-400 italic' : ''}`}>
+              <div key={i} className={`py-1 relative ${isPK ? 'text-green-400 font-bold' : ''} ${isFK ? 'text-fuchsia-400 italic' : ''}`}>
                 {col}
                 {isPK && (
                   <Handle 
                     type="source" 
                     position={Position.Right} 
                     id={`${data.label}-${col.split(' ')[0]}`} 
-                    className="w-2 h-2 !bg-cyan-400 transition-all duration-300 !opacity-60 group-hover:!opacity-100 group-hover:!shadow-[0_0_8px_rgba(34,211,238,0.6)]" 
+                    className="w-2 h-2 !bg-green-400 transition-all duration-300 !opacity-60 group-hover:!opacity-100 group-hover:!shadow-[0_0_8px_rgba(34,211,238,0.6)]" 
                     style={{ right: -10 }} 
                   />
                 )}
@@ -463,8 +463,8 @@ export const DataTab = ({ project }: DataTabProps) => {
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_right,rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-4">
-          <div className="text-lg text-cyan-400 font-mono flex items-center">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 mr-2 shadow-[0_0_8px_rgba(34,211,238,0.6)]"></span>
+          <div className="text-lg text-green-400 font-mono flex items-center">
+            <span className="w-2 h-2 rounded-full bg-green-400 mr-2 shadow-[0_0_8px_rgba(34,211,238,0.6)]"></span>
             {viewMode === 'metadata' ? 'Data Overview' : 'Data Relationships'}
             {viewMode === 'erd' && nodes.length > 0 && ` (${nodes.length} tables)`}
             {viewMode === 'metadata' && Array.isArray(project?.data) && ` (${project.data.length} items)`}
@@ -472,7 +472,7 @@ export const DataTab = ({ project }: DataTabProps) => {
           {viewMode === 'metadata' && (
             <button 
               onClick={() => setViewMode('erd')}
-              className="px-3 py-1.5 rounded-lg bg-cyan-900/20 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-900/30 hover:border-cyan-500/50 transition-all duration-300 text-xs"
+              className="px-3 py-1.5 rounded-lg bg-green-900/20 border border-green-500/30 text-green-400 hover:bg-green-900/30 hover:border-green-500/50 transition-all duration-300 text-xs"
             >
               Switch to ERD
             </button>
@@ -481,7 +481,7 @@ export const DataTab = ({ project }: DataTabProps) => {
             <div className="flex gap-2">
               <button 
                 onClick={() => setViewMode('metadata')}
-                className="px-3 py-1.5 rounded-lg bg-purple-900/20 border border-purple-500/30 text-purple-400 hover:bg-purple-900/30 hover:border-purple-500/50 transition-all duration-300 text-xs"
+                className="px-3 py-1.5 rounded-lg bg-green-900/20 border border-green-500/30 text-green-400 hover:bg-green-900/30 hover:border-green-500/50 transition-all duration-300 text-xs"
               >
                 Data Overview
               </button>
@@ -495,8 +495,8 @@ export const DataTab = ({ project }: DataTabProps) => {
                   {isSaving ? 'Saving...' : 'Save Layout'}
                 </button>
               )}
-              <button onClick={addTableNode} className="p-2 rounded-lg bg-cyan-900/20 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-900/30 hover:border-cyan-500/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 flex items-center justify-center gap-2 w-full md:w-auto relative overflow-hidden group">
-                <span className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <button onClick={addTableNode} className="p-2 rounded-lg bg-green-900/20 border border-green-500/30 text-green-400 hover:bg-green-900/30 hover:border-green-500/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 flex items-center justify-center gap-2 w-full md:w-auto relative overflow-hidden group">
+                <span className="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 <Database className="w-4 h-4 relative z-10" />
                 <span className="text-xs relative z-10">Add Table</span>
               </button>
@@ -523,7 +523,7 @@ export const DataTab = ({ project }: DataTabProps) => {
         ) : (
           <div className="h-[70vh] relative">
             {/* Subtle neon glow at the top */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.2)] z-10"></div>
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-green-500/30 shadow-[0_0_10px_rgba(34,211,238,0.2)] z-10"></div>
             {nodes.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-gray-500">
                 <Database className="w-16 h-16 mb-4 opacity-50" />
@@ -597,14 +597,14 @@ const DeleteConfirmModal = ({
   tableName: string;
 }) => {
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="relative p-6 rounded-md backdrop-blur-md w-full max-w-md
-          bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-          border border-gray-200 dark:border-zinc-800/50
-          shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-center justify-center z-50">
+      <div className="relative p-6 rounded-md bg-white dark:bg-black w-full max-w-md
+          bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+          border border-gray-200 dark:border-gray-200 dark:border-gray-800
+          shadow-sm dark:shadow-sm
           before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] 
           before:rounded-t-[4px] before:bg-red-500 
-          before:shadow-[0_0_10px_2px_rgba(239,68,68,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(239,68,68,0.7)]">
+          before:shadow-lg dark:before:shadow-lg">
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-4">
@@ -803,10 +803,10 @@ const EditTableModal = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-gray-900 border border-cyan-500/30 rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-center justify-center z-50">
+      <div className="bg-gray-900 border border-green-500/30 rounded-lg p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-cyan-400 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-green-400 flex items-center gap-2">
             <Database className="w-5 h-5" />
             Edit Table
           </h3>
@@ -828,7 +828,7 @@ const EditTableModal = ({
               type="text"
               value={tableName}
               onChange={(e) => setTableName(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none"
             />
           </div>
 
@@ -840,7 +840,7 @@ const EditTableModal = ({
               </label>
               <button
                 onClick={addColumn}
-                className="px-2 py-1 bg-cyan-900/30 border border-cyan-500/30 text-cyan-400 rounded text-xs hover:bg-cyan-900/50 transition-colors flex items-center gap-1"
+                className="px-2 py-1 bg-green-900/30 border border-green-500/30 text-green-400 rounded text-xs hover:bg-green-900/50 transition-colors flex items-center gap-1"
               >
                 <Plus className="w-3 h-3" />
                 Add Column
@@ -865,7 +865,7 @@ const EditTableModal = ({
                     placeholder="Column name"
                     value={column.name}
                     onChange={(e) => updateColumn(index, 'name', e.target.value)}
-                    className="col-span-3 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none text-sm"
+                    className="col-span-3 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none text-sm"
                   />
                   
                   {/* Data Type */}
@@ -874,14 +874,14 @@ const EditTableModal = ({
                     placeholder="Data type"
                     value={column.dataType}
                     onChange={(e) => updateColumn(index, 'dataType', e.target.value)}
-                    className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none text-sm"
+                    className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none text-sm"
                   />
                   
                   {/* Column Type */}
                   <select
                     value={column.columnType}
                     onChange={(e) => updateColumn(index, 'columnType', e.target.value)}
-                    className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none text-sm"
+                    className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none text-sm"
                   >
                     <option value="regular">Regular</option>
                     <option value="pk">Primary Key</option>
@@ -894,7 +894,7 @@ const EditTableModal = ({
                       <select
                         value={column.referencedTable || ''}
                         onChange={(e) => updateColumn(index, 'referencedTable', e.target.value)}
-                        className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none text-sm"
+                        className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none text-sm"
                       >
                         <option value="">Select table...</option>
                         {getAvailableTables().map((table) => (
@@ -908,7 +908,7 @@ const EditTableModal = ({
                         value={column.referencedColumn || ''}
                         onChange={(e) => updateColumn(index, 'referencedColumn', e.target.value)}
                         disabled={!column.referencedTable}
-                        className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none text-sm disabled:opacity-50"
+                        className="col-span-2 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-500 focus:outline-none text-sm disabled:opacity-50"
                       >
                         <option value="">Select column...</option>
                         {column.referencedTable && getAvailableColumns(column.referencedTable).map((col) => (
@@ -941,7 +941,7 @@ const EditTableModal = ({
         <div className="flex gap-2 mt-6">
           <button
             onClick={handleSave}
-            className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors"
+            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
           >
             Save Changes
           </button>

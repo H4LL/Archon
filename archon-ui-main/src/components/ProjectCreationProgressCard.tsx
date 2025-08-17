@@ -56,17 +56,17 @@ export const ProjectCreationProgressCard: React.FC<ProjectCreationProgressCardPr
       case 'error':
         return <XCircle className="w-5 h-5 text-red-500" />;
       case 'initializing_agents':
-        return <Bot className="w-5 h-5 text-blue-500 animate-pulse" />;
+        return <Bot className="w-5 h-5 text-green-500 animate-pulse" />;
       case 'generating_docs':
       case 'processing_requirements':
       case 'ai_generation':
-        return <BrainCircuit className="w-5 h-5 text-purple-500 animate-pulse" />;
+        return <BrainCircuit className="w-5 h-5 text-green-500 animate-pulse" />;
       case 'finalizing_docs':
-        return <BookOpen className="w-5 h-5 text-indigo-500 animate-pulse" />;
+        return <BookOpen className="w-5 h-5 text-green-500 animate-pulse" />;
       case 'saving_to_database':
         return <Database className="w-5 h-5 text-green-500 animate-pulse" />;
       default:
-        return <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />;
+        return <Loader2 className="w-5 h-5 text-green-500 animate-spin" />;
     }
   };
 
@@ -77,17 +77,17 @@ export const ProjectCreationProgressCard: React.FC<ProjectCreationProgressCardPr
       case 'error':
         return 'text-red-500';
       case 'initializing_agents':
-        return 'text-blue-500';
+        return 'text-green-500';
       case 'generating_docs':
       case 'processing_requirements':
       case 'ai_generation':
-        return 'text-purple-500';
+        return 'text-green-500';
       case 'finalizing_docs':
-        return 'text-indigo-500';
+        return 'text-green-500';
       case 'saving_to_database':
         return 'text-green-500';
       default:
-        return 'text-blue-500';
+        return 'text-green-500';
     }
   };
 
@@ -175,7 +175,7 @@ export const ProjectCreationProgressCard: React.FC<ProjectCreationProgressCardPr
                 ? 'bg-red-500' 
                 : progressData.status === 'completed'
                 ? 'bg-green-500'
-                : 'bg-purple-500'
+                : 'bg-green-500'
             }`}
             initial={{ width: 0 }}
             animate={{ width: `${progressData.percentage}%` }}
@@ -212,8 +212,8 @@ export const ProjectCreationProgressCard: React.FC<ProjectCreationProgressCardPr
 
       {/* Debug Information - Show when stuck on starting status */}
       {progressData.status === 'starting' && progressData.percentage === 0 && connectionStatus === 'connected' && (
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-          <div className="text-sm text-blue-700 dark:text-blue-400">
+        <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+          <div className="text-sm text-green-700 dark:text-green-400">
             <strong>Debug:</strong> Connected to progress stream but no updates received yet.
             <div className="mt-1 text-xs opacity-75">
               Progress ID: {progressData.progressId}
@@ -276,7 +276,7 @@ export const ProjectCreationProgressCard: React.FC<ProjectCreationProgressCardPr
           <Button 
             onClick={onRetry}
             variant="primary" 
-            accentColor="purple"
+            accentColor="green"
             className="text-sm"
           >
             <RotateCcw className="w-4 h-4 mr-2" />

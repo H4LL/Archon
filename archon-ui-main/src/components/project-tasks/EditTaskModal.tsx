@@ -102,11 +102,11 @@ export const EditTaskModal = memo(({
   if (!isModalOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="relative p-6 rounded-md backdrop-blur-md w-full max-w-2xl bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-zinc-800/50 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:rounded-t-[4px] before:bg-gradient-to-r before:from-cyan-500 before:to-fuchsia-500 before:shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)] after:content-[''] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-cyan-100 after:to-white dark:after:from-cyan-500/20 dark:after:to-fuchsia-500/5 after:rounded-t-md after:pointer-events-none">
+    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 bg-white dark:bg-black flex items-center justify-center z-50">
+      <div className="relative p-6 rounded-md bg-white dark:bg-black w-full max-w-2xl bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-sm before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] before:rounded-t-[4px] before:bg-gradient-to-r before:from-green-500 before:to-fuchsia-500 before:shadow-lg dark:before:shadow-lg after:content-[''] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-green-100 after:to-white dark:after:from-green-500/20 dark:after:to-fuchsia-500/5 after:rounded-t-md after:pointer-events-none">
         <div className="relative z-10">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-transparent bg-clip-text">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-green-400 to-fuchsia-500 text-transparent bg-clip-text">
               {editingTask?.id ? 'Edit Task' : 'New Task'}
             </h3>
             <button onClick={handleClose} className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white transition-colors">
@@ -120,7 +120,7 @@ export const EditTaskModal = memo(({
               <DebouncedInput
                 value={localTask?.title || ''}
                 onChange={handleTitleChange}
-                className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
               />
             </div>
 
@@ -131,7 +131,7 @@ export const EditTaskModal = memo(({
                 onChange={handleDescriptionChange}
                 type="textarea"
                 rows={5}
-                className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
               />
             </div>
 
@@ -141,7 +141,7 @@ export const EditTaskModal = memo(({
                 <select 
                   value={localTask?.status || 'backlog'} 
                   onChange={handleStatusChange}
-                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
                 >
                   <option value="backlog">Backlog</option>
                   <option value="in-progress">In Process</option>
@@ -155,7 +155,7 @@ export const EditTaskModal = memo(({
                 <select 
                   value={localTask?.task_order || 1} 
                   onChange={handlePriorityChange}
-                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
                 >
                   {priorityOptions.map((option) => (
                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -170,7 +170,7 @@ export const EditTaskModal = memo(({
                 <select 
                   value={localTask?.assignee?.name || 'User'} 
                   onChange={handleAssigneeChange}
-                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
                 >
                   {ASSIGNEE_OPTIONS.map(option => (
                     <option key={option} value={option}>{option}</option>
@@ -186,7 +186,7 @@ export const EditTaskModal = memo(({
                   projectFeatures={projectFeatures}
                   isLoadingFeatures={isLoadingFeatures}
                   placeholder="Type feature name"
-                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 pr-10 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
+                  className="w-full bg-white/50 dark:bg-black/70 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white rounded-md py-2 px-3 pr-10 focus:outline-none focus:border-green-400 focus:shadow-[0_0_10px_rgba(34,211,238,0.2)] transition-all duration-300"
                 />
               </div>
             </div>
@@ -199,7 +199,7 @@ export const EditTaskModal = memo(({
               onClick={handleSave} 
               variant="primary" 
               accentColor="cyan" 
-              className="shadow-lg shadow-cyan-500/20"
+              className="shadow-lg shadow-green-500/20"
               disabled={isSavingTask}
             >
               {isSavingTask ? (

@@ -117,7 +117,7 @@ export const GenericSection: React.FC<SectionProps> = ({
         <div className="space-y-3 mt-2">
           {displayItems.map((item, index) => (
             <div key={index} className="relative" style={{ marginLeft: indent }}>
-              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 to-transparent dark:from-gray-600"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-white dark:bg-black dark:from-gray-600"></div>
               <div className="pl-4">
                 <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
                   [{index}]
@@ -157,12 +157,12 @@ export const GenericSection: React.FC<SectionProps> = ({
   
   const getBackgroundColor = () => {
     const colorMap = {
-      blue: 'bg-blue-50/50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
-      purple: 'bg-purple-50/50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
+      blue: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+      green: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
       green: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
       orange: 'bg-orange-50/50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800',
-      pink: 'bg-pink-50/50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800',
-      cyan: 'bg-cyan-50/50 dark:bg-cyan-900/20 border-cyan-200 dark:border-cyan-800',
+      green: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+      cyan: 'bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
       gray: 'bg-gray-50/50 dark:bg-gray-900/20 border-gray-200 dark:border-gray-800',
     };
     return colorMap[accentColor as keyof typeof colorMap] || colorMap.gray;

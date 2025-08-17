@@ -516,7 +516,7 @@ archon:manage_task(
               value="claude"
               checked={selectedRuleType === 'claude'}
               onChange={() => setSelectedRuleType('claude')}
-              className="mr-2 text-blue-500 focus:ring-blue-500"
+              className="mr-2 text-green-500 focus:ring-green-500"
               aria-label="Claude Code Rules - Comprehensive Archon workflow instructions for Claude"
             />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Claude Code Rules</span>
@@ -528,15 +528,15 @@ archon:manage_task(
               value="universal"
               checked={selectedRuleType === 'universal'}
               onChange={() => setSelectedRuleType('universal')}
-              className="mr-2 text-blue-500 focus:ring-blue-500"
+              className="mr-2 text-green-500 focus:ring-green-500"
               aria-label="Universal Agent Rules - Simplified workflow for all other AI agents"
             />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Universal Agent Rules</span>
           </label>
         </fieldset>
 
-        <div className="border border-blue-200 dark:border-blue-800/30 bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm rounded-md h-[400px] flex flex-col">
-          <div className="p-4 pb-2 border-b border-blue-200/50 dark:border-blue-800/30">
+        <div className="border border-green-200 dark:border-green-800/30 bg-gradient-to-br from-green-500/10 to-green-600/10 bg-white dark:bg-black rounded-md h-[400px] flex flex-col">
+          <div className="p-4 pb-2 border-b border-green-200/50 dark:border-green-800/30">
             <h3 className="text-base font-semibold text-gray-800 dark:text-white">
               {selectedRuleType === 'claude' ? 'Claude Code' : 'Universal Agent'} Rules
             </h3>
@@ -549,7 +549,7 @@ archon:manage_task(
         </div>
 
         {/* Info Note */}
-        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-md">
+        <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-md">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <strong>Where to place these rules:</strong>
           </p>

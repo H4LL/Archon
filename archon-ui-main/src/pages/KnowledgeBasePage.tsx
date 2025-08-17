@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { Search, Grid, Plus, Upload, Link as LinkIcon, Brain, Filter, BoxIcon, List, BookOpen, CheckSquare } from 'lucide-react';
+import { Search, Grid, Plus, Upload, Link as LinkIcon, Brain, Filter, BoxIcon, List, BookOpen, CheckSquare, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -19,6 +19,7 @@ import { KnowledgeItemCard } from '../components/knowledge-base/KnowledgeItemCar
 import { GroupedKnowledgeItemCard } from '../components/knowledge-base/GroupedKnowledgeItemCard';
 import { KnowledgeGridSkeleton, KnowledgeTableSkeleton } from '../components/knowledge-base/KnowledgeItemSkeleton';
 import { GroupCreationModal } from '../components/knowledge-base/GroupCreationModal';
+import { KnowledgeChat } from '../components/knowledge/KnowledgeChat';
 
 const extractDomain = (url: string): string => {
   try {
@@ -54,7 +55,7 @@ interface GroupedKnowledgeItem {
 
 
 export const KnowledgeBasePage = () => {
-  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+  const [viewMode, setViewMode] = useState<'grid' | 'table' | 'chat'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
@@ -896,27 +897,30 @@ export const KnowledgeBasePage = () => {
         <motion.div className="flex items-center gap-4" variants={headerItemVariants}>
           {/* Search Bar */}
           <div className="relative">
-            <Input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search knowledge base..." accentColor="purple" icon={<Search className="w-4 h-4" />} />
+            <Input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search knowledge base..." accentColor="green" icon={<Search className="w-4 h-4" />} />
           </div>
           {/* Type Filter */}
           <div className="flex items-center bg-gray-50 dark:bg-black border border-gray-200 dark:border-zinc-900 rounded-md overflow-hidden">
             <button onClick={() => setTypeFilter('all')} className={`p-2 ${typeFilter === 'all' ? 'bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-white' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="All Types">
               <Filter className="w-4 h-4" />
             </button>
-            <button onClick={() => setTypeFilter('technical')} className={`p-2 ${typeFilter === 'technical' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Technical/Coding">
+            <button onClick={() => setTypeFilter('technical')} className={`p-2 ${typeFilter === 'technical' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Technical/Coding">
               <BoxIcon className="w-4 h-4" />
             </button>
-            <button onClick={() => setTypeFilter('business')} className={`p-2 ${typeFilter === 'business' ? 'bg-pink-100 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Business/Project">
+            <button onClick={() => setTypeFilter('business')} className={`p-2 ${typeFilter === 'business' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Business/Project">
               <Brain className="w-4 h-4" />
             </button>
           </div>
           {/* View Toggle */}
           <div className="flex items-center bg-gray-50 dark:bg-black border border-gray-200 dark:border-zinc-900 rounded-md overflow-hidden">
-            <button onClick={() => setViewMode('grid')} className={`p-2 ${viewMode === 'grid' ? 'bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Grid View">
+            <button onClick={() => setViewMode('grid')} className={`p-2 ${viewMode === 'grid' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Grid View">
               <Grid className="w-4 h-4" />
             </button>
-            <button onClick={() => setViewMode('table')} className={`p-2 ${viewMode === 'table' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Table View">
+            <button onClick={() => setViewMode('table')} className={`p-2 ${viewMode === 'table' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Table View">
               <List className="w-4 h-4" />
+            </button>
+            <button onClick={() => setViewMode('chat')} className={`p-2 ${viewMode === 'chat' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-500' : 'text-gray-500 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300'}`} title="Chat View">
+              <MessageSquare className="w-4 h-4" />
             </button>
           </div>
           {/* Selection Mode Toggle */}
@@ -924,13 +928,13 @@ export const KnowledgeBasePage = () => {
             onClick={toggleSelectionMode} 
             variant={isSelectionMode ? "secondary" : "ghost"} 
             accentColor="blue"
-            className={isSelectionMode ? "bg-blue-500/10 border-blue-500/40" : ""}
+            className={isSelectionMode ? "bg-green-500/10 border-green-500/40" : ""}
           >
             <CheckSquare className="w-4 h-4 mr-2 inline" />
             <span>{isSelectionMode ? 'Cancel' : 'Select'}</span>
           </Button>
           {/* Add Button */}
-          <Button onClick={handleAddKnowledge} variant="primary" accentColor="purple" className="shadow-lg shadow-purple-500/20">
+          <Button onClick={handleAddKnowledge} variant="primary" accentColor="green" className="shadow-lg shadow-green-500/20">
             <Plus className="w-4 h-4 mr-2 inline" />
             <span>Knowledge</span>
           </Button>
@@ -945,7 +949,7 @@ export const KnowledgeBasePage = () => {
             exit={{ opacity: 0, y: -20 }}
             className="mb-6"
           >
-            <Card className="p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/20">
+            <Card className="p-4 bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -981,7 +985,7 @@ export const KnowledgeBasePage = () => {
                     onClick={deleteSelectedItems}
                     variant="secondary"
                     size="sm"
-                    accentColor="pink"
+                    accentColor="green"
                   >
                     Delete Selected
                   </Button>
@@ -995,7 +999,9 @@ export const KnowledgeBasePage = () => {
       {/* Main Content */}
       <div className="relative">
         {loading ? (
-          viewMode === 'grid' ? <KnowledgeGridSkeleton /> : <KnowledgeTableSkeleton />
+          viewMode === 'grid' ? <KnowledgeGridSkeleton /> : viewMode === 'table' ? <KnowledgeTableSkeleton /> : null
+        ) : viewMode === 'chat' ? (
+          <KnowledgeChat className="h-[calc(100vh-200px)]" />
         ) : viewMode === 'table' ? (
           <KnowledgeTable 
             items={filteredItems} 
@@ -1390,7 +1396,7 @@ const AddKnowledgeModal = ({
     }
   };
 
-  return <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+  return <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 bg-white dark:bg-black flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-2xl relative before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[1px] before:bg-green-500 p-8">
         <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-8">
           Add Knowledge Source
@@ -1403,7 +1409,7 @@ const AddKnowledgeModal = ({
           <div className="flex gap-4">
             <label className={`
                 flex-1 p-4 rounded-md border cursor-pointer transition flex items-center justify-center gap-2
-                ${knowledgeType === 'technical' ? 'border-blue-500 text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-blue-300 dark:hover:border-blue-500/30'}
+                ${knowledgeType === 'technical' ? 'border-green-500 text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-green-300 dark:hover:border-green-500/30'}
               `}>
               <input type="radio" name="knowledgeType" value="technical" checked={knowledgeType === 'technical'} onChange={() => setKnowledgeType('technical')} className="sr-only" />
               <BoxIcon className="w-5 h-5" />
@@ -1411,7 +1417,7 @@ const AddKnowledgeModal = ({
             </label>
             <label className={`
                 flex-1 p-4 rounded-md border cursor-pointer transition flex items-center justify-center gap-2
-                ${knowledgeType === 'business' ? 'border-purple-500 text-purple-600 dark:text-purple-500 bg-purple-50 dark:bg-purple-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-purple-300 dark:hover:border-purple-500/30'}
+                ${knowledgeType === 'business' ? 'border-green-500 text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-green-300 dark:hover:border-green-500/30'}
               `}>
               <input type="radio" name="knowledgeType" value="business" checked={knowledgeType === 'business'} onChange={() => setKnowledgeType('business')} className="sr-only" />
               <Brain className="w-5 h-5" />
@@ -1421,11 +1427,11 @@ const AddKnowledgeModal = ({
         </div>
         {/* Source Type Selection */}
         <div className="flex gap-4 mb-6">
-          <button onClick={() => setMethod('url')} className={`flex-1 p-4 rounded-md border ${method === 'url' ? 'border-blue-500 text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-blue-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-blue-300 dark:hover:border-blue-500/30'} transition flex items-center justify-center gap-2`}>
+          <button onClick={() => setMethod('url')} className={`flex-1 p-4 rounded-md border ${method === 'url' ? 'border-green-500 text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-green-300 dark:hover:border-green-500/30'} transition flex items-center justify-center gap-2`}>
             <LinkIcon className="w-4 h-4" />
             <span>URL / Website</span>
           </button>
-          <button onClick={() => setMethod('file')} className={`flex-1 p-4 rounded-md border ${method === 'file' ? 'border-pink-500 text-pink-600 dark:text-pink-500 bg-pink-50 dark:bg-pink-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-pink-300 dark:hover:border-pink-500/30'} transition flex items-center justify-center gap-2`}>
+          <button onClick={() => setMethod('file')} className={`flex-1 p-4 rounded-md border ${method === 'file' ? 'border-green-500 text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-green-300 dark:hover:border-green-500/30'} transition flex items-center justify-center gap-2`}>
             <Upload className="w-4 h-4" />
             <span>Upload File</span>
           </button>
@@ -1463,11 +1469,11 @@ const AddKnowledgeModal = ({
               <label 
                 htmlFor="file-upload"
                 className="flex items-center justify-center gap-3 w-full p-6 rounded-md border-2 border-dashed cursor-pointer transition-all duration-300
-                  bg-blue-500/10 hover:bg-blue-500/20 
-                  border-blue-500/30 hover:border-blue-500/50
-                  text-blue-600 dark:text-blue-400
-                  hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]
-                  backdrop-blur-sm"
+                  bg-green-500/10 hover:bg-green-500/20 
+                  border-green-500/30 hover:border-green-500/50
+                  text-green-600 dark:text-green-400
+                  hover:shadow-[0_0_15px_rgba(#50c878,0.3)]
+                  bg-white dark:bg-black"
               >
                 <Upload className="w-6 h-6" />
                 <div className="text-center">
@@ -1517,7 +1523,7 @@ const AddKnowledgeModal = ({
             Tags (AI will add recommended tags if left blank)
           </label>
           <div className="flex flex-wrap gap-2 mb-2">
-            {tags.map(tag => <Badge key={tag} color="purple" variant="outline">
+            {tags.map(tag => <Badge key={tag} color="green" variant="outline">
                 {tag}
               </Badge>)}
           </div>
@@ -1526,14 +1532,14 @@ const AddKnowledgeModal = ({
             setTags([...tags, newTag.trim()]);
             setNewTag('');
           }
-        }} placeholder="Add tags..." accentColor="purple" />
+        }} placeholder="Add tags..." accentColor="green" />
         </div>
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
           <Button onClick={onClose} variant="ghost" disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} variant="primary" accentColor={method === 'url' ? 'blue' : 'pink'} disabled={loading}>
+          <Button onClick={handleSubmit} variant="primary" accentColor={method === 'url' ? 'green' : 'green'} disabled={loading}>
             {loading ? 'Adding...' : 'Add Source'}
           </Button>
         </div>

@@ -34,29 +34,29 @@ interface TaskTableViewProps {
 const getAssigneeGlassStyle = (assigneeName: 'User' | 'Archon' | 'AI IDE Agent') => {
   switch (assigneeName) {
     case 'User':
-      return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-blue-400 dark:border-blue-500'; // blue glass
+      return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500'; // blue glass
     case 'AI IDE Agent':
-      return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-emerald-400 dark:border-emerald-500'; // emerald green glass (like toggle)
+      return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500'; // emerald green glass (like toggle)
     case 'Archon':
-      return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-pink-400 dark:border-pink-500'; // pink glass
+      return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500'; // green glass
     default:
-      return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-blue-400 dark:border-blue-500';
+      return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500';
   }
 };
 
 // Get glass morphism style based on task order (lower = higher priority = warmer color)
 const getOrderGlassStyle = (order: number) => {
-  if (order <= 3) return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-rose-400 dark:border-rose-500'; // red glass
-  if (order <= 6) return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-orange-400 dark:border-orange-500'; // orange glass
-  if (order <= 10) return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-blue-400 dark:border-blue-500'; // blue glass
-  return 'backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-emerald-400 dark:border-emerald-500'; // green glass
+  if (order <= 3) return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-rose-400 dark:border-rose-500'; // red glass
+  if (order <= 6) return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-orange-400 dark:border-orange-500'; // orange glass
+  if (order <= 10) return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500'; // blue glass
+  return 'bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-green-400 dark:border-green-500'; // green glass
 };
 
 const getOrderTextColor = (order: number) => {
   if (order <= 3) return 'text-rose-500 dark:text-rose-400'; // red text
   if (order <= 6) return 'text-orange-500 dark:text-orange-400'; // orange text
-  if (order <= 10) return 'text-blue-500 dark:text-blue-400'; // blue text
-  return 'text-emerald-500 dark:text-emerald-400'; // green text
+  if (order <= 10) return 'text-green-500 dark:text-green-400'; // blue text
+  return 'text-green-500 dark:text-green-400'; // green text
 };
 
 
@@ -149,7 +149,7 @@ const EditableCell = ({
           }}
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
           autoFocus
         >
           {options.map(option => (
@@ -163,7 +163,7 @@ const EditableCell = ({
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           placeholder={placeholder}
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)] resize-none"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)] resize-none"
           rows={2}
           autoFocus
         />
@@ -175,7 +175,7 @@ const EditableCell = ({
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           placeholder={placeholder}
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
           autoFocus
         />
       )}
@@ -272,10 +272,10 @@ const DraggableTaskRow = ({
       className={`
         group transition-all duration-200 cursor-move
         ${index % 2 === 0 ? 'bg-white/50 dark:bg-black/50' : 'bg-gray-50/80 dark:bg-gray-900/30'}
-        hover:bg-gradient-to-r hover:from-cyan-50/70 hover:to-purple-50/70 dark:hover:from-cyan-900/20 dark:hover:to-purple-900/20
+        hover:bg-gradient-to-r hover:from-green-50/70 hover:to-green-50/70 dark:hover:from-green-900/20 dark:hover:to-green-900/20
         border-b border-gray-200 dark:border-gray-800 last:border-b-0
         ${isDragging ? 'opacity-50 scale-105 shadow-lg z-50' : ''}
-        ${isOver && canDrop ? 'bg-cyan-100/50 dark:bg-cyan-900/20 border-cyan-400' : ''}
+        ${isOver && canDrop ? 'bg-green-100/50 dark:bg-green-900/20 border-green-400' : ''}
         ${isHovering ? 'transform translate-y-1 shadow-md' : ''}
       `}
       onMouseLeave={() => setIsHovering(false)}
@@ -338,7 +338,7 @@ const DraggableTaskRow = ({
       <td className="p-3">
         <div className="flex items-center justify-center">
           <div 
-            className={`flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all duration-300 cursor-pointer hover:scale-110 ${getAssigneeGlassStyle(task.assignee?.name || 'User')} ${getAssigneeGlow(task.assignee?.name || 'User')}`}
+            className={`flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all duration-300 cursor-pointer hover:scale-105 ${getAssigneeGlassStyle(task.assignee?.name || 'User')} ${getAssigneeGlow(task.assignee?.name || 'User')}`}
             onClick={() => setEditingField('assignee')}
             title={`Assignee: ${task.assignee?.name || 'User'}`}
           >
@@ -352,7 +352,7 @@ const DraggableTaskRow = ({
                   handleUpdateField('assignee', e.target.value);
                   setEditingField(null);
                 }}
-                className="bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-cyan-500"
+                className="bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1 text-sm focus:outline-none focus:border-green-500"
                 autoFocus
               >
                 <option value="User">User</option>
@@ -379,7 +379,7 @@ const DraggableTaskRow = ({
           </button>
           <button 
             onClick={() => onTaskView(task)} 
-            className="p-1.5 rounded-full bg-cyan-500/20 text-cyan-500 hover:bg-cyan-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
+            className="p-1.5 rounded-full bg-green-500/20 text-green-500 hover:bg-green-500/30 hover:shadow-[0_0_10px_rgba(34,211,238,0.3)] transition-all duration-300"
           >
             <Edit className="w-3.5 h-3.5" />
           </button>
@@ -421,7 +421,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
     status: statusFilter === 'all' ? 'backlog' : statusFilter,
     assignee: { name: 'AI IDE Agent', avatar: '' },
     feature: '',
-    featureColor: '#3b82f6',
+    featureColor: '#50c878',
     task_order: 1
   });
 
@@ -466,16 +466,16 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
 
   return (
     <>
-      <tr className="border-t border-cyan-400 dark:border-cyan-500 bg-cyan-50/30 dark:bg-cyan-900/10 relative">
+      <tr className="border-t border-green-400 dark:border-green-500 bg-green-50/30 dark:bg-green-900/10 relative">
         {/* Toned down neon blue line separator */}
         <td colSpan={6} className="p-0 relative">
-          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_4px_1px_rgba(34,211,238,0.4)] dark:shadow-[0_0_6px_2px_rgba(34,211,238,0.5)]"></div>
+          <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-green-400 to-transparent shadow-lg dark:shadow-lg"></div>
         </td>
       </tr>
-      <tr className="bg-cyan-50/20 dark:bg-cyan-900/5">
+      <tr className="bg-green-50/20 dark:bg-green-900/5">
       <td className="p-3">
         <div className="flex items-center justify-center">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]">
+          <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white bg-green-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]">
             +
           </div>
         </div>
@@ -487,7 +487,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
           onChange={(e) => setNewTask(prev => ({ ...prev, title: e.target.value }))}
           onKeyPress={handleKeyPress}
           placeholder="Type task title and press Enter..."
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)] transition-all duration-200"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)] transition-all duration-200"
           autoFocus
         />
       </td>
@@ -505,7 +505,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
             };
             setNewTask(prev => ({ ...prev, status: statusMap[e.target.value] || 'backlog' }));
           }}
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
         >
           <option value="Backlog">Backlog</option>
           <option value="In Progress">In Progress</option>
@@ -520,7 +520,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
           onChange={(e) => setNewTask(prev => ({ ...prev, feature: e.target.value }))}
           onKeyPress={handleKeyPress}
           placeholder="Feature..."
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
         />
       </td>
       <td className="p-3">
@@ -530,7 +530,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
             ...prev, 
             assignee: { name: e.target.value as 'User' | 'Archon' | 'AI IDE Agent', avatar: '' }
           }))}
-          className="w-full bg-white/90 dark:bg-black/90 border border-cyan-300 dark:border-cyan-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-cyan-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
+          className="w-full bg-white/90 dark:bg-black/90 border border-green-300 dark:border-green-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-green-500 focus:shadow-[0_0_5px_rgba(34,211,238,0.3)]"
         >
           <option value="AI IDE Agent">AI IDE Agent</option>
           <option value="User">User</option>
@@ -539,7 +539,7 @@ const AddTaskRow = ({ onTaskCreate, tasks, statusFilter }: AddTaskRowProps) => {
       </td>
       <td className="p-3">
         <div className="flex justify-center">
-          <span className="text-xs text-cyan-600 dark:text-cyan-400 font-medium">Press Enter</span>
+          <span className="text-xs text-green-600 dark:text-green-400 font-medium">Press Enter</span>
         </div>
       </td>
     </tr>
@@ -693,11 +693,11 @@ export const TaskTableView = ({
 
   // Get column header color and glow based on header type (matching board view style)
   const getHeaderColor = (type: 'primary' | 'secondary') => {
-    return type === 'primary' ? 'text-cyan-600 dark:text-cyan-400' : 'text-purple-600 dark:text-purple-400';
+    return type === 'primary' ? 'text-green-600 dark:text-green-400' : 'text-green-600 dark:text-green-400';
   };
 
   const getHeaderGlow = (type: 'primary' | 'secondary') => {
-    return type === 'primary' ? 'bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.6)]' : 'bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)]';
+    return type === 'primary' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,211,238,0.6)]' : 'bg-green-500 shadow-[0_0_8px_rgba(#50c878,0.6)]';
   };
 
   return (
@@ -710,7 +710,7 @@ export const TaskTableView = ({
             className={`
               px-3 py-1.5 rounded-full text-xs transition-all duration-200
               ${statusFilter === 'all' 
-                ? 'bg-cyan-100 dark:bg-cyan-900/20 text-cyan-600 dark:text-cyan-400 ring-1 ring-cyan-500/50 shadow-[0_0_8px_rgba(34,211,238,0.3)]' 
+                ? 'bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 ring-1 ring-green-500/50 shadow-[0_0_8px_rgba(34,211,238,0.3)]' 
                 : 'bg-gray-100/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-gray-200/70 dark:hover:bg-gray-700/50'
               }
             `}
@@ -728,13 +728,13 @@ export const TaskTableView = ({
                 };
               case 'in-progress':
                 return {
-                  selected: 'bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/50 shadow-[0_0_8px_rgba(59,130,246,0.3)]',
-                  unselected: 'bg-gray-100/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-blue-200/30 dark:hover:bg-blue-900/20'
+                  selected: 'bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 ring-1 ring-green-500/50 shadow-[0_0_8px_rgba(#50c878,0.3)]',
+                  unselected: 'bg-gray-100/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-green-200/30 dark:hover:bg-green-900/20'
                 };
               case 'review':
                 return {
-                  selected: 'bg-purple-100 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 ring-1 ring-purple-500/50 shadow-[0_0_8px_rgba(168,85,247,0.3)]',
-                  unselected: 'bg-gray-100/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-purple-200/30 dark:hover:bg-purple-900/20'
+                  selected: 'bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 ring-1 ring-green-500/50 shadow-[0_0_8px_rgba(#50c878,0.3)]',
+                  unselected: 'bg-gray-100/70 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-green-200/30 dark:hover:bg-green-900/20'
                 };
               case 'complete':
                 return {
@@ -788,49 +788,49 @@ export const TaskTableView = ({
             <col className="w-40" />
           </colgroup>
           <thead>
-            <tr className="bg-white/80 dark:bg-black/80 backdrop-blur-sm sticky top-0 z-10">
+            <tr className="bg-white/80 dark:bg-black/80 bg-white dark:bg-black sticky top-0 z-10">
               <th className="text-left p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center gap-2">
                   <span className={getHeaderColor('secondary')}>Order</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('secondary')}`}></span>
                 </div>
                 {/* Header divider with glow matching board view */}
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-purple-500/30 shadow-[0_0_10px_2px_rgba(168,85,247,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
               <th className="text-left p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center gap-2">
                   <span className={getHeaderColor('primary')}>Task</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('primary')}`}></span>
                 </div>
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-cyan-500/30 shadow-[0_0_10px_2px_rgba(34,211,238,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
               <th className="text-left p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center gap-2">
                   <span className={getHeaderColor('secondary')}>Status</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('secondary')}`}></span>
                 </div>
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-purple-500/30 shadow-[0_0_10px_2px_rgba(168,85,247,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
               <th className="text-left p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center gap-2">
                   <span className={getHeaderColor('secondary')}>Feature</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('secondary')}`}></span>
                 </div>
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-purple-500/30 shadow-[0_0_10px_2px_rgba(168,85,247,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
               <th className="text-left p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center gap-2">
                   <span className={getHeaderColor('primary')}>Assignee</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('primary')}`}></span>
                 </div>
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-cyan-500/30 shadow-[0_0_10px_2px_rgba(34,211,238,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
               <th className="text-center p-3 font-mono border-b border-gray-300 dark:border-gray-800 relative">
                 <div className="flex items-center justify-center gap-2">
                   <span className={getHeaderColor('primary')}>Actions</span>
                   <span className={`w-1 h-1 rounded-full ${getHeaderGlow('primary')}`}></span>
                 </div>
-                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-cyan-500/30 shadow-[0_0_10px_2px_rgba(34,211,238,0.2)]`}></div>
+                <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] bg-green-500/30 shadow-lg`}></div>
               </th>
             </tr>
           </thead>

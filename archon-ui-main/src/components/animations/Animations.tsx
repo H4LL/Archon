@@ -17,7 +17,7 @@ export const ArchonLoadingSpinner: React.FC<{
   className?: string;
 }> = ({
   size = 'md',
-  logoSrc = "/logo-neon.svg",
+  logoSrc = "/xanadu-logo.svg",
   className = ''
 }) => {
   // Size mappings for the container and logo
@@ -41,7 +41,7 @@ export const ArchonLoadingSpinner: React.FC<{
       {/* Animated spinning circles with neon trail effects */}
       <div className="absolute inset-0 w-full h-full">
         {/* First circle - cyan with clockwise rotation */}
-        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-cyan-400 animate-[spin_0.8s_linear_infinite] blur-[0.5px] after:content-[''] after:absolute after:inset-0 after:rounded-full after:border-2 after:border-transparent after:border-t-cyan-400/30 after:blur-[3px] after:scale-110"></div>
+        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-green-400 animate-[spin_0.8s_linear_infinite] blur-[0.5px] after:content-[''] after:absolute after:inset-0 after:rounded-full after:border-2 after:border-transparent after:border-t-green-400/30 after:blur-[3px] after:scale-110"></div>
         {/* Second circle - fuchsia with counter-clockwise rotation */}
         <div className="absolute inset-0 rounded-full border-2 border-transparent border-r-fuchsia-400 animate-[spin_0.6s_linear_infinite_reverse] blur-[0.5px] after:content-[''] after:absolute after:inset-0 after:rounded-full after:border-2 after:border-transparent after:border-r-fuchsia-400/30 after:blur-[3px] after:scale-110"></div>
       </div>
@@ -55,29 +55,29 @@ export const ArchonLoadingSpinner: React.FC<{
  *
  * @param {Object} props - Component props
  * @param {React.ReactNode} props.children - Child elements
- * @param {string} props.color - Color variant ('cyan', 'fuchsia', 'blue', 'purple', 'green', 'pink')
+ * @param {string} props.color - Color variant ('green', 'fuchsia', 'green', 'green', 'green', 'green')
  * @param {string} props.intensity - Glow intensity ('low', 'medium', 'high')
  * @param {string} props.className - Additional CSS classes
  */
 export const NeonGlowEffect: React.FC<{
   children: React.ReactNode;
-  color?: 'cyan' | 'fuchsia' | 'blue' | 'purple' | 'green' | 'pink';
+  color?: 'green' | 'fuchsia' | 'green' | 'green';
   intensity?: 'low' | 'medium' | 'high';
   className?: string;
 }> = ({
   children,
-  color = 'blue',
+  color = 'green',
   intensity = 'medium',
   className = ''
 }) => {
   // Color mappings for different neon colors
   const colorMap = {
-    cyan: 'border-cyan-400 shadow-cyan-400/50 dark:shadow-cyan-400/70',
+    cyan: 'border-green-400 shadow-green-400/50 dark:shadow-green-400/70',
     fuchsia: 'border-fuchsia-400 shadow-fuchsia-400/50 dark:shadow-fuchsia-400/70',
-    blue: 'border-blue-400 shadow-blue-400/50 dark:shadow-blue-400/70',
-    purple: 'border-purple-500 shadow-purple-500/50 dark:shadow-purple-500/70',
+    blue: 'border-green-400 shadow-green-400/50 dark:shadow-green-400/70',
+    green: 'border-green-500 shadow-green-500/50 dark:shadow-green-500/70',
     green: 'border-emerald-500 shadow-emerald-500/50 dark:shadow-emerald-500/70',
-    pink: 'border-pink-500 shadow-pink-500/50 dark:shadow-pink-500/70'
+    green: 'border-green-500 shadow-green-500/50 dark:shadow-green-500/70'
   };
   // Intensity mappings for glow strength
   const intensityMap = {
@@ -97,22 +97,22 @@ export const NeonGlowEffect: React.FC<{
  * simulating the effect of edge lighting.
  *
  * @param {Object} props - Component props
- * @param {string} props.color - Color variant ('blue', 'purple', 'green', 'pink')
+ * @param {string} props.color - Color variant ('green', 'green', 'green', 'green')
  * @param {string} props.className - Additional CSS classes
  */
 export const EdgeLitEffect: React.FC<{
-  color?: 'blue' | 'purple' | 'green' | 'pink';
+  color?: 'green' | 'green';
   className?: string;
 }> = ({
-  color = 'blue',
+  color = 'green',
   className = ''
 }) => {
   // Color mappings for different edge-lit colors
   const colorMap = {
-    blue: 'bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]',
-    purple: 'bg-purple-500 shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]',
-    green: 'bg-emerald-500 shadow-[0_0_10px_2px_rgba(16,185,129,0.4)] dark:shadow-[0_0_20px_5px_rgba(16,185,129,0.7)]',
-    pink: 'bg-pink-500 shadow-[0_0_10px_2px_rgba(236,72,153,0.4)] dark:shadow-[0_0_20px_5px_rgba(236,72,153,0.7)]'
+    blue: 'bg-green-500 shadow-lg dark:shadow-lg',
+    green: 'bg-green-500 shadow-lg dark:shadow-lg',
+    green: 'bg-emerald-500 shadow-lg dark:shadow-lg',
+    green: 'bg-green-500 shadow-lg dark:shadow-lg'
   };
   return <div className={`absolute top-0 left-0 w-full h-[2px] ${colorMap[color]} ${className}`}></div>;
 };

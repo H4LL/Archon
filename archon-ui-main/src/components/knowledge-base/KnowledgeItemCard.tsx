@@ -42,7 +42,7 @@ const TagsDisplay = ({ tags }: TagsDisplayProps) => {
         {visibleTags.map((tag, index) => (
           <Badge
             key={index}
-            color="purple"
+            color="green"
             variant="outline"
             className="text-xs"
           >
@@ -56,15 +56,15 @@ const TagsDisplay = ({ tags }: TagsDisplayProps) => {
             onMouseLeave={() => setShowTooltip(false)}
           >
             <Badge
-              color="purple"
+              color="green"
               variant="outline"
-              className="bg-purple-100/50 dark:bg-purple-900/30 border-dashed text-xs"
+              className="bg-green-100/50 dark:bg-green-900/30 border-dashed text-xs"
             >
               +{remainingTags.length} more...
             </Badge>
             {showTooltip && (
               <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 bg-black dark:bg-zinc-800 text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 whitespace-nowrap max-w-xs">
-                <div className="font-semibold text-purple-300 mb-1">
+                <div className="font-semibold text-green-300 mb-1">
                   Additional Tags:
                 </div>
                 {remainingTags.map((tag, index) => (
@@ -97,7 +97,7 @@ const DeleteConfirmModal = ({
   message,
 }: DeleteConfirmModalProps) => {
   return (
-    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 bg-white dark:bg-black flex items-center justify-center z-50">
       <div className="w-full max-w-md">
         <Card className="w-full">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
@@ -113,7 +113,7 @@ const DeleteConfirmModal = ({
             </button>
             <button
               onClick={onConfirm}
-              className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors"
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
             >
               Delete
             </button>
@@ -154,18 +154,18 @@ export const KnowledgeItemCard = ({
 
   const statusColorMap = {
     active: 'green',
-    processing: 'blue',
-    error: 'pink'
+    processing: 'green',
+    error: 'green'
   };
   
   // Updated color logic based on source type and knowledge type
   const getCardColor = () => {
     if (item.metadata.source_type === 'url') {
       // Web documents
-      return item.metadata.knowledge_type === 'technical' ? 'blue' : 'cyan';
+      return item.metadata.knowledge_type === 'technical' ? 'green' : 'green';
     } else {
       // Uploaded documents
-      return item.metadata.knowledge_type === 'technical' ? 'purple' : 'pink';
+      return item.metadata.knowledge_type === 'technical' ? 'green' : 'green';
     }
   };
   
@@ -174,17 +174,17 @@ export const KnowledgeItemCard = ({
   // Updated icon colors to match card colors
   const getSourceIconColor = () => {
     if (item.metadata.source_type === 'url') {
-      return item.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     } else {
-      return item.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     }
   };
   
   const getTypeIconColor = () => {
     if (item.metadata.source_type === 'url') {
-      return item.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     } else {
-      return item.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     }
   };
   
@@ -262,7 +262,7 @@ export const KnowledgeItemCard = ({
       <Card
         accentColor={accentColor}
         className={`relative h-full flex flex-col overflow-hidden ${
-          isSelected ? 'ring-2 ring-blue-500 dark:ring-blue-400' : ''
+          isSelected ? 'ring-2 ring-green-500 dark:ring-green-400' : ''
         } ${isSelectionMode ? 'cursor-pointer' : ''}`}
         onClick={(e) => {
           if (isSelectionMode && onToggleSelection) {
@@ -297,13 +297,13 @@ export const KnowledgeItemCard = ({
           style={{
             opacity: tiltStyles.glowIntensity * 0.3,
             background: `radial-gradient(circle at ${tiltStyles.glowPosition.x}% ${tiltStyles.glowPosition.y}%, 
-              rgba(${accentColor === 'blue' ? '59, 130, 246' : 
-                    accentColor === 'cyan' ? '34, 211, 238' : 
-                    accentColor === 'purple' ? '168, 85, 247' : 
+              rgba(${accentColor === 'green' ? '59, 130, 246' : 
+                    accentColor === 'green' ? '34, 211, 238' : 
+                    accentColor === 'green' ? '168, 85, 247' : 
                     '236, 72, 153'}, 0.6) 0%, 
-              rgba(${accentColor === 'blue' ? '59, 130, 246' : 
-                    accentColor === 'cyan' ? '34, 211, 238' : 
-                    accentColor === 'purple' ? '168, 85, 247' : 
+              rgba(${accentColor === 'green' ? '59, 130, 246' : 
+                    accentColor === 'green' ? '34, 211, 238' : 
+                    accentColor === 'green' ? '168, 85, 247' : 
                     '236, 72, 153'}, 0) 70%)`,
           }}
         ></div>
@@ -333,7 +333,7 @@ export const KnowledgeItemCard = ({
                     e.stopPropagation();
                     setShowEditModal(true);
                   }}
-                  className="p-1 text-gray-500 hover:text-blue-500"
+                  className="p-1 text-gray-500 hover:text-green-500"
                   title="Edit"
                 >
                   <Pencil className="w-3 h-3" />
@@ -371,8 +371,8 @@ export const KnowledgeItemCard = ({
                   onClick={handleRefresh}
                   className={`flex items-center gap-1 mb-1 px-2 py-1 transition-colors ${
                     item.metadata.knowledge_type === 'technical' 
-                      ? 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300'
-                      : 'text-cyan-500 hover:text-cyan-600 dark:text-cyan-400 dark:hover:text-cyan-300'
+                      ? 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300'
+                      : 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300'
                   }`}
                   title={`Refresh from: ${item.metadata.original_url || item.url || 'URL not available'}`}
                 >
@@ -395,24 +395,24 @@ export const KnowledgeItemCard = ({
                   onMouseEnter={() => setShowCodeTooltip(true)}
                   onMouseLeave={() => setShowCodeTooltip(false)}
                 >
-                  <div className={`flex items-center gap-1 px-2 py-1 rounded-full backdrop-blur-sm transition-all duration-300 ${
+                  <div className={`flex items-center gap-1 px-2 py-1 rounded-full bg-white dark:bg-black transition-all duration-300 ${
                     item.metadata.source_type === 'url'
                       ? item.metadata.knowledge_type === 'technical'
-                        ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]'
-                        : 'bg-cyan-500/20 border border-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                        ? 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)]'
+                        : 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
                       : item.metadata.knowledge_type === 'technical'
-                        ? 'bg-purple-500/20 border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
-                        : 'bg-pink-500/20 border border-pink-500/40 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:shadow-[0_0_20px_rgba(236,72,153,0.5)]'
+                        ? 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)]'
+                        : 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(80,200,120,0.3)] hover:shadow-[0_0_20px_rgba(80,200,120,0.5)]'
                   }`}>
                     <Code className={`w-3 h-3 ${
                       item.metadata.source_type === 'url'
-                        ? item.metadata.knowledge_type === 'technical' ? 'text-blue-400' : 'text-cyan-400'
-                        : item.metadata.knowledge_type === 'technical' ? 'text-purple-400' : 'text-pink-400'
+                        ? item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
+                        : item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
                     }`} />
                     <span className={`text-xs font-medium ${
                       item.metadata.source_type === 'url'
-                        ? item.metadata.knowledge_type === 'technical' ? 'text-blue-400' : 'text-cyan-400'
-                        : item.metadata.knowledge_type === 'technical' ? 'text-purple-400' : 'text-pink-400'
+                        ? item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
+                        : item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
                     }`}>
                       {codeExamplesCount}
                     </span>
@@ -422,8 +422,8 @@ export const KnowledgeItemCard = ({
                     <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black dark:bg-zinc-800 text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 max-w-xs">
                       <div className={`font-semibold mb-2 ${
                         item.metadata.source_type === 'url'
-                          ? item.metadata.knowledge_type === 'technical' ? 'text-blue-300' : 'text-cyan-300'
-                          : item.metadata.knowledge_type === 'technical' ? 'text-purple-300' : 'text-pink-300'
+                          ? item.metadata.knowledge_type === 'technical' ? 'text-green-300' : 'text-green-300'
+                          : item.metadata.knowledge_type === 'technical' ? 'text-green-300' : 'text-green-300'
                       }`}>
                         Click for Code Browser
                       </div>
@@ -431,8 +431,8 @@ export const KnowledgeItemCard = ({
                         {codeExamples.map((example, index) => (
                           <div key={index} className={`mb-1 last:mb-0 ${
                             item.metadata.source_type === 'url'
-                              ? item.metadata.knowledge_type === 'technical' ? 'text-blue-200' : 'text-cyan-200'
-                              : item.metadata.knowledge_type === 'technical' ? 'text-purple-200' : 'text-pink-200'
+                              ? item.metadata.knowledge_type === 'technical' ? 'text-green-200' : 'text-green-200'
+                              : item.metadata.knowledge_type === 'technical' ? 'text-green-200' : 'text-green-200'
                           }`}>
                             • {example.title}
                           </div>
@@ -450,7 +450,7 @@ export const KnowledgeItemCard = ({
                 onMouseEnter={() => setShowPageTooltip(true)}
                 onMouseLeave={() => setShowPageTooltip(false)}
               >
-                <div className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300">
+                <div className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full bg-white dark:bg-black shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300">
                   <FileText className="w-3 h-3 text-orange-400" />
                   <span className="text-xs text-orange-400 font-medium">
                     {Math.ceil(

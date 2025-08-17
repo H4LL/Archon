@@ -288,7 +288,7 @@ export const SimpleMarkdown: React.FC<SimpleMarkdownProps> = ({ content, classNa
       flushList();
       const content = line.substring(1).trim();
       elements.push(
-        <blockquote key={index} className="border-l-4 border-blue-400 dark:border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 pl-4 pr-4 py-3 italic my-4 rounded-r-lg backdrop-blur-sm">
+        <blockquote key={index} className="border-l-4 border-green-400 dark:border-green-500 bg-green-50/50 dark:bg-green-900/20 pl-4 pr-4 py-3 italic my-4 rounded-r-lg bg-white dark:bg-black">
           <div className="text-gray-700 dark:text-gray-300">
             {processInlineMarkdown(content)}
           </div>

@@ -41,7 +41,7 @@ export function formatValue(value: any): string {
  * Gets accent color based on index for variety
  */
 export function getAccentColor(index: number): string {
-  const colors = ['blue', 'purple', 'green', 'orange', 'pink', 'cyan', 'indigo', 'emerald'];
+  const colors = ['green', 'green', 'green', 'orange', 'green', 'green', 'green', 'emerald'];
   return colors[index % colors.length];
 }
 

@@ -24,7 +24,7 @@ export const useNeonGlow = (initialOptions: NeonGlowOptions = {}): NeonGlowHook 
     opacity: 0.8,
     blur: 2,
     size: 100,
-    color: 'blue',
+    color: 'green',
     speed: 2000,
     enabled: true,
     ...initialOptions

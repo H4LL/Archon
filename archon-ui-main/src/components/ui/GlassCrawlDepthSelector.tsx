@@ -43,9 +43,9 @@ export const GlassCrawlDepthSelector: React.FC<GlassCrawlDepthSelectorProps> = (
               key={`tube-${level}`}
               className={cn(
                 "h-0.5 flex-1 transition-all duration-300",
-                "backdrop-blur-md",
+                "bg-white dark:bg-black",
                 level < value 
-                  ? "bg-blue-500/50" 
+                  ? "bg-green-500/50" 
                   : "bg-white/10 dark:bg-zinc-700/20"
               )}
               style={{
@@ -71,22 +71,22 @@ export const GlassCrawlDepthSelector: React.FC<GlassCrawlDepthSelectorProps> = (
               className={cn(
                 "relative z-10 w-12 h-12 rounded-full transition-all duration-300",
                 "flex items-center justify-center flex-shrink-0",
-                "hover:scale-110 active:scale-95"
+                "hover:scale-105 active:scale-95"
               )}
             >
               {/* Outer glass layer with glow */}
               <div className={cn(
                 "absolute inset-0 rounded-full transition-all duration-300",
-                "backdrop-blur-xl border",
+                "bg-white dark:bg-black border",
                 isSelected 
-                  ? "bg-black/90 border-blue-500/50" 
+                  ? "bg-black/90 border-green-500/50" 
                   : "bg-black/95 border-red-500/30"
               )}>
                 {/* Glow effect - pulsing for current value */}
                 <div className={cn(
                   "absolute -inset-2 rounded-full transition-all duration-300",
                   isSelected
-                    ? "bg-blue-500/30 blur-lg"
+                    ? "bg-green-500/30 blur-lg"
                     : "bg-red-500/20 blur-md",
                   isCurrentValue && "animate-pulse-glow"
                 )} />
@@ -95,17 +95,17 @@ export const GlassCrawlDepthSelector: React.FC<GlassCrawlDepthSelectorProps> = (
               {/* Inner glass layer */}
               <div className={cn(
                 "absolute inset-[3px] rounded-full transition-all duration-300",
-                "backdrop-blur-md border",
+                "bg-white dark:bg-black border",
                 isSelected 
-                  ? "bg-gradient-to-b from-blue-500/30 to-blue-600/40 border-blue-400/60" 
-                  : "bg-gradient-to-b from-white/5 to-white/10 border-white/20"
+                  ? "bg-gradient-to-b from-green-500/30 to-green-600/40 border-green-400/60" 
+                  : "bg-white dark:bg-black border-gray-200 dark:border-gray-800"
               )} />
               
               {/* Number display */}
               <span className={cn(
                 "relative z-20 text-base font-bold transition-all duration-300",
                 isSelected 
-                  ? "text-blue-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]" 
+                  ? "text-green-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]" 
                   : "text-gray-400 dark:text-gray-500"
               )}>
                 {level}
@@ -123,26 +123,26 @@ export const GlassCrawlDepthSelector: React.FC<GlassCrawlDepthSelectorProps> = (
       {/* Detailed tooltip - positioned better */}
       {showTooltip && onTooltipToggle && (
         <motion.div 
-          className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-4 p-3 bg-gray-900/95 dark:bg-black/95 text-white rounded-lg shadow-xl w-80 backdrop-blur-md border border-gray-700"
+          className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-4 p-3 bg-gray-900/95 dark:bg-black/95 text-white rounded-lg shadow-xl w-80 bg-white dark:bg-black border border-gray-700"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
         >
           <h4 className="font-semibold mb-2 text-sm">Crawl Depth Explained</h4>
           <div className="space-y-1.5 text-xs">
-            <div className={cn("transition-all duration-300", value === 1 ? "text-blue-300" : "text-gray-300")}>
-              <span className="font-medium text-blue-400">Level 1:</span> Only the URL you provide (1-50 pages)
+            <div className={cn("transition-all duration-300", value === 1 ? "text-green-300" : "text-gray-300")}>
+              <span className="font-medium text-green-400">Level 1:</span> Only the URL you provide (1-50 pages)
               <div className="text-gray-500 text-[10px]">Best for: Single articles, specific pages</div>
             </div>
-            <div className={cn("transition-all duration-300", value === 2 ? "text-blue-300" : "text-gray-300")}>
+            <div className={cn("transition-all duration-300", value === 2 ? "text-green-300" : "text-gray-300")}>
               <span className="font-medium text-green-400">Level 2:</span> URL + all linked pages (10-200 pages)
               <div className="text-gray-500 text-[10px]">Best for: Documentation sections, blogs</div>
             </div>
-            <div className={cn("transition-all duration-300", value === 3 ? "text-blue-300" : "text-gray-300")}>
+            <div className={cn("transition-all duration-300", value === 3 ? "text-green-300" : "text-gray-300")}>
               <span className="font-medium text-yellow-400">Level 3:</span> URL + 2 levels of links (50-500 pages)
               <div className="text-gray-500 text-[10px]">Best for: Entire sites, comprehensive docs</div>
             </div>
-            <div className={cn("transition-all duration-300", value >= 4 ? "text-blue-300" : "text-gray-300")}>
+            <div className={cn("transition-all duration-300", value >= 4 ? "text-green-300" : "text-gray-300")}>
               <span className="font-medium text-orange-400">Level 4-5:</span> Very deep crawling (100-1000+ pages)
               <div className="text-gray-500 text-[10px]">Warning: May include irrelevant content</div>
             </div>

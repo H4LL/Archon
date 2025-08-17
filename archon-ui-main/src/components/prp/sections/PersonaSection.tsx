@@ -9,7 +9,7 @@ export const PersonaSection: React.FC<SectionProps> = ({
   title,
   data,
   icon,
-  accentColor = 'purple',
+  accentColor = 'green',
   defaultOpen = true,
   isDarkMode = false,
 }) => {
@@ -80,7 +80,7 @@ const PersonaCard: React.FC<PersonaCardProps> = ({ persona, personaKey }) => {
   return (
     <div className="group">
       <div 
-        className="p-6 rounded-xl bg-gradient-to-br from-white/80 to-white/60 dark:from-gray-800/50 dark:to-gray-900/50 border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+        className="p-6 rounded-xl bg-gradient-to-br from-white/80 to-white/60 dark:from-gray-800/50 dark:to-gray-900/50 border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-start gap-4">

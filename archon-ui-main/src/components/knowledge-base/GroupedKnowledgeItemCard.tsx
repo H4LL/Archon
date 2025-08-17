@@ -52,7 +52,7 @@ const TagsDisplay = ({ tags }: TagsDisplayProps) => {
         {visibleTags.map((tag, index) => (
           <Badge
             key={index}
-            color="purple"
+            color="green"
             variant="outline"
             className="text-xs"
           >
@@ -66,15 +66,15 @@ const TagsDisplay = ({ tags }: TagsDisplayProps) => {
             onMouseLeave={() => setShowTooltip(false)}
           >
             <Badge
-              color="purple"
+              color="green"
               variant="outline"
-              className="bg-purple-100/50 dark:bg-purple-900/30 border-dashed text-xs"
+              className="bg-green-100/50 dark:bg-green-900/30 border-dashed text-xs"
             >
               +{remainingTags.length} more...
             </Badge>
             {showTooltip && (
               <div className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 bg-black dark:bg-zinc-800 text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 whitespace-nowrap max-w-xs">
-                <div className="font-semibold text-purple-300 mb-1">
+                <div className="font-semibold text-green-300 mb-1">
                   Additional Tags:
                 </div>
                 {remainingTags.map((tag, index) => (
@@ -107,7 +107,7 @@ const DeleteConfirmModal = ({
   message,
 }: DeleteConfirmModalProps) => {
   return (
-    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-gray-500/50 dark:bg-black/80 bg-white dark:bg-black flex items-center justify-center z-50">
       <div className="w-full max-w-md">
         <Card className="w-full">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
@@ -123,7 +123,7 @@ const DeleteConfirmModal = ({
             </button>
             <button
               onClick={onConfirm}
-              className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors"
+              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
             >
               Delete
             </button>
@@ -164,10 +164,10 @@ export const GroupedKnowledgeItemCard = ({
   const getCardColor = (item: KnowledgeItem) => {
     if (item.metadata.source_type === 'url') {
       // Web documents
-      return item.metadata.knowledge_type === 'technical' ? 'blue' : 'cyan';
+      return item.metadata.knowledge_type === 'technical' ? 'green' : 'green';
     } else {
       // Uploaded documents
-      return item.metadata.knowledge_type === 'technical' ? 'purple' : 'pink';
+      return item.metadata.knowledge_type === 'technical' ? 'green' : 'green';
     }
   };
   
@@ -177,17 +177,17 @@ export const GroupedKnowledgeItemCard = ({
   // Updated icon colors to match active card
   const getSourceIconColor = (item: KnowledgeItem) => {
     if (item.metadata.source_type === 'url') {
-      return item.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     } else {
-      return item.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     }
   };
   
   const getTypeIconColor = (item: KnowledgeItem) => {
     if (item.metadata.source_type === 'url') {
-      return item.metadata.knowledge_type === 'technical' ? 'text-blue-500' : 'text-cyan-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     } else {
-      return item.metadata.knowledge_type === 'technical' ? 'text-purple-500' : 'text-pink-500';
+      return item.metadata.knowledge_type === 'technical' ? 'text-green-500' : 'text-green-500';
     }
   };
   
@@ -198,8 +198,8 @@ export const GroupedKnowledgeItemCard = ({
   
   const statusColorMap = {
     active: 'green',
-    processing: 'blue',
-    error: 'pink'
+    processing: 'green',
+    error: 'green'
   };
 
   // Use the tilt effect hook - but only apply the handlers if not grouped
@@ -321,15 +321,15 @@ export const GroupedKnowledgeItemCard = ({
           {isGrouped && (
             <button
               onClick={shuffleToNextCard}
-              className="group flex items-center gap-1 px-2 py-1 bg-blue-500/20 border border-blue-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 card-3d-layer-3 flex-shrink-0"
+              className="group flex items-center gap-1 px-2 py-1 bg-green-500/20 border border-green-500/40 rounded-full bg-white dark:bg-black shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)] transition-all duration-300 card-3d-layer-3 flex-shrink-0"
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
             >
-              <Globe className="w-3 h-3 text-blue-400" />
-              <span className="text-xs text-blue-400 font-medium">
+              <Globe className="w-3 h-3 text-green-400" />
+              <span className="text-xs text-green-400 font-medium">
                 {activeCardIndex + 1}/{groupedItem.items.length}
               </span>
-              <ChevronRight className="w-3 h-3 text-blue-400 group-hover:translate-x-0.5 transition-transform" />
+              <ChevronRight className="w-3 h-3 text-green-400 group-hover:translate-x-0.5 transition-transform" />
             </button>
           )}
         </div>
@@ -339,7 +339,7 @@ export const GroupedKnowledgeItemCard = ({
               e.stopPropagation();
               setShowEditModal(true);
             }}
-            className="p-1 text-gray-500 hover:text-blue-500"
+            className="p-1 text-gray-500 hover:text-green-500"
             title="Edit"
           >
             <Pencil className="w-3 h-3" />
@@ -379,8 +379,8 @@ export const GroupedKnowledgeItemCard = ({
               onClick={handleRefresh}
               className={`flex items-center gap-1 mb-1 px-2 py-1 transition-colors ${
                 item.metadata.knowledge_type === 'technical' 
-                  ? 'text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300'
-                  : 'text-cyan-500 hover:text-cyan-600 dark:text-cyan-400 dark:hover:text-cyan-300'
+                  ? 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300'
+                  : 'text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300'
               }`}
               title={`Refresh from: ${item.metadata.original_url || item.url || 'URL not available'}`}
             >
@@ -403,24 +403,24 @@ export const GroupedKnowledgeItemCard = ({
               onMouseEnter={() => setShowCodeTooltip(true)}
               onMouseLeave={() => setShowCodeTooltip(false)}
             >
-              <div className={`flex items-center gap-1 px-2 py-1 rounded-full backdrop-blur-sm transition-all duration-300 ${
+              <div className={`flex items-center gap-1 px-2 py-1 rounded-full bg-white dark:bg-black transition-all duration-300 ${
                 item.metadata.source_type === 'url'
                   ? item.metadata.knowledge_type === 'technical'
-                    ? 'bg-blue-500/20 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]'
-                    : 'bg-cyan-500/20 border border-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
+                    ? 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)]'
+                    : 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(34,211,238,0.3)] hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]'
                   : item.metadata.knowledge_type === 'technical'
-                    ? 'bg-purple-500/20 border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]'
-                    : 'bg-pink-500/20 border border-pink-500/40 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:shadow-[0_0_20px_rgba(236,72,153,0.5)]'
+                    ? 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(#50c878,0.3)] hover:shadow-[0_0_20px_rgba(#50c878,0.5)]'
+                    : 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(80,200,120,0.3)] hover:shadow-[0_0_20px_rgba(80,200,120,0.5)]'
               }`}>
                 <Code className={`w-3 h-3 ${
                   item.metadata.source_type === 'url'
-                    ? item.metadata.knowledge_type === 'technical' ? 'text-blue-400' : 'text-cyan-400'
-                    : item.metadata.knowledge_type === 'technical' ? 'text-purple-400' : 'text-pink-400'
+                    ? item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
+                    : item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
                 }`} />
                 <span className={`text-xs font-medium ${
                   item.metadata.source_type === 'url'
-                    ? item.metadata.knowledge_type === 'technical' ? 'text-blue-400' : 'text-cyan-400'
-                    : item.metadata.knowledge_type === 'technical' ? 'text-purple-400' : 'text-pink-400'
+                    ? item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
+                    : item.metadata.knowledge_type === 'technical' ? 'text-green-400' : 'text-green-400'
                 }`}>
                   {activeCodeExamples}
                 </span>
@@ -443,7 +443,7 @@ export const GroupedKnowledgeItemCard = ({
             onMouseEnter={() => setShowPageTooltip(true)}
             onMouseLeave={() => setShowPageTooltip(false)}
           >
-            <div className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full backdrop-blur-sm shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300">
+            <div className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full bg-white dark:bg-black shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300">
               <FileText className="w-3 h-3 text-orange-400" />
               <span className="text-xs text-orange-400 font-medium">
                 {Math.ceil(activeWordCount / 250).toLocaleString()}
@@ -507,7 +507,7 @@ export const GroupedKnowledgeItemCard = ({
           >
             <Card
               accentColor={getCardColor(groupedItem.items[(activeCardIndex + groupedItem.items.length - 2) % groupedItem.items.length])}
-              className="w-full h-full bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md shadow-md opacity-60 overflow-hidden"
+              className="w-full h-full bg-white/60 dark:bg-zinc-900/60 bg-white dark:bg-black shadow-md opacity-60 overflow-hidden"
             >
               {/* Add a simplified version of the content for depth */}
               <div className="p-4 opacity-30">
@@ -534,7 +534,7 @@ export const GroupedKnowledgeItemCard = ({
           >
             <Card
               accentColor={getCardColor(groupedItem.items[(activeCardIndex + groupedItem.items.length - 1) % groupedItem.items.length])}
-              className="w-full h-full bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md shadow-md opacity-80 overflow-hidden"
+              className="w-full h-full bg-white/70 dark:bg-zinc-900/70 bg-white dark:bg-black shadow-md opacity-80 overflow-hidden"
             >
               {/* Add a simplified version of the content for depth */}
               <div className="p-4 opacity-60">
@@ -561,7 +561,7 @@ export const GroupedKnowledgeItemCard = ({
       >
         <Card
           accentColor={accentColor}
-          className="relative h-full flex flex-col backdrop-blur-lg bg-white/80 dark:bg-zinc-900/80"
+          className="relative h-full flex flex-col bg-white dark:bg-black bg-white/80 dark:bg-zinc-900/80"
         >
           {/* Reflection overlay */}
           <div
@@ -589,7 +589,7 @@ export const GroupedKnowledgeItemCard = ({
         >
           <Card
             accentColor={accentColor}
-            className="relative h-full flex flex-col backdrop-blur-lg bg-white/80 dark:bg-zinc-900/80"
+            className="relative h-full flex flex-col bg-white dark:bg-black bg-white/80 dark:bg-zinc-900/80"
           >
             {/* Reflection overlay */}
             <div
@@ -612,14 +612,14 @@ export const GroupedKnowledgeItemCard = ({
       
       {/* Sources tooltip */}
       {showTooltip && isGrouped && (
-        <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/90 dark:bg-zinc-800/90 backdrop-blur-md text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 whitespace-nowrap max-w-xs">
-          <div className="font-semibold text-blue-300 mb-1">
+        <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/90 dark:bg-zinc-800/90 bg-white dark:bg-black text-white text-xs rounded-lg py-2 px-3 shadow-lg z-50 whitespace-nowrap max-w-xs">
+          <div className="font-semibold text-green-300 mb-1">
             Grouped Sources:
           </div>
           {groupedItem.items.map((item, index) => (
             <div
               key={index}
-              className={`text-gray-300 ${activeCardIndex === index ? 'text-blue-300 font-medium' : ''}`}
+              className={`text-gray-300 ${activeCardIndex === index ? 'text-green-300 font-medium' : ''}`}
             >
               {index + 1}. {item.title}
             </div>

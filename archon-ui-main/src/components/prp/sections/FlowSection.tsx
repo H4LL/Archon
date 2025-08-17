@@ -27,7 +27,7 @@ export const FlowSection: React.FC<SectionProps> = ({
       if (typeof value === 'string') {
         return (
           <div key={nodeKey} className="flex items-center gap-2 p-2" style={{ marginLeft: depth * 24 }}>
-            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500"></div>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {formatKey(key)}:
             </span>
@@ -38,10 +38,10 @@ export const FlowSection: React.FC<SectionProps> = ({
         return (
           <div key={nodeKey} className="mb-3">
             <div className="flex items-center gap-2 p-2 font-medium text-gray-800 dark:text-white" style={{ marginLeft: depth * 24 }}>
-              <Navigation className="w-4 h-4 text-purple-500" />
+              <Navigation className="w-4 h-4 text-green-500" />
               {formatKey(key)}
             </div>
-            <div className="border-l-2 border-purple-200 dark:border-purple-800 ml-6">
+            <div className="border-l-2 border-green-200 dark:border-green-800 ml-6">
               {renderFlowNode(value, depth + 1)}
             </div>
           </div>
@@ -56,10 +56,10 @@ export const FlowSection: React.FC<SectionProps> = ({
       {Object.entries(data).map(([flowName, flow]) => (
         <div 
           key={flowName}
-          className="p-4 rounded-lg bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-800"
+          className="p-4 rounded-lg bg-gradient-to-br from-green-50/50 to-green-50/50 dark:from-green-900/20 dark:to-green-900/20 border border-green-200 dark:border-green-800"
         >
           <h4 className="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
-            <Workflow className="w-5 h-5 text-purple-500" />
+            <Workflow className="w-5 h-5 text-green-500" />
             {formatKey(flowName)}
           </h4>
           <div className="overflow-x-auto">

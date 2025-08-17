@@ -71,9 +71,9 @@ const ColumnDropZone = ({
       case 'backlog':
         return 'text-gray-600 dark:text-gray-400';
       case 'in-progress':
-        return 'text-blue-600 dark:text-blue-400';
+        return 'text-green-600 dark:text-green-400';
       case 'review':
-        return 'text-purple-600 dark:text-purple-400';
+        return 'text-green-600 dark:text-green-400';
       case 'complete':
         return 'text-green-600 dark:text-green-400';
     }
@@ -85,11 +85,11 @@ const ColumnDropZone = ({
       case 'backlog':
         return 'bg-gray-500/30';
       case 'in-progress':
-        return 'bg-blue-500/30 shadow-[0_0_10px_2px_rgba(59,130,246,0.2)]';
+        return 'bg-green-500/30 shadow-lg';
       case 'review':
-        return 'bg-purple-500/30 shadow-[0_0_10px_2px_rgba(168,85,247,0.2)]';
+        return 'bg-green-500/30 shadow-lg';
       case 'complete':
-        return 'bg-green-500/30 shadow-[0_0_10px_2px_rgba(16,185,129,0.2)]';
+        return 'bg-green-500/30 shadow-lg';
     }
   };
 
@@ -101,7 +101,7 @@ const ColumnDropZone = ({
       ref={ref} 
       className={`flex flex-col bg-white/20 dark:bg-black/30 ${isOver ? 'bg-gray-100/50 dark:bg-gray-800/20 border-t-2 border-t-[#00ff00] shadow-[inset_0_1px_10px_rgba(0,255,0,0.1)]' : ''} transition-colors duration-200 h-full`}
     >
-      <div className="text-center py-3 sticky top-0 z-10 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+      <div className="text-center py-3 sticky top-0 z-10 bg-white/80 dark:bg-black/80 bg-white dark:bg-black">
         <h3 className={`font-mono ${getColumnColor()} text-sm`}>{title}</h3>
         {/* Column header divider with glow */}
         <div className={`absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[1px] ${getColumnGlow()}`}></div>
@@ -266,9 +266,9 @@ export const TaskBoardView = ({
     <div className="flex flex-col h-full min-h-[70vh]">
       {/* Multi-select toolbar */}
       {selectedTasks.size > 0 && (
-        <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-900/20 border-b border-blue-200 dark:border-blue-800">
+        <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 border-b border-green-200 dark:border-green-800">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+            <span className="text-sm font-medium text-green-700 dark:text-green-300">
               {selectedTasks.size} task{selectedTasks.size !== 1 ? 's' : ''} selected
             </span>
           </div>

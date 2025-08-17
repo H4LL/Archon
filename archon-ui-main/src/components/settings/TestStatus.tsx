@@ -403,8 +403,8 @@ export const TestStatus = () => {
     if (log.includes('FAIL') || log.includes('✕') || log.includes('failed')) textColor = 'text-red-600 dark:text-red-400';
     if (log.includes('Error:') || log.includes('ERROR')) textColor = 'text-red-600 dark:text-red-400';
     if (log.includes('Warning:') || log.includes('WARN')) textColor = 'text-yellow-600 dark:text-yellow-400';
-    if (log.includes('Status:') || log.includes('Duration:') || log.includes('Execution ID:')) textColor = 'text-cyan-600 dark:text-cyan-400';
-    if (log.startsWith('>')) textColor = 'text-blue-600 dark:text-blue-400';
+    if (log.includes('Status:') || log.includes('Duration:') || log.includes('Execution ID:')) textColor = 'text-green-600 dark:text-green-400';
+    if (log.startsWith('>')) textColor = 'text-green-600 dark:text-green-400';
 
     return (
       <div key={index} className={`${textColor} py-0.5 whitespace-pre-wrap font-mono`}>
@@ -608,7 +608,7 @@ export const TestStatus = () => {
           {testState.isRunning ? (
             <Button
               variant="outline"
-              accentColor="pink"
+              accentColor="green"
               size="sm"
               onClick={onCancel}
             >

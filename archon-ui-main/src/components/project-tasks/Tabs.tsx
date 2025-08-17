@@ -43,7 +43,7 @@ export const TabsList = ({
 }: TabsListProps) => {
   return <div className={`relative ${className}`} role="tablist">
       {/* Subtle neon glow effect */}
-      <div className="absolute inset-0 rounded-lg opacity-30 blur-[1px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 pointer-events-none"></div>
+      <div className="absolute inset-0 rounded-lg opacity-30 blur-[1px] bg-gradient-to-r from-green-500/10 via-green-500/10 to-green-500/10 pointer-events-none"></div>
       {children}
     </div>;
 };
@@ -52,14 +52,14 @@ interface TabsTriggerProps {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
-  color?: 'blue' | 'purple' | 'pink' | 'orange' | 'cyan' | 'green';
+  color?: 'green' | 'orange' | 'green';
 }
 export const TabsTrigger = ({
   value,
   children,
   className = '',
   onClick,
-  color = 'blue'
+  color = 'green'
 }: TabsTriggerProps) => {
   const {
     value: activeValue,
@@ -72,33 +72,33 @@ export const TabsTrigger = ({
   };
   const colorMap = {
     blue: {
-      text: 'text-blue-600 dark:text-blue-400',
-      glow: 'bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]',
-      hover: 'hover:text-blue-500 dark:hover:text-blue-400/70'
+      text: 'text-green-600 dark:text-green-400',
+      glow: 'bg-green-500 shadow-lg dark:shadow-lg',
+      hover: 'hover:text-green-500 dark:hover:text-green-400/70'
     },
-    purple: {
-      text: 'text-purple-600 dark:text-purple-400',
-      glow: 'bg-purple-500 shadow-[0_0_10px_2px_rgba(168,85,247,0.4)] dark:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]',
-      hover: 'hover:text-purple-500 dark:hover:text-purple-400/70'
+    green: {
+      text: 'text-green-600 dark:text-green-400',
+      glow: 'bg-green-500 shadow-lg dark:shadow-lg',
+      hover: 'hover:text-green-500 dark:hover:text-green-400/70'
     },
-    pink: {
-      text: 'text-pink-600 dark:text-pink-400',
-      glow: 'bg-pink-500 shadow-[0_0_10px_2px_rgba(236,72,153,0.4)] dark:shadow-[0_0_20px_5px_rgba(236,72,153,0.7)]',
-      hover: 'hover:text-pink-500 dark:hover:text-pink-400/70'
+    green: {
+      text: 'text-green-600 dark:text-green-400',
+      glow: 'bg-green-500 shadow-lg dark:shadow-lg',
+      hover: 'hover:text-green-500 dark:hover:text-green-400/70'
     },
     orange: {
       text: 'text-orange-600 dark:text-orange-400',
-      glow: 'bg-orange-500 shadow-[0_0_10px_2px_rgba(249,115,22,0.4)] dark:shadow-[0_0_20px_5px_rgba(249,115,22,0.7)]',
+      glow: 'bg-orange-500 shadow-lg dark:shadow-lg',
       hover: 'hover:text-orange-500 dark:hover:text-orange-400/70'
     },
     cyan: {
-      text: 'text-cyan-600 dark:text-cyan-400',
-      glow: 'bg-cyan-500 shadow-[0_0_10px_2px_rgba(34,211,238,0.4)] dark:shadow-[0_0_20px_5px_rgba(34,211,238,0.7)]',
-      hover: 'hover:text-cyan-500 dark:hover:text-cyan-400/70'
+      text: 'text-green-600 dark:text-green-400',
+      glow: 'bg-green-500 shadow-lg dark:shadow-lg',
+      hover: 'hover:text-green-500 dark:hover:text-green-400/70'
     },
     green: {
       text: 'text-emerald-600 dark:text-emerald-400',
-      glow: 'bg-emerald-500 shadow-[0_0_10px_2px_rgba(16,185,129,0.4)] dark:shadow-[0_0_20px_5px_rgba(16,185,129,0.7)]',
+      glow: 'bg-emerald-500 shadow-lg dark:shadow-lg',
       hover: 'hover:text-emerald-500 dark:hover:text-emerald-400/70'
     }
   };

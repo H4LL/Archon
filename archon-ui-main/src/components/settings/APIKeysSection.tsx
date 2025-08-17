@@ -189,7 +189,7 @@ export const APIKeysSection = () => {
   if (loading) {
     return (
       <div className="space-y-5">
-        <Card accentColor="pink" className="space-y-5">
+        <Card accentColor="green" className="space-y-5">
           <div className="animate-pulse space-y-4">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
             <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
@@ -201,7 +201,7 @@ export const APIKeysSection = () => {
   }
 
   return (
-    <Card accentColor="pink" className="p-8">
+    <Card accentColor="green" className="p-8">
         <div className="space-y-4">
           {/* Description text */}
           <p className="text-sm text-gray-600 dark:text-zinc-400 mb-4">
@@ -266,7 +266,7 @@ export const APIKeysSection = () => {
                       className={`
                         absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded transition-colors
                         ${cred.is_encrypted 
-                          ? 'text-pink-600 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/20' 
+                          ? 'text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/20' 
                           : 'text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                         }
                       `}
@@ -300,7 +300,7 @@ export const APIKeysSection = () => {
             <Button
               variant="outline"
               onClick={handleAddNewRow}
-              accentColor="pink"
+              accentColor="green"
               size="sm"
             >
               <Plus className="w-3.5 h-3.5 mr-1.5" />
@@ -323,7 +323,7 @@ export const APIKeysSection = () => {
                 onClick={saveAllChanges}
                 accentColor="green"
                 disabled={saving}
-                className="shadow-emerald-500/20 shadow-sm"
+                className="shadow-green-500/20 shadow-sm"
               >
                 {saving ? (
                   <>
@@ -342,7 +342,7 @@ export const APIKeysSection = () => {
 
           {/* Security Notice */}
           <div className="p-3 mt-6 mb-2 bg-gray-50 dark:bg-black/40 rounded-md flex items-start gap-3">
-            <div className="w-5 h-5 text-pink-500 mt-0.5 flex-shrink-0">
+            <div className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0">
               <Lock className="w-5 h-5" />
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">

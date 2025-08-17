@@ -121,7 +121,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black/50 bg-white dark:bg-black z-50 flex items-center justify-center p-4"
         onClick={onClose}
       >
         <motion.div
@@ -135,7 +135,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-3">
-              <BarChart className="w-6 h-6 text-blue-500" />
+              <BarChart className="w-6 h-6 text-green-500" />
               <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
                 Test Coverage Report
               </h2>
@@ -153,7 +153,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
             {loading && (
               <div className="flex items-center justify-center py-12">
                 <div className="flex items-center gap-3">
-                  <Activity className="w-5 h-5 animate-pulse text-blue-500" />
+                  <Activity className="w-5 h-5 animate-pulse text-green-500" />
                   <span className="text-gray-600 dark:text-gray-400">Loading coverage data...</span>
                 </div>
               </div>
@@ -169,7 +169,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
                 <button
                   onClick={generateCoverage}
                   disabled={generating}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white rounded-lg transition-colors"
                 >
                   {generating ? (
                     <>
@@ -194,7 +194,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
                     {summary.total.lines.pct >= 80 ? (
                       <CheckCircle className="w-6 h-6 text-green-500" />
                     ) : (
-                      <BarChart className="w-6 h-6 text-blue-500" />
+                      <BarChart className="w-6 h-6 text-green-500" />
                     )}
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                       Overall Coverage
@@ -305,7 +305,7 @@ export function CoverageModal({ isOpen, onClose }: CoverageModalProps) {
                   <button
                     onClick={generateCoverage}
                     disabled={generating}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 disabled:opacity-50 text-white rounded-lg transition-colors"
                   >
                     {generating ? (
                       <>

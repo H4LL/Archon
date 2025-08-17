@@ -358,7 +358,7 @@ export const MCPPage = () => {
         return <CheckCircle className="w-5 h-5 text-green-500" />;
       case 'starting':
       case 'stopping':
-        return <Loader className="w-5 h-5 text-blue-500 animate-spin" />;
+        return <Loader className="w-5 h-5 text-green-500 animate-spin" />;
       default:
         return <AlertCircle className="w-5 h-5 text-red-500" />;
     }
@@ -370,7 +370,7 @@ export const MCPPage = () => {
         return 'text-green-500';
       case 'starting':
       case 'stopping':
-        return 'text-blue-500';
+        return 'text-green-500';
       default:
         return 'text-red-500';
     }
@@ -394,7 +394,7 @@ export const MCPPage = () => {
         className="text-3xl font-bold text-gray-800 dark:text-white mb-8 flex items-center gap-3"
         variants={titleVariants}
       >
-        <svg fill="currentColor" fillRule="evenodd" height="28" width="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="text-pink-500 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.8)]">
+        <svg fill="currentColor" fillRule="evenodd" height="28" width="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="text-green-500 filter drop-shadow-[0_0_8px_rgba(80,200,120,0.8)]">
           <path d="M15.688 2.343a2.588 2.588 0 00-3.61 0l-9.626 9.44a.863.863 0 01-1.203 0 .823.823 0 010-1.18l9.626-9.44a4.313 4.313 0 016.016 0 4.116 4.116 0 011.204 3.54 4.3 4.3 0 013.609 1.18l.05.05a4.115 4.115 0 010 5.9l-8.706 8.537a.274.274 0 000 .393l1.788 1.754a.823.823 0 010 1.18.863.863 0 01-1.203 0l-1.788-1.753a1.92 1.92 0 010-2.754l8.706-8.538a2.47 2.47 0 000-3.54l-.05-.049a2.588 2.588 0 00-3.607-.003l-7.172 7.034-.002.002-.098.097a.863.863 0 01-1.204 0 .823.823 0 010-1.18l7.273-7.133a2.47 2.47 0 00-.003-3.537z"></path>
           <path d="M14.485 4.703a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a4.115 4.115 0 000 5.9 4.314 4.314 0 006.016 0l7.12-6.982a.823.823 0 000-1.18.863.863 0 00-1.204 0l-7.119 6.982a2.588 2.588 0 01-3.61 0 2.47 2.47 0 010-3.54l7.12-6.982z"></path>
         </svg>
@@ -408,13 +408,13 @@ export const MCPPage = () => {
             onClick={() => setActiveTab('server')}
             className={`pb-3 relative ${
               activeTab === 'server'
-                ? 'text-blue-600 dark:text-blue-400 font-medium'
+                ? 'text-green-600 dark:text-green-400 font-medium'
                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
             }`}
           >
             Server Control
             {activeTab === 'server' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></span>
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500 shadow-[0_0_10px_rgba(#50c878,0.5)]"></span>
             )}
           </button>
           {/* TODO: MCP Client feature not implemented - commenting out for now
@@ -422,13 +422,13 @@ export const MCPPage = () => {
             onClick={() => setActiveTab('clients')}
             className={`pb-3 relative ${
               activeTab === 'clients'
-                ? 'text-cyan-600 dark:text-cyan-400 font-medium'
+                ? 'text-green-600 dark:text-green-400 font-medium'
                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
             }`}
           >
             MCP Clients
             {activeTab === 'clients' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></span>
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500 shadow-[0_0_10px_rgba(34,211,238,0.5)]"></span>
             )}
           </button>
           */}
@@ -444,7 +444,7 @@ export const MCPPage = () => {
             {/* Left Column: Archon MCP Server */}
             <div className="flex flex-col">
               <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
-                <Server className="mr-2 text-blue-500" size={20} />
+                <Server className="mr-2 text-green-500" size={20} />
                 Archon MCP Server
               </h2>
               
@@ -479,7 +479,7 @@ export const MCPPage = () => {
                         disabled={isStarting}
                         variant="primary"
                         accentColor="green"
-                        className="shadow-emerald-500/20 shadow-sm"
+                        className="shadow-green-500/20 shadow-sm"
                       >
                         {isStarting ? (
                           <>
@@ -498,8 +498,8 @@ export const MCPPage = () => {
                         onClick={handleStopServer}
                         disabled={isStopping || serverStatus.status !== 'running'}
                         variant="primary"
-                        accentColor="pink"
-                        className="shadow-pink-500/20 shadow-sm"
+                        accentColor="green"
+                        className="shadow-green-500/20 shadow-sm"
                       >
                         {isStopping ? (
                           <>
@@ -523,7 +523,7 @@ export const MCPPage = () => {
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-medium text-gray-700 dark:text-zinc-300">
                         IDE Configuration
-                        <span className="ml-2 px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                        <span className="ml-2 px-2 py-1 text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full">
                           HTTP Mode
                         </span>
                       </h3>
@@ -545,7 +545,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('claudecode')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'claudecode'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -555,7 +555,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('cursor')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'cursor'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -565,7 +565,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('windsurf')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'windsurf'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -575,7 +575,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('cline')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'cline'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -585,7 +585,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('kiro')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'kiro'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -595,7 +595,7 @@ export const MCPPage = () => {
                           onClick={() => setSelectedIDE('augment')}
                           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                             selectedIDE === 'augment'
-                              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'border-green-500 text-green-600 dark:text-green-400'
                               : 'border-transparent text-gray-500 dark:text-zinc-400 hover:text-gray-700 dark:hover:text-zinc-300'
                           } cursor-pointer`}
                         >
@@ -663,11 +663,11 @@ export const MCPPage = () => {
             {/* Right Column: Server Logs */}
             <div className="flex flex-col">
               <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
-                <Clock className="mr-2 text-purple-500" size={20} />
+                <Clock className="mr-2 text-green-500" size={20} />
                 Server Logs
               </h2>
               
-              <Card accentColor="purple" className="h-full flex flex-col">
+              <Card accentColor="green" className="h-full flex flex-col">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm text-gray-600 dark:text-zinc-400">
                     {logs.length > 0 
@@ -722,7 +722,7 @@ export const MCPPage = () => {
           {/* Global Rules Section */}
           <motion.div className="mt-6" variants={itemVariants}>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
-              <Server className="mr-2 text-pink-500" size={20} />
+              <Server className="mr-2 text-green-500" size={20} />
               Global IDE Rules
             </h2>
             <IDEGlobalRules />

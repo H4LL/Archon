@@ -1,60 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
   :root {
-    /* Light mode variables */
-    --background: 0 0% 98%;
-    --foreground: 240 10% 3.9%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    /* Light mode - Xanadu Cyber exact theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+    --popover-foreground: 0 0% 0%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --primary: 271 91% 65%;
+    --card-foreground: 0 0% 0%;
+    --primary: 152 43% 54%;  /* Xanadu green #50c878 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --accent: 271 91% 65%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --accent: 152 43% 54%;  /* Same as primary */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --ring: 240 5.9% 10%;
+    --ring: 0 0% 40%;
     --radius: 0.5rem;
-    --purple-accent: 271 91% 65%;
-    --green-accent: 160 84% 39%;
-    --pink-accent: 330 90% 65%;
-    --blue-accent: 217 91% 60%;
+    --xanadu-green: 152 43% 54%;  /* #50c878 */
   }
   .dark {
-    /* Dark mode variables - keep exactly as they were */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
+    /* Dark mode - Xanadu Cyber exact theme */
+    --background: 0 0% 0%;  /* Pure black like Xanadu */
+    --foreground: 0 0% 100%;  /* Pure white */
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
     --popover: 0 0% 0%;
     --popover-foreground: 0 0% 100%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
     --card: 0 0% 0%;
     --card-foreground: 0 0% 100%;
-    --primary: 271 91% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --accent: 271 91% 65%;
-    --accent-foreground: 0 0% 100%;
+    --primary: 152 43% 54%;  /* Xanadu green #50c878 */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 152 43% 54%;  /* Same as primary */
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --ring: 240 3.7% 15.9%;
+    --ring: 152 43% 54%;
     --radius: 0.5rem;
-    --purple-accent: 271 91% 65%;
-    --green-accent: 160 84% 39%;
-    --pink-accent: 330 90% 65%;
-    --blue-accent: 217 91% 60%;
+    --xanadu-green: 152 43% 54%;  /* #50c878 */
   }
 }
 @layer base {
@@ -63,25 +60,58 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Roboto', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 @layer components {
-  .neon-grid {
-    @apply bg-[linear-gradient(to_right,#a855f720_1px,transparent_1px),linear-gradient(to_bottom,#a855f720_1px,transparent_1px)] bg-[size:40px_40px];
-    @apply dark:bg-[linear-gradient(to_right,#a855f730_1px,transparent_1px),linear-gradient(to_bottom,#a855f730_1px,transparent_1px)];
+  /* Xanadu-style button gradient */
+  .xanadu-button-gradient {
+    @apply bg-gradient-to-r from-green-500 to-green-600;
+    @apply hover:from-green-600 hover:to-green-700;
+    @apply transition-all duration-300;
   }
+  
+  /* Clean hover effect */
+  .xanadu-button-hover {
+    @apply hover:opacity-80 transition-opacity duration-300;
+  }
+
   .neon-divider-h {
     @apply h-[1px] w-full;
   }
-  .neon-divider-h.purple {
-    @apply bg-purple-500;
+  .neon-divider-h.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-h.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-h.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-h.blue {
+    @apply bg-green-500;
+  }
+  .neon-divider-v {
+    @apply w-[1px] h-full;
+  }
+  .neon-divider-v.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-v.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-v.green {
+    @apply bg-green-500;
+  }
+  .neon-divider-v.blue {
+    @apply bg-green-500;
   }
   .neon-divider-h.green {
     @apply bg-emerald-500;
   }
-  .neon-divider-h.pink {
-    @apply bg-pink-500;
+  .neon-divider-h.green {
+    @apply bg-green-500;
   }
   .neon-divider-h.blue {
     @apply bg-blue-500;
@@ -89,74 +119,66 @@
   .neon-divider-v {
     @apply w-[1px] h-full;
   }
-  .neon-divider-v.purple {
-    @apply bg-purple-500;
+  .neon-divider-v.green {
+    @apply bg-green-500;
   }
   .neon-divider-v.green {
     @apply bg-emerald-500;
   }
-  .neon-divider-v.pink {
-    @apply bg-pink-500;
+  .neon-divider-v.green {
+    @apply bg-green-500;
   }
   .neon-divider-v.blue {
     @apply bg-blue-500;
   }
   .knowledge-item-card {
-    @apply relative backdrop-blur-md bg-gradient-to-b from-white/10 to-black/30 border border-purple-500/30 rounded-md p-4 transition-all duration-300;
-    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-purple-500 before:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)];
-    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-purple-500/20 after:to-purple-500/5 after:rounded-t-md after:pointer-events-none;
-    @apply shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
+    @apply bg-white dark:bg-black border border-gray-200 dark:border-gray-800;
+    @apply rounded-lg p-6 transition-all duration-300;
+    @apply shadow-sm hover:shadow-lg;
   }
   .knowledge-item-card:hover {
-    @apply border-purple-500/70 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.9)] before:shadow-[0_0_25px_8px_rgba(168,85,247,0.8)];
-    @apply translate-y-[-2px];
+    @apply border-green-500/30 -translate-y-0.5;
   }
-  /* Glassmorphism utility classes */
+  /* Clean card styles */
   .glass {
-    /* Light mode (base) styles */
-    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-gray-200 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)];
-    /* Dark mode overrides */
-    @apply dark:bg-gradient-to-b dark:from-white/10 dark:to-black/30 dark:border-zinc-800/50 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
-  }
-  .glass-purple {
-    /* Light mode (base) styles */
-    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-purple-300 shadow-[0_10px_30px_-15px_rgba(168,85,247,0.15)];
-    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-purple-500 before:shadow-[0_0_10px_2px_rgba(168,85,247,0.4)];
-    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-purple-100 after:to-white after:rounded-t-md after:pointer-events-none;
-    /* Dark mode overrides */
-    @apply dark:from-white/10 dark:to-black/30 dark:border-purple-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
-    @apply dark:before:shadow-[0_0_20px_5px_rgba(168,85,247,0.7)];
-    @apply dark:after:from-purple-500/20 dark:after:to-purple-500/5;
+    @apply bg-white/90 dark:bg-black/90 backdrop-blur-sm;
+    @apply border border-gray-200 dark:border-gray-800;
+    @apply shadow-sm;
   }
   .glass-green {
-    /* Light mode (base) styles */
-    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-emerald-300 shadow-[0_10px_30px_-15px_rgba(16,185,129,0.15)];
-    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-emerald-500 before:shadow-[0_0_10px_2px_rgba(16,185,129,0.4)];
-    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-emerald-100 after:to-white after:rounded-t-md after:pointer-events-none;
-    /* Dark mode overrides */
-    @apply dark:from-white/10 dark:to-black/30 dark:border-emerald-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
-    @apply dark:before:shadow-[0_0_20px_5px_rgba(16,185,129,0.7)];
-    @apply dark:after:from-emerald-500/20 dark:after:to-emerald-500/5;
+    @apply bg-white dark:bg-black;
+    @apply border border-green-500/20;
+    @apply shadow-sm;
   }
-  .glass-pink {
-    /* Light mode (base) styles */
-    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-pink-300 shadow-[0_10px_30px_-15px_rgba(236,72,153,0.15)];
-    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-pink-500 before:shadow-[0_0_10px_2px_rgba(236,72,153,0.4)];
-    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-pink-100 after:to-white after:rounded-t-md after:pointer-events-none;
+  .glass-green {
+    /* Light mode (base) styles - Xanadu green */
+    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-green-300 shadow-[0_10px_30px_-15px_rgba(80,200,120,0.15)];
+    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-green-500 before:shadow-[0_0_10px_2px_rgba(80,200,120,0.4)];
+    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-green-100 after:to-white after:rounded-t-md after:pointer-events-none;
     /* Dark mode overrides */
-    @apply dark:from-white/10 dark:to-black/30 dark:border-pink-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
-    @apply dark:before:shadow-[0_0_20px_5px_rgba(236,72,153,0.7)];
-    @apply dark:after:from-pink-500/20 dark:after:to-pink-500/5;
+    @apply dark:from-white/10 dark:to-black/30 dark:border-green-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
+    @apply dark:before:shadow-[0_0_20px_5px_rgba(80,200,120,0.7)];
+    @apply dark:after:from-green-500/20 dark:after:to-green-500/5;
+  }
+  .glass-green {
+    /* Unified Xanadu green theme */
+    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-green-300 shadow-[0_10px_30px_-15px_rgba(80,200,120,0.15)];
+    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-green-500 before:shadow-[0_0_10px_2px_rgba(80,200,120,0.4)];
+    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-green-100 after:to-white after:rounded-t-md after:pointer-events-none;
+    /* Dark mode overrides */
+    @apply dark:from-white/10 dark:to-black/30 dark:border-green-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
+    @apply dark:before:shadow-[0_0_20px_5px_rgba(80,200,120,0.7)];
+    @apply dark:after:from-green-500/20 dark:after:to-green-500/5;
   }
   .glass-blue {
-    /* Light mode (base) styles */
-    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-blue-300 shadow-[0_10px_30px_-15px_rgba(59,130,246,0.15)];
-    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-blue-500 before:shadow-[0_0_10px_2px_rgba(59,130,246,0.4)];
-    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-blue-100 after:to-white after:rounded-t-md after:pointer-events-none;
+    /* Unified Xanadu green theme */
+    @apply backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 border border-green-300 shadow-[0_10px_30px_-15px_rgba(80,200,120,0.15)];
+    @apply before:content-[""] before:absolute before:top-0 before:left-0 before:w-full before:h-[2px] before:bg-green-500 before:shadow-[0_0_10px_2px_rgba(80,200,120,0.4)];
+    @apply after:content-[""] after:absolute after:top-0 after:left-0 after:right-0 after:h-16 after:bg-gradient-to-b after:from-green-100 after:to-white after:rounded-t-md after:pointer-events-none;
     /* Dark mode overrides */
-    @apply dark:from-white/10 dark:to-black/30 dark:border-blue-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
-    @apply dark:before:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)];
-    @apply dark:after:from-blue-500/20 dark:after:to-blue-500/5;
+    @apply dark:from-white/10 dark:to-black/30 dark:border-green-500/30 dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)];
+    @apply dark:before:shadow-[0_0_20px_5px_rgba(80,200,120,0.7)];
+    @apply dark:after:from-green-500/20 dark:after:to-green-500/5;
   }
   /* Hide scrollbar but allow scrolling */
   .hide-scrollbar {
@@ -179,6 +201,29 @@
     -webkit-transform-style: preserve-3d;
   }
 }
+  /* Xanadu Cyber exact button style */
+  .xanadu-button {
+    @apply inline-flex items-center justify-center rounded-lg py-3 px-7 text-white font-medium transition-all duration-300;
+    box-shadow: inset 0 -3px 10px 0 #50c878;
+    background: linear-gradient(180deg, #50c878 -11.11%, #50c878);
+  }
+  .xanadu-button:hover {
+    @apply opacity-80;
+  }
+  
+  /* Xanadu glassmorphism cards */
+  .xanadu-glass {
+    @apply backdrop-blur-lg rounded-lg p-6 transition-all duration-300;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  /* Xanadu nav gradient */
+  .xanadu-nav {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.09) 10.51%, rgba(255,255,255,0));
+    border: 1px solid rgba(255,255,255,0.09);
+    @apply rounded-full;
+  }
 /* Animation delays */
 .animation-delay-150 {
   animation-delay: 150ms;
@@ -280,12 +325,12 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0.5),
-                0 0 40px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 20px 10px rgba(80, 200, 120, 0.5),
+                0 0 40px 20px rgba(80, 200, 120, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px 15px rgba(59, 130, 246, 0.7),
-                0 0 60px 30px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 30px 15px rgba(80, 200, 120, 0.7),
+                0 0 60px 30px rgba(80, 200, 120, 0.4);
   }
 }
 
@@ -296,7 +341,7 @@
 /* Custom scrollbar styles */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
+  scrollbar-color: rgba(80, 200, 120, 0.3) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -308,21 +353,21 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(80, 200, 120, 0.3);
   border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(59, 130, 246, 0.5);
+  background-color: rgba(80, 200, 120, 0.5);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(59, 130, 246, 0.4);
+  background-color: rgba(80, 200, 120, 0.4);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(59, 130, 246, 0.6);
+  background-color: rgba(80, 200, 120, 0.6);
 }
 
 /* Thin scrollbar styles */

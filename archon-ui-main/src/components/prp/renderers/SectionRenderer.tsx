@@ -72,11 +72,11 @@ export const SectionRenderer: React.FC<SectionRendererProps> = ({
   // Get accent color based on section or index
   const getColor = () => {
     const normalizedKey = sectionKey.toLowerCase();
-    if (normalizedKey.includes('context')) return 'blue';
-    if (normalizedKey.includes('persona')) return 'purple';
+    if (normalizedKey.includes('context')) return 'green';
+    if (normalizedKey.includes('persona')) return 'green';
     if (normalizedKey.includes('flow') || normalizedKey.includes('journey')) return 'orange';
     if (normalizedKey.includes('metric')) return 'green';
-    if (normalizedKey.includes('plan')) return 'cyan';
+    if (normalizedKey.includes('plan')) return 'green';
     if (normalizedKey.includes('validation')) return 'emerald';
     return getAccentColor(index);
   };

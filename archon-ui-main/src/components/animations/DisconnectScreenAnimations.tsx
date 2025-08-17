@@ -109,7 +109,7 @@ export const DisconnectScreen: React.FC = () => {
           <div 
             className="absolute inset-0 w-96 h-96 rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(34, 211, 238, 0.3) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(80, 200, 120, 0.3) 0%, rgba(80, 200, 120, 0.2) 40%, transparent 70%)',
               filter: 'blur(40px)',
               animation: 'glow 4s ease-in-out infinite',
             }}
@@ -124,10 +124,10 @@ export const DisconnectScreen: React.FC = () => {
               border: '3px solid rgba(255,255,255,0.25)',
               boxShadow: `
                 inset 0 0 40px rgba(255,255,255,0.1), 
-                0 0 80px rgba(34, 211, 238, 0.5),
-                0 0 120px rgba(168, 85, 247, 0.4),
-                0 0 160px rgba(34, 211, 238, 0.3),
-                0 0 200px rgba(168, 85, 247, 0.2)
+                0 0 80px rgba(80, 200, 120, 0.5),
+                0 0 120px rgba(80, 200, 120, 0.4),
+                0 0 160px rgba(80, 200, 120, 0.3),
+                0 0 200px rgba(80, 200, 120, 0.2)
               `,
             }}
           />
@@ -135,7 +135,7 @@ export const DisconnectScreen: React.FC = () => {
           {/* Embossed logo - made bigger */}
           <div className="relative w-96 h-96 flex items-center justify-center">
             <img 
-              src="/logo-neon.svg" 
+              src="/xanadu-logo.svg" 
               alt="Archon" 
               className="w-64 h-64 z-10"
               style={{

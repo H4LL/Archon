@@ -8,7 +8,7 @@ export const ButtonPlayground: React.FC = () => {
   const [showLayer2, setShowLayer2] = useState(true);
   const [layer2Inset, setLayer2Inset] = useState(8);
   const [layer1Color, setLayer1Color] = useState<ColorOption>('none');
-  const [layer2Color, setLayer2Color] = useState<ColorOption>('pink');
+  const [layer2Color, setLayer2Color] = useState<ColorOption>('green');
   const [layer1Border, setLayer1Border] = useState(true);
   const [layer2Border, setLayer2Border] = useState(true);
   const [coloredText, setColoredText] = useState(true);
@@ -49,7 +49,7 @@ export const ButtonPlayground: React.FC = () => {
   
   const [copied, setCopied] = useState(false);
 
-  const colors: ColorOption[] = ['none', 'purple', 'pink', 'blue', 'green', 'red'];
+  const colors: ColorOption[] = ['none', 'green', 'green', 'green', 'green', 'red'];
   const glowOptions: GlowIntensity[] = ['none', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
   // Handle corner changes with linking
@@ -157,11 +157,11 @@ export const ButtonPlayground: React.FC = () => {
   bottom: ${layer2Inset}px;
   background: ${layer2Color === 'none' 
     ? 'linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.2))' 
-    : layer2Color === 'purple'
+    : layer2Color === 'green'
       ? 'linear-gradient(to bottom, rgba(168,85,247,0.3), rgba(147,51,234,0.3))'
-      : layer2Color === 'pink'
-        ? 'linear-gradient(to bottom, rgba(236,72,153,0.3), rgba(219,39,119,0.3))'
-        : layer2Color === 'blue'
+      : layer2Color === 'green'
+        ? 'linear-gradient(to bottom, rgba(80,200,120,0.3), rgba(80,200,120,0.3))'
+        : layer2Color === 'green'
           ? 'linear-gradient(to bottom, rgba(59,130,246,0.3), rgba(37,99,235,0.3))'
           : layer2Color === 'green'
             ? 'linear-gradient(to bottom, rgba(34,197,94,0.3), rgba(22,163,74,0.3))'
@@ -223,25 +223,25 @@ export const ButtonPlayground: React.FC = () => {
   const getColorConfig = (color: ColorOption) => {
     const configs = {
       none: {
-        border: 'border-white/20',
+        border: 'border-gray-200 dark:border-gray-800',
         glow: 'rgba(255,255,255,0.4)',
         glowDark: 'rgba(255,255,255,0.3)',
         text: 'rgb(156 163 175)'
       },
-      purple: {
-        border: 'border-purple-400/30',
+      green: {
+        border: 'border-green-400/30',
         glow: 'rgba(168,85,247,0.6)',
         glowDark: 'rgba(168,85,247,0.5)',
         text: 'rgb(168 85 247)'
       },
-      pink: {
-        border: 'border-pink-400/30',
-        glow: 'rgba(236,72,153,0.6)',
-        glowDark: 'rgba(236,72,153,0.5)',
-        text: 'rgb(236 72 153)'
+      green: {
+        border: 'border-green-400/30',
+        glow: 'rgba(80,200,120,0.6)',
+        glowDark: 'rgba(80,200,120,0.5)',
+        text: 'rgb(80 200 120)'
       },
       blue: {
-        border: 'border-blue-400/30',
+        border: 'border-green-400/30',
         glow: 'rgba(59,130,246,0.6)',
         glowDark: 'rgba(59,130,246,0.5)',
         text: 'rgb(59 130 246)'
@@ -270,8 +270,8 @@ export const ButtonPlayground: React.FC = () => {
   const getBorderColor = (color: ColorOption) => {
     const colors = {
       none: 'rgba(229,231,235,0.5)',
-      purple: 'rgba(196,181,253,0.6)',
-      pink: 'rgba(251,207,232,0.6)',
+      green: 'rgba(196,181,253,0.6)',
+      green: 'rgba(80,200,120,0.6)',
       blue: 'rgba(147,197,253,0.6)',
       green: 'rgba(134,239,172,0.6)',
       red: 'rgba(252,165,165,0.6)'
@@ -305,7 +305,7 @@ export const ButtonPlayground: React.FC = () => {
         className={cn(
           'w-5 h-5 rounded border transition-all flex items-center justify-center',
           linked 
-            ? 'bg-blue-500 border-blue-600 text-white' 
+            ? 'bg-green-500 border-green-600 text-white' 
             : 'bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600'
         )}
       >
@@ -333,10 +333,10 @@ export const ButtonPlayground: React.FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Preview and Controls */}
-        <div className="relative rounded-xl backdrop-blur-md
-          bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-          border border-gray-200 dark:border-zinc-800/50
-          shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
+        <div className="relative rounded-xl bg-white dark:bg-black
+          bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+          border border-gray-200 dark:border-gray-200 dark:border-gray-800
+          shadow-sm dark:shadow-sm">
           
           {/* Preview Section */}
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
@@ -372,7 +372,7 @@ export const ButtonPlayground: React.FC = () => {
                   type="checkbox"
                   checked={coloredText}
                   onChange={(e) => setColoredText(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-purple-600"
+                  className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-green-600"
                 />
                 Colored Text (takes button color)
               </label>
@@ -384,13 +384,13 @@ export const ButtonPlayground: React.FC = () => {
                   className={cn(
                     'px-4 py-2 text-sm font-medium transition-colors relative',
                     activeTab === 'layer1' 
-                      ? 'text-purple-600 dark:text-purple-400' 
+                      ? 'text-green-600 dark:text-green-400' 
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                   )}
                 >
                   Layer 1
                   {activeTab === 'layer1' && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 dark:bg-purple-400" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600 dark:bg-green-400" />
                   )}
                 </button>
                 <div className="flex items-center gap-2">
@@ -399,20 +399,20 @@ export const ButtonPlayground: React.FC = () => {
                     className={cn(
                       'px-4 py-2 text-sm font-medium transition-colors relative',
                       activeTab === 'layer2' 
-                        ? 'text-purple-600 dark:text-purple-400' 
+                        ? 'text-green-600 dark:text-green-400' 
                         : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                     )}
                   >
                     Layer 2
                     {activeTab === 'layer2' && (
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 dark:bg-purple-400" />
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600 dark:bg-green-400" />
                     )}
                   </button>
                   <input
                     type="checkbox"
                     checked={showLayer2}
                     onChange={(e) => setShowLayer2(e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-purple-600"
+                    className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-green-600"
                   />
                 </div>
               </div>
@@ -460,7 +460,7 @@ export const ButtonPlayground: React.FC = () => {
                         type="checkbox"
                         checked={layer1Border}
                         onChange={(e) => setLayer1Border(e.target.checked)}
-                        className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-purple-600"
+                        className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-green-600"
                       />
                       Border
                     </label>
@@ -587,7 +587,7 @@ export const ButtonPlayground: React.FC = () => {
                       type="checkbox"
                       checked={layer2Border}
                       onChange={(e) => setLayer2Border(e.target.checked)}
-                      className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-purple-600"
+                      className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-green-600"
                       disabled={!showLayer2}
                     />
                     Border
@@ -645,17 +645,17 @@ export const ButtonPlayground: React.FC = () => {
         </div>
 
         {/* Right Column - CSS Output */}
-        <div className="relative rounded-xl backdrop-blur-md
-          bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-          border border-gray-200 dark:border-zinc-800/50
-          shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
+        <div className="relative rounded-xl bg-white dark:bg-black
+          bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+          border border-gray-200 dark:border-gray-200 dark:border-gray-800
+          shadow-sm dark:shadow-sm
           h-full">
           
           <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white">CSS Styles</h3>
             <button
               onClick={copyToClipboard}
-              className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-purple-600/25"
+              className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors flex items-center gap-2 shadow-lg shadow-green-600/25"
             >
               {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
               {copied ? 'Copied!' : 'Copy Styles'}

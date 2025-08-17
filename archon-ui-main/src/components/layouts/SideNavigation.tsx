@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, HardDrive, Settings } from 'lucide-react';
+import { BookOpen, Settings } from 'lucide-react';
 import { useSettings } from '../../contexts/SettingsContext';
+import { XanaduLogo } from '../ui/XanaduLogo';
 /**
  * Interface for navigation items
  */
@@ -66,7 +67,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
     label: 'Settings'
   }];
   // Logo configuration
-  const logoSrc = "/logo-neon.svg";
+  const logoSrc = "/xanadu-logo.svg";
   const logoAlt = 'Knowledge Base Logo';
   // Get current location to determine active route
   const location = useLocation();
@@ -74,11 +75,11 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
   
   const logoClassName = `
     logo-container p-2 relative rounded-lg transition-all duration-300
-    ${isProjectsActive ? 'bg-gradient-to-b from-white/20 to-white/5 dark:from-white/10 dark:to-black/20 shadow-[0_5px_15px_-5px_rgba(59,130,246,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(59,130,246,0.5)] transform scale-110' : ''}
+    ${isProjectsActive ? 'bg-white dark:bg-black dark:from-white/10 dark:to-black/20 shadow-sm dark:shadow-sm transform scale-110' : ''}
     ${projectsEnabled ? 'hover:bg-white/10 dark:hover:bg-white/5 cursor-pointer' : 'opacity-50 cursor-not-allowed'}
   `;
   
-  return <div data-id={dataId} className={`flex flex-col items-center gap-6 py-6 px-3 rounded-xl backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-zinc-800/50 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] ${className}`}>
+  return <div data-id={dataId} className={`flex flex-col items-center gap-6 py-6 px-3 rounded-xl bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-sm ${className}`}>
       {/* Logo - Conditionally clickable based on Projects enabled */}
       {projectsEnabled ? (
         <Link 
@@ -87,11 +88,11 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
           onMouseEnter={() => setActiveTooltip('logo')} 
           onMouseLeave={() => setActiveTooltip(null)}
         >
-          <img src={logoSrc} alt={logoAlt} className={`w-8 h-8 transition-all duration-300 ${isProjectsActive ? 'filter drop-shadow-[0_0_8px_rgba(59,130,246,0.7)]' : ''}`} />
+          <XanaduLogo className={`text-green-500 dark:text-white transition-all duration-300 ${isProjectsActive ? 'scale-110' : ''}`} />
           {/* Active state decorations */}
           {isProjectsActive && <>
-              <span className="absolute inset-0 rounded-lg border border-blue-300 dark:border-blue-500/30"></span>
-              <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]"></span>
+              <span className="absolute inset-0 rounded-lg border border-green-300 dark:border-green-500/30"></span>
+              <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-green-500 shadow-lg dark:shadow-lg"></span>
             </>}
           <NavTooltip show={activeTooltip === 'logo'} label="Project Management" />
         </Link>
@@ -101,7 +102,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
           onMouseEnter={() => setActiveTooltip('logo')} 
           onMouseLeave={() => setActiveTooltip(null)}
         >
-          <img src={logoSrc} alt={logoAlt} className="w-8 h-8 transition-all duration-300" />
+          <XanaduLogo className="text-green-500 dark:text-white transition-all duration-300" />
           <NavTooltip show={activeTooltip === 'logo'} label="Projects Disabled" />
         </div>
       )}
@@ -112,13 +113,13 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
         return <Link key={item.path} to={item.path} className={`
                 relative p-3 rounded-lg flex items-center justify-center
                 transition-all duration-300
-                ${isActive ? 'bg-gradient-to-b from-white/20 to-white/5 dark:from-white/10 dark:to-black/20 text-blue-600 dark:text-blue-400 shadow-[0_5px_15px_-5px_rgba(59,130,246,0.3)] dark:shadow-[0_5px_15px_-5px_rgba(59,130,246,0.5)]' : 'text-gray-500 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400'}
+                ${isActive ? 'bg-white dark:bg-black dark:from-white/10 dark:to-black/20 text-green-600 dark:text-green-400 shadow-sm dark:shadow-sm' : 'text-gray-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400'}
               `} onMouseEnter={() => setActiveTooltip(item.path)} onMouseLeave={() => setActiveTooltip(null)} aria-label={item.label}>
               {/* Active state decorations - Modified to place neon line below button with adjusted width */}
               {isActive && <>
-                  <span className="absolute inset-0 rounded-lg border border-blue-300 dark:border-blue-500/30"></span>
+                  <span className="absolute inset-0 rounded-lg border border-green-300 dark:border-green-500/30"></span>
                   {/* Neon line positioned below the button with reduced width to respect curved edges */}
-                  <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-blue-500 shadow-[0_0_10px_2px_rgba(59,130,246,0.4)] dark:shadow-[0_0_20px_5px_rgba(59,130,246,0.7)]"></span>
+                  <span className="absolute bottom-0 left-[15%] right-[15%] w-[70%] mx-auto h-[2px] bg-green-500 shadow-lg dark:shadow-lg"></span>
                 </>}
               {item.icon}
               {/* Custom tooltip */}

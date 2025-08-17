@@ -143,13 +143,13 @@ export const CollapsibleSectionRenderer: React.FC<CollapsibleSectionRendererProp
         normalizedKey.includes(keyword) || normalizedTitle.includes(keyword)
       );
 
-    if (checkKeywords(['context', 'overview'])) return 'blue';
-    if (checkKeywords(['persona', 'user'])) return 'purple';
+    if (checkKeywords(['context', 'overview'])) return 'green';
+    if (checkKeywords(['persona', 'user'])) return 'green';
     if (checkKeywords(['flow', 'journey'])) return 'orange';
     if (checkKeywords(['metric', 'success'])) return 'green';
-    if (checkKeywords(['plan', 'implementation'])) return 'cyan';
+    if (checkKeywords(['plan', 'implementation'])) return 'green';
     if (checkKeywords(['validation', 'gate'])) return 'emerald';
-    if (checkKeywords(['technical', 'architecture'])) return 'indigo';
+    if (checkKeywords(['technical', 'architecture'])) return 'green';
     if (checkKeywords(['feature'])) return 'yellow';
     if (checkKeywords(['risk', 'issue'])) return 'red';
     
@@ -259,18 +259,18 @@ export const CollapsibleSectionRenderer: React.FC<CollapsibleSectionRendererProp
   const getColorClasses = () => {
     const colorMap = {
       blue: {
-        bg: 'bg-blue-50/50 dark:bg-blue-950/20',
-        border: 'border-blue-200 dark:border-blue-800',
-        iconBg: 'bg-blue-100 dark:bg-blue-900',
-        iconText: 'text-blue-600 dark:text-blue-400',
-        accent: 'border-l-blue-500'
+        bg: 'bg-green-50/50 dark:bg-green-950/20',
+        border: 'border-green-200 dark:border-green-800',
+        iconBg: 'bg-green-100 dark:bg-green-900',
+        iconText: 'text-green-600 dark:text-green-400',
+        accent: 'border-l-green-500'
       },
-      purple: {
-        bg: 'bg-purple-50/50 dark:bg-purple-950/20',
-        border: 'border-purple-200 dark:border-purple-800',
-        iconBg: 'bg-purple-100 dark:bg-purple-900',
-        iconText: 'text-purple-600 dark:text-purple-400',
-        accent: 'border-l-purple-500'
+      green: {
+        bg: 'bg-green-50/50 dark:bg-green-950/20',
+        border: 'border-green-200 dark:border-green-800',
+        iconBg: 'bg-green-100 dark:bg-green-900',
+        iconText: 'text-green-600 dark:text-green-400',
+        accent: 'border-l-green-500'
       },
       green: {
         bg: 'bg-green-50/50 dark:bg-green-950/20',
@@ -287,25 +287,25 @@ export const CollapsibleSectionRenderer: React.FC<CollapsibleSectionRendererProp
         accent: 'border-l-orange-500'
       },
       cyan: {
-        bg: 'bg-cyan-50/50 dark:bg-cyan-950/20',
-        border: 'border-cyan-200 dark:border-cyan-800',
-        iconBg: 'bg-cyan-100 dark:bg-cyan-900',
-        iconText: 'text-cyan-600 dark:text-cyan-400',
-        accent: 'border-l-cyan-500'
+        bg: 'bg-green-50/50 dark:bg-green-950/20',
+        border: 'border-green-200 dark:border-green-800',
+        iconBg: 'bg-green-100 dark:bg-green-900',
+        iconText: 'text-green-600 dark:text-green-400',
+        accent: 'border-l-green-500'
       },
-      indigo: {
-        bg: 'bg-indigo-50/50 dark:bg-indigo-950/20',
-        border: 'border-indigo-200 dark:border-indigo-800',
-        iconBg: 'bg-indigo-100 dark:bg-indigo-900',
-        iconText: 'text-indigo-600 dark:text-indigo-400',
-        accent: 'border-l-indigo-500'
+      green: {
+        bg: 'bg-green-50/50 dark:bg-green-950/20',
+        border: 'border-green-200 dark:border-green-800',
+        iconBg: 'bg-green-100 dark:bg-green-900',
+        iconText: 'text-green-600 dark:text-green-400',
+        accent: 'border-l-green-500'
       },
       emerald: {
-        bg: 'bg-emerald-50/50 dark:bg-emerald-950/20',
-        border: 'border-emerald-200 dark:border-emerald-800',
-        iconBg: 'bg-emerald-100 dark:bg-emerald-900',
-        iconText: 'text-emerald-600 dark:text-emerald-400',
-        accent: 'border-l-emerald-500'
+        bg: 'bg-green-50/50 dark:bg-green-950/20',
+        border: 'border-green-200 dark:border-green-800',
+        iconBg: 'bg-green-100 dark:bg-green-900',
+        iconText: 'text-green-600 dark:text-green-400',
+        accent: 'border-l-green-500'
       },
       yellow: {
         bg: 'bg-yellow-50/50 dark:bg-yellow-950/20',

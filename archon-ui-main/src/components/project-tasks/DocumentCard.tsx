@@ -41,9 +41,9 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
   
   const getTypeColor = (type?: string) => {
     switch (type) {
-      case 'prp': return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/30';
+      case 'prp': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/30';
       case 'technical': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/30';
-      case 'business': return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30';
+      case 'business': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/30';
       case 'meeting_notes': return 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/30';
       default: return 'bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/30';
     }
@@ -69,7 +69,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
         relative flex-shrink-0 w-48 p-4 rounded-lg cursor-pointer
         transition-all duration-200 group
         ${isActive 
-          ? 'bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-500 shadow-lg scale-105' 
+          ? 'bg-green-50 dark:bg-green-900/20 border-2 border-green-500 shadow-lg scale-105' 
           : 'bg-white/50 dark:bg-black/30 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-md'
         }
       `}
@@ -135,10 +135,10 @@ export const NewDocumentCard: React.FC<NewDocumentCardProps> = ({ onClick }) => 
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-48 h-[120px] rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 flex flex-col items-center justify-center cursor-pointer transition-colors group"
+      className="flex-shrink-0 w-48 h-[120px] rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 flex flex-col items-center justify-center cursor-pointer transition-colors group"
     >
-      <Plus className="w-8 h-8 text-gray-400 group-hover:text-blue-500 transition-colors mb-2" />
-      <span className="text-sm text-gray-500 group-hover:text-blue-500">New Document</span>
+      <Plus className="w-8 h-8 text-gray-400 group-hover:text-green-500 transition-colors mb-2" />
+      <span className="text-sm text-gray-500 group-hover:text-green-500">New Document</span>
     </div>
   );
 };

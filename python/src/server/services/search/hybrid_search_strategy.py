@@ -11,6 +11,7 @@ Strategy combines:
 4. Intelligent result merging with preference ordering
 """
 
+import os
 from typing import Any
 
 from supabase import Client
@@ -219,8 +220,11 @@ class HybridSearchStrategy:
         """
         with safe_span("hybrid_search_code_examples") as span:
             try:
+                # Get provider for embeddings
+                provider = os.getenv("LLM_PROVIDER", "openai")
+                
                 # Create query embedding (no enhancement needed)
-                query_embedding = await create_embedding(query)
+                query_embedding = await create_embedding(query, provider=provider)
 
                 if not query_embedding:
                     logger.error("Failed to create embedding for code example query")

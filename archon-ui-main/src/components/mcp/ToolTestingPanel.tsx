@@ -350,7 +350,7 @@ export const ToolTestingPanel = ({
   return (
     <div 
       ref={panelRef} 
-      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-gradient-to-t from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-t border-gray-200 dark:border-gray-800 transition-all duration-500 ease-in-out z-30 shadow-2xl rounded-t-xl overflow-hidden ${isOpen ? 'translate-y-0' : 'translate-y-full'}`} 
+      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 bg-white dark:bg-black bg-gradient-to-t from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-t border-gray-200 dark:border-gray-800 transition-all duration-500 ease-in-out z-30 shadow-2xl rounded-t-xl overflow-hidden ${isOpen ? 'translate-y-0' : 'translate-y-full'}`} 
       style={{
         height: `${panelHeight}px`,
         width: 'calc(100% - 4rem)',
@@ -363,22 +363,22 @@ export const ToolTestingPanel = ({
         className="absolute top-0 left-0 right-0 h-2 cursor-ns-resize group transform -translate-y-1 z-10" 
         onMouseDown={handleResizeStart}
       >
-        <div className="w-16 h-1 mx-auto bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-cyan-400 dark:group-hover:bg-cyan-500 transition-colors"></div>
+        <div className="w-16 h-1 mx-auto bg-gray-300 dark:bg-gray-600 rounded-full group-hover:bg-green-400 dark:group-hover:bg-green-500 transition-colors"></div>
       </div>
 
       {/* Panel with neon effect */}
       <div className="relative h-full">
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-cyan-500 shadow-[0_0_20px_5px_rgba(34,211,238,0.7),0_0_10px_2px_rgba(34,211,238,1.0)] dark:shadow-[0_0_25px_8px_rgba(34,211,238,0.8),0_0_15px_3px_rgba(34,211,238,1.0)]"></div>
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-green-500 shadow-[0_0_20px_5px_rgba(34,211,238,0.7),0_0_10px_2px_rgba(34,211,238,1.0)] dark:shadow-[0_0_25px_8px_rgba(34,211,238,0.8),0_0_15px_3px_rgba(34,211,238,1.0)]"></div>
         
         {/* Header */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
             <span className={`w-2 h-2 rounded-full mr-2 ${
               client.status === 'online' 
-                ? 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]' 
+                ? 'bg-green-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]' 
                 : client.status === 'offline' 
                 ? 'bg-gray-400' 
-                : 'bg-pink-400 shadow-[0_0_8px_rgba(236,72,153,0.6)]'
+                : 'bg-green-400 shadow-[0_0_8px_rgba(80,200,120,0.6)]'
             }`}></span>
             {client.name}
             <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -439,7 +439,7 @@ export const ToolTestingPanel = ({
                     </label>
                     <div className="relative">
                       <select 
-                        className="w-full bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md py-2 pl-3 pr-10 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500" 
+                        className="w-full bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md py-2 pl-3 pr-10 text-gray-900 dark:text-white appearance-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500" 
                         value={selectedTool?.id || ''} 
                         onChange={e => {
                           const tool = client.tools.find(t => t.id === e.target.value);
@@ -497,14 +497,14 @@ export const ToolTestingPanel = ({
                         <div key={param.name}>
                           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
                             {param.name}
-                            {param.required && <span className="text-pink-500 ml-1">*</span>}
+                            {param.required && <span className="text-green-500 ml-1">*</span>}
                             <span className="text-gray-400 ml-1">({param.type})</span>
                           </label>
                           <input 
                             type={param.type === 'number' ? 'number' : 'text'} 
                             value={paramValues[param.name] || ''} 
                             onChange={e => handleParamChange(param.name, e.target.value)} 
-                            className="w-full px-3 py-2 text-sm bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-200" 
+                            className="w-full px-3 py-2 text-sm bg-white/50 dark:bg-black/50 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-all duration-200" 
                             placeholder={param.description || `Enter ${param.name}`}
                           />
                           {param.description && (
@@ -524,7 +524,7 @@ export const ToolTestingPanel = ({
                 <div className="flex-1 bg-gray-900 rounded-lg overflow-hidden relative border border-gray-800 h-full">
                   <div className="flex items-center justify-between bg-gray-800 px-3 py-2">
                     <div className="flex items-center">
-                      <TerminalSquare className="w-4 h-4 text-cyan-400 mr-2" />
+                      <TerminalSquare className="w-4 h-4 text-green-400 mr-2" />
                       <span className="text-xs text-gray-300 font-medium">
                         Terminal Output
                       </span>
@@ -546,9 +546,9 @@ export const ToolTestingPanel = ({
                   >
                     {terminalOutput.map(line => (
                       <div key={line.id} className={`
-                          ${line.isCommand ? 'text-cyan-400' : ''}
+                          ${line.isCommand ? 'text-green-400' : ''}
                           ${line.isWarning ? 'text-yellow-400' : ''}
-                          ${line.isError ? 'text-pink-400' : ''}
+                          ${line.isError ? 'text-green-400' : ''}
                           ${line.isTyping ? 'terminal-typing' : ''}
                           whitespace-pre-wrap
                         `}>

@@ -267,20 +267,20 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
       width: `${width}px`
     }} data-id={props['data-id']}>
       {/* Drag handle for resizing */}
-      <div ref={dragHandleRef} className={`absolute left-0 top-0 w-1.5 h-full cursor-ew-resize z-20 ${isDragging ? 'bg-blue-500/50' : 'bg-transparent hover:bg-blue-500/30'} transition-colors duration-200`} onMouseDown={handleDragStart} />
+      <div ref={dragHandleRef} className={`absolute left-0 top-0 w-1.5 h-full cursor-ew-resize z-20 ${isDragging ? 'bg-green-500/50' : 'bg-transparent hover:bg-green-500/30'} transition-colors duration-200`} onMouseDown={handleDragStart} />
       {/* Main panel with glassmorphism */}
-      <div className="h-full flex flex-col relative backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border-l border-blue-200 dark:border-blue-500/30">
+      <div className="h-full flex flex-col relative bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border-l border-green-200 dark:border-green-500/30">
         {/* Edgelit glow effect */}
         <EdgeLitEffect color="blue" />
         {/* Header gradient background */}
-        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-blue-100 to-white dark:from-blue-500/20 dark:to-blue-500/5 rounded-t-md pointer-events-none"></div>
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-green-100 to-white dark:from-green-500/20 dark:to-green-500/5 rounded-t-md pointer-events-none"></div>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-zinc-800/80">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-200 dark:border-gray-800">
           <div className="flex flex-col gap-2">
             <div className="flex items-center">
               {/* Archon Logo - No animation in header */}
               <div className="relative w-8 h-8 mr-3 flex items-center justify-center">
-                <img src="/logo-neon.svg" alt="Archon" className="w-6 h-6 z-10 relative" />
+                <img src="/xanadu-logo.svg" alt="Archon" className="w-6 h-6 z-10 relative" />
               </div>
               <h2 className="text-gray-800 dark:text-white font-medium z-10 relative">
                 Knowledge Base Assistant
@@ -300,7 +300,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
                 <button
                   onClick={handleReconnect}
                   disabled={isReconnecting}
-                  className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 bg-blue-100/80 hover:bg-blue-200/80 dark:bg-blue-900/30 dark:hover:bg-blue-800/40 px-2 py-1 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-1 text-xs text-green-600 hover:text-green-700 bg-green-100/80 hover:bg-green-200/80 dark:bg-green-900/30 dark:hover:bg-green-800/40 px-2 py-1 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <RefreshCw className={`w-3 h-3 ${isReconnecting ? 'animate-spin' : ''}`} />
                   {isReconnecting ? 'Connecting...' : 'Reconnect'}
@@ -309,7 +309,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
             )}
             
             {connectionStatus === 'connecting' && (
-              <div className="text-xs text-blue-500 bg-blue-100/80 dark:bg-blue-900/30 px-2 py-1 rounded">
+              <div className="text-xs text-green-500 bg-green-100/80 dark:bg-green-900/30 px-2 py-1 rounded">
                 <div className="flex items-center">
                   <RefreshCw className="w-3 h-3 mr-1 animate-spin" />
                   Connecting...
@@ -341,16 +341,16 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               <div className={`
                 max-w-[80%] rounded-lg p-3 
                 ${message.sender === 'user' 
-                  ? 'bg-purple-100/80 dark:bg-purple-500/20 border border-purple-200 dark:border-purple-500/30 ml-auto' 
-                  : 'bg-blue-100/80 dark:bg-blue-500/20 border border-blue-200 dark:border-blue-500/30 mr-auto'}
+                  ? 'bg-green-100/80 dark:bg-green-500/20 border border-green-200 dark:border-green-500/30 ml-auto' 
+                  : 'bg-green-100/80 dark:bg-green-500/20 border border-green-200 dark:border-green-500/30 mr-auto'}
               `}>
                 <div className="flex items-center mb-1">
                   {message.sender === 'agent' ? (
                     <div className="w-4 h-4 mr-1 flex items-center justify-center">
-                      <img src="/logo-neon.svg" alt="Archon" className="w-full h-full" />
+                      <img src="/xanadu-logo.svg" alt="Archon" className="w-full h-full" />
                     </div>
                   ) : (
-                    <User className="w-4 h-4 text-purple-500 mr-1" />
+                    <User className="w-4 h-4 text-green-500 mr-1" />
                   )}
                   <span className="text-xs text-gray-500 dark:text-zinc-400">
                     {formatTime(message.timestamp)}
@@ -388,15 +388,15 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
           {/* Streaming message */}
           {isStreaming && streamingMessage && (
             <div className="flex justify-start">
-              <div className="max-w-[80%] bg-blue-100/80 dark:bg-blue-500/20 border border-blue-200 dark:border-blue-500/30 mr-auto rounded-lg p-3">
+              <div className="max-w-[80%] bg-green-100/80 dark:bg-green-500/20 border border-green-200 dark:border-green-500/30 mr-auto rounded-lg p-3">
                 <div className="flex items-center mb-1">
                   <div className="w-4 h-4 mr-1 flex items-center justify-center">
-                    <img src="/logo-neon.svg" alt="Archon" className="w-full h-full" />
+                    <img src="/xanadu-logo.svg" alt="Archon" className="w-full h-full" />
                   </div>
                   <span className="text-xs text-gray-500 dark:text-zinc-400">
                     {formatTime(new Date())}
                   </span>
-                  <div className="ml-2 w-1 h-1 bg-blue-500 rounded-full animate-pulse" />
+                  <div className="ml-2 w-1 h-1 bg-green-500 rounded-full animate-pulse" />
                 </div>
                 <p className="text-gray-800 dark:text-white text-sm whitespace-pre-wrap">
                   {streamingMessage}
@@ -419,7 +419,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
           <div ref={messagesEndRef} />
         </div>
         {/* Input area */}
-        <div className="p-4 border-t border-gray-200 dark:border-zinc-800/80 bg-white/60 dark:bg-transparent">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-transparent">
           {connectionStatus === 'offline' && (
             <div className="mb-3 p-3 bg-red-50/80 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 rounded-md">
               <div className="flex items-center text-sm text-red-700 dark:text-red-300">
@@ -431,7 +431,7 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
           
           <div className="flex items-center gap-2">
             {/* Text input field */}
-            <div className="flex-1 backdrop-blur-md bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-zinc-800/80 rounded-md px-3 py-2 focus-within:border-blue-500 focus-within:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-200">
+            <div className="flex-1 bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border border-gray-200 dark:border-gray-200 dark:border-gray-800 rounded-md px-3 py-2 focus-within:border-green-500 focus-within:shadow-[0_0_15px_rgba(#50c878,0.5)] transition-all duration-200">
               <input 
                 type="text" 
                 value={inputValue} 
@@ -455,19 +455,19 @@ export const ArchonChatPanel: React.FC<ArchonChatPanelProps> = props => {
               className="relative flex items-center justify-center p-2 rounded-md overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {/* Glass background */}
-              <div className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-blue-100/80 to-blue-50/60 dark:from-white/5 dark:to-black/20 rounded-md"></div>
+              <div className="absolute inset-0 bg-white dark:bg-black bg-gradient-to-b from-green-100/80 to-green-50/60 dark:from-white/5 dark:to-black/20 rounded-md"></div>
               {/* Neon border glow */}
-              <div className={`absolute inset-0 rounded-md border-2 border-blue-400 ${
+              <div className={`absolute inset-0 rounded-md border-2 border-green-400 ${
                 isTyping || connectionStatus !== 'online' ? 'opacity-30' : 'opacity-60 group-hover:opacity-100'
-              } shadow-[0_0_10px_rgba(59,130,246,0.3),inset_0_0_6px_rgba(59,130,246,0.2)] dark:shadow-[0_0_10px_rgba(59,130,246,0.6),inset_0_0_6px_rgba(59,130,246,0.4)] transition-all duration-300`}></div>
+              } shadow-[0_0_10px_rgba(#50c878,0.3),inset_0_0_6px_rgba(#50c878,0.2)] dark:shadow-[0_0_10px_rgba(#50c878,0.6),inset_0_0_6px_rgba(#50c878,0.4)] transition-all duration-300`}></div>
               {/* Inner glow effect */}
-              <div className={`absolute inset-[1px] rounded-sm bg-blue-100/30 dark:bg-blue-500/10 ${
+              <div className={`absolute inset-[1px] rounded-sm bg-green-100/30 dark:bg-green-500/10 ${
                 isTyping || connectionStatus !== 'online' ? 'opacity-20' : 'opacity-30 group-hover:opacity-40'
               } transition-all duration-200`}></div>
               {/* Send icon with neon glow */}
-              <Send className={`w-4 h-4 text-blue-500 dark:text-blue-400 relative z-10 ${
+              <Send className={`w-4 h-4 text-green-500 dark:text-green-400 relative z-10 ${
                 isTyping || connectionStatus !== 'online' ? 'opacity-50' : 'opacity-90 group-hover:opacity-100'
-              } drop-shadow-[0_0_3px_rgba(59,130,246,0.5)] dark:drop-shadow-[0_0_3px_rgba(59,130,246,0.8)] transition-all duration-200`} />
+              } drop-shadow-[0_0_3px_rgba(#50c878,0.5)] dark:drop-shadow-[0_0_3px_rgba(#50c878,0.8)] transition-all duration-200`} />
               {/* Shine effect */}
               <div className="absolute top-0 left-0 w-full h-[1px] bg-white/40 rounded-t-md"></div>
             </button>

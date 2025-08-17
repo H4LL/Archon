@@ -46,14 +46,14 @@ const RestoreConfirmModal: React.FC<RestoreConfirmModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[60]">
-      <div className="relative p-6 rounded-md backdrop-blur-md w-full max-w-md
-          bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30
-          border border-gray-200 dark:border-zinc-800/50
-          shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]
+    <div className="fixed inset-0 bg-black/50 bg-white dark:bg-black flex items-center justify-center z-[60]">
+      <div className="relative p-6 rounded-md bg-white dark:bg-black w-full max-w-md
+          bg-white dark:bg-black dark:from-white/10 dark:to-black/30
+          border border-gray-200 dark:border-gray-200 dark:border-gray-800
+          shadow-sm dark:shadow-sm
           before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-[2px] 
           before:rounded-t-[4px] before:bg-orange-500 
-          before:shadow-[0_0_10px_2px_rgba(249,115,22,0.4)] dark:before:shadow-[0_0_20px_5px_rgba(249,115,22,0.7)]">
+          before:shadow-lg dark:before:shadow-lg">
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-4">
@@ -221,13 +221,13 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
   const getChangeTypeIcon = (changeType: string) => {
     switch (changeType) {
       case 'create':
-        return <FileText className="w-4 h-4 text-emerald-400" />;
+        return <FileText className="w-4 h-4 text-green-400" />;
       case 'update':
-        return <Clock className="w-4 h-4 text-blue-400" />;
+        return <Clock className="w-4 h-4 text-green-400" />;
       case 'delete':
         return <X className="w-4 h-4 text-red-400" />;
       case 'restore':
-        return <RotateCcw className="w-4 h-4 text-purple-400" />;
+        return <RotateCcw className="w-4 h-4 text-green-400" />;
       default:
         return <Clock className="w-4 h-4 text-gray-400" />;
     }
@@ -423,7 +423,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
           {content.map((doc, index) => (
             <div key={index} className="border border-gray-700/50 rounded-lg p-4 bg-gray-900/30">
               <div className="flex items-center gap-3 mb-4">
-                <FileText className="w-5 h-5 text-blue-400" />
+                <FileText className="w-5 h-5 text-green-400" />
                 <h3 className="text-lg font-semibold text-white">{doc.title || `Document ${index + 1}`}</h3>
               </div>
               {doc.blocks && (
@@ -474,17 +474,17 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="relative w-full max-w-6xl h-5/6 flex flex-col bg-gradient-to-b from-white/80 to-white/60 dark:from-white/10 dark:to-black/30 border border-purple-500/30 rounded-lg overflow-hidden shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)] backdrop-blur-md">
+      <div className="fixed inset-0 bg-black/80 bg-white dark:bg-black flex items-center justify-center z-50">
+        <div className="relative w-full max-w-6xl h-5/6 flex flex-col bg-white dark:bg-black dark:from-white/10 dark:to-black/30 border border-green-500/30 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-black">
           {/* Neon top edge */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-purple-500 shadow-[0_0_20px_5px_rgba(168,85,247,0.7)]"></div>
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-green-500 shadow-lg"></div>
           
           {/* Header */}
-          <div className="relative z-10 flex items-center justify-between p-6 border-b border-purple-500/30">
+          <div className="relative z-10 flex items-center justify-between p-6 border-b border-green-500/30">
             <h2 className="text-xl font-semibold text-white flex items-center gap-3">
-              <Clock className="w-6 h-6 text-purple-400" />
+              <Clock className="w-6 h-6 text-green-400" />
               Version History
-              <span className="text-purple-400">- {fieldName}{documentId ? ' (Document Filtered)' : ''}</span>
+              <span className="text-green-400">- {fieldName}{documentId ? ' (Document Filtered)' : ''}</span>
             </h2>
             <button
               onClick={onClose}
@@ -497,16 +497,16 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
           {/* Content */}
           <div className="flex-1 flex overflow-hidden relative z-10">
             {/* Version List */}
-            <div className="w-1/3 border-r border-purple-500/30 overflow-y-auto">
+            <div className="w-1/3 border-r border-green-500/30 overflow-y-auto">
               <div className="p-6">
                 <h3 className="font-medium text-white mb-4 flex items-center gap-2">
-                  <GitBranch className="w-5 h-5 text-purple-400" />
+                  <GitBranch className="w-5 h-5 text-green-400" />
                   Versions
                 </h3>
                 
                 {loading && (
                   <div className="text-center py-8">
-                    <div className="w-8 h-8 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mx-auto mb-4"></div>
+                    <div className="w-8 h-8 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin mx-auto mb-4"></div>
                     <p className="text-gray-400">Loading versions...</p>
                   </div>
                 )}
@@ -530,7 +530,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
                       key={version.id}
                       className={`relative p-4 rounded-lg cursor-pointer transition-all duration-300 border ${
                         previewVersion === version.version_number
-                          ? 'bg-blue-500/20 border-blue-500/50'
+                          ? 'bg-green-500/20 border-green-500/50'
                           : 'bg-white/5 border-gray-500/30 hover:bg-white/10 hover:border-gray-400/50'
                       }`}
                       onClick={() => handlePreview(version.version_number)}
@@ -553,7 +553,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
                             }}
                             disabled={restoring === version.version_number}
                             icon={restoring === version.version_number ? 
-                              <div className="w-4 h-4 border-2 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" /> :
+                              <div className="w-4 h-4 border-2 border-green-500/30 border-t-green-500 rounded-full animate-spin" /> :
                               <RotateCcw className="w-4 h-4" />
                             }
                           >
@@ -565,7 +565,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
                       <p className="text-sm text-gray-300 mb-3">
                         {version.change_summary}
                         {version.document_id && documentId && version.document_id === documentId && (
-                          <span className="ml-2 text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded">
+                          <span className="ml-2 text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">
                             This document
                           </span>
                         )}
@@ -592,7 +592,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="font-medium text-white flex items-center gap-3">
-                    <Eye className="w-5 h-5 text-blue-400" />
+                    <Eye className="w-5 h-5 text-green-400" />
                     {viewMode === 'diff' ? 'Changes' : 'Content'}
                   </h3>
                   
@@ -601,7 +601,7 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
                       <Button
                         variant={viewMode === 'diff' ? 'primary' : 'ghost'}
                         size="sm"
-                        accentColor="purple"
+                        accentColor="green"
                         onClick={() => setViewMode('diff')}
                         icon={<Diff className="w-4 h-4" />}
                       >
@@ -635,11 +635,11 @@ export const VersionHistoryModal: React.FC<VersionHistoryModalProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="relative z-10 border-t border-purple-500/30 p-6">
+          <div className="relative z-10 border-t border-green-500/30 p-6">
             <div className="flex justify-end">
               <Button
                 variant="ghost"
-                accentColor="purple"
+                accentColor="green"
                 onClick={onClose}
               >
                 Close

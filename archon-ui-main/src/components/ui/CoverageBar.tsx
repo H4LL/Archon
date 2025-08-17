@@ -41,9 +41,9 @@ export function CoverageBar() {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
-        <Activity className="w-4 h-4 animate-pulse text-blue-500" />
-        <span className="text-sm text-blue-600 dark:text-blue-400">Loading coverage...</span>
+      <div className="flex items-center gap-2 p-2 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
+        <Activity className="w-4 h-4 animate-pulse text-green-500" />
+        <span className="text-sm text-green-600 dark:text-green-400">Loading coverage...</span>
       </div>
     )
   }
@@ -96,7 +96,7 @@ export function CoverageBar() {
           {overallPct >= 80 ? (
             <CheckCircle className="w-5 h-5 text-green-500" />
           ) : (
-            <BarChart className="w-5 h-5 text-blue-500" />
+            <BarChart className="w-5 h-5 text-green-500" />
           )}
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Overall Coverage
@@ -180,7 +180,7 @@ export function CoverageBar() {
       <div className="flex gap-2 pt-2 border-t border-gray-200 dark:border-gray-700">
         <button
           onClick={() => window.open('/coverage/index.html', '_blank')}
-          className="text-xs bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded transition-colors"
+          className="text-xs bg-green-100 hover:bg-green-200 dark:bg-green-900/20 dark:hover:bg-green-900/30 text-green-600 dark:text-green-400 px-2 py-1 rounded transition-colors"
         >
           View Full Report
         </button>

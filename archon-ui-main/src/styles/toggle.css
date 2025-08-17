@@ -45,19 +45,19 @@
   50% { filter: brightness(1.3); }
 }
 /* Color variants */
-.toggle-purple {
+.toggle-green {
   --accent-color-rgb: 168, 85, 247;
 }
-.toggle-purple.toggle-checked {
+.toggle-green.toggle-checked {
   background: rgba(168, 85, 247, 0.2);
   border-color: rgba(168, 85, 247, 0.5);
   box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
   animation: toggleGlow 2s ease-in-out infinite;
 }
-.toggle-purple .toggle-thumb {
+.toggle-green .toggle-thumb {
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
 }
-.toggle-purple.toggle-checked .toggle-thumb {
+.toggle-green.toggle-checked .toggle-thumb {
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.7);
 }
 .toggle-green {
@@ -75,19 +75,19 @@
 .toggle-green.toggle-checked .toggle-thumb {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
 }
-.toggle-pink {
+.toggle-green {
   --accent-color-rgb: 236, 72, 153;
 }
-.toggle-pink.toggle-checked {
+.toggle-green.toggle-checked {
   background: rgba(236, 72, 153, 0.2);
   border-color: rgba(236, 72, 153, 0.5);
   box-shadow: 0 0 18px rgba(236, 72, 153, 0.5);
   animation: toggleGlow 2s ease-in-out infinite;
 }
-.toggle-pink .toggle-thumb {
+.toggle-green .toggle-thumb {
   box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
 }
-.toggle-pink.toggle-checked .toggle-thumb {
+.toggle-green.toggle-checked .toggle-thumb {
   box-shadow: 0 0 20px rgba(236, 72, 153, 0.7);
 }
 .toggle-blue {

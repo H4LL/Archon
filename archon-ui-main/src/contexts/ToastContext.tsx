@@ -53,7 +53,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
       case 'info':
       default:
-        return <Info className="w-5 h-5 text-blue-500" />;
+        return <Info className="w-5 h-5 text-green-500" />;
     }
   };
 
@@ -61,28 +61,28 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     switch (type) {
       case 'success':
         return {
-          container: 'backdrop-blur-xl bg-gradient-to-r from-green-50/95 to-emerald-50/95 dark:from-green-950/90 dark:to-emerald-950/90 border border-green-300/60 dark:border-green-500/40 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.6),0_10px_10px_-5px_rgba(0,0,0,0.3)]',
+          container: 'bg-white dark:bg-black bg-gradient-to-r from-green-50/95 to-green-50/95 dark:from-green-950/90 dark:to-green-950/90 border border-green-300/60 dark:border-green-500/40 shadow-sm dark:shadow-sm',
           textColor: 'text-green-800 dark:text-green-100',
           buttonColor: 'text-green-600 hover:text-green-800 dark:text-green-300 dark:hover:text-green-100'
         };
       case 'error':
         return {
-          container: 'backdrop-blur-xl bg-gradient-to-r from-red-50/95 to-pink-50/95 dark:from-red-950/90 dark:to-pink-950/90 border border-red-300/60 dark:border-red-500/40 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.6),0_10px_10px_-5px_rgba(0,0,0,0.3)]',
+          container: 'bg-white dark:bg-black bg-gradient-to-r from-red-50/95 to-green-50/95 dark:from-red-950/90 dark:to-green-950/90 border border-red-300/60 dark:border-red-500/40 shadow-sm dark:shadow-sm',
           textColor: 'text-red-800 dark:text-red-100',
           buttonColor: 'text-red-600 hover:text-red-800 dark:text-red-300 dark:hover:text-red-100'
         };
       case 'warning':
         return {
-          container: 'backdrop-blur-xl bg-gradient-to-r from-yellow-50/95 to-orange-50/95 dark:from-yellow-950/90 dark:to-orange-950/90 border border-yellow-300/60 dark:border-yellow-500/40 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.6),0_10px_10px_-5px_rgba(0,0,0,0.3)]',
+          container: 'bg-white dark:bg-black bg-gradient-to-r from-yellow-50/95 to-orange-50/95 dark:from-yellow-950/90 dark:to-orange-950/90 border border-yellow-300/60 dark:border-yellow-500/40 shadow-sm dark:shadow-sm',
           textColor: 'text-yellow-800 dark:text-yellow-100',
           buttonColor: 'text-yellow-600 hover:text-yellow-800 dark:text-yellow-300 dark:hover:text-yellow-100'
         };
       case 'info':
       default:
         return {
-          container: 'backdrop-blur-xl bg-gradient-to-r from-blue-50/95 to-cyan-50/95 dark:from-blue-950/90 dark:to-cyan-950/90 border border-blue-300/60 dark:border-blue-500/40 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.6),0_10px_10px_-5px_rgba(0,0,0,0.3)]',
-          textColor: 'text-blue-800 dark:text-blue-100',
-          buttonColor: 'text-blue-600 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-100'
+          container: 'bg-white dark:bg-black bg-gradient-to-r from-green-50/95 to-green-50/95 dark:from-green-950/90 dark:to-green-950/90 border border-green-300/60 dark:border-green-500/40 shadow-sm dark:shadow-sm',
+          textColor: 'text-green-800 dark:text-green-100',
+          buttonColor: 'text-green-600 hover:text-green-800 dark:text-green-300 dark:hover:text-green-100'
         };
     }
   };

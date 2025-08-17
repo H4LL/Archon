@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const DatabaseTaskStatusSchema = z.enum(['todo', 'doing', 'review', 'done']);
 export const UITaskStatusSchema = z.enum(['backlog', 'in-progress', 'review', 'complete']);
 export const TaskPrioritySchema = z.enum(['low', 'medium', 'high', 'critical']);
-export const ProjectColorSchema = z.enum(['cyan', 'purple', 'pink', 'blue', 'orange', 'green']);
+export const ProjectColorSchema = z.enum(['green', 'green', 'green', 'green', 'orange', 'green']);
 
 // Assignee schema - simplified to predefined options
 export const AssigneeSchema = z.enum(['User', 'Archon', 'AI IDE Agent']);

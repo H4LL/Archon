@@ -18,24 +18,24 @@ export const KeyValueSection: React.FC<PRPSectionProps> = ({
   if (!data || typeof data !== 'object') return null;
 
   const colorMap = {
-    blue: 'from-blue-400 to-blue-600',
-    purple: 'from-purple-400 to-purple-600',
+    blue: 'from-green-400 to-green-600',
+    green: 'from-green-400 to-green-600',
     green: 'from-green-400 to-green-600',
     orange: 'from-orange-400 to-orange-600',
-    pink: 'from-pink-400 to-pink-600',
-    cyan: 'from-cyan-400 to-cyan-600',
-    indigo: 'from-indigo-400 to-indigo-600',
+    green: 'from-green-400 to-green-600',
+    cyan: 'from-green-400 to-green-600',
+    indigo: 'from-green-400 to-green-600',
     emerald: 'from-emerald-400 to-emerald-600',
   };
 
   const borderColorMap = {
-    blue: 'border-blue-200 dark:border-blue-800',
-    purple: 'border-purple-200 dark:border-purple-800',
+    blue: 'border-green-200 dark:border-green-800',
+    green: 'border-green-200 dark:border-green-800',
     green: 'border-green-200 dark:border-green-800',
     orange: 'border-orange-200 dark:border-orange-800',
-    pink: 'border-pink-200 dark:border-pink-800',
-    cyan: 'border-cyan-200 dark:border-cyan-800',
-    indigo: 'border-indigo-200 dark:border-indigo-800',
+    green: 'border-green-200 dark:border-green-800',
+    cyan: 'border-green-200 dark:border-green-800',
+    indigo: 'border-green-200 dark:border-green-800',
     emerald: 'border-emerald-200 dark:border-emerald-800',
   };
 

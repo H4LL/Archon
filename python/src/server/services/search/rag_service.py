@@ -10,10 +10,15 @@ It combines multiple RAG strategies in a pipeline fashion:
 4. + Agentic RAG (if enabled) - enhanced code example search
 
 Multiple strategies can be enabled simultaneously and work together.
+
+When Ollama is detected as the LLM provider, the service automatically routes
+to the LangGraph-based OllamaReActRagAgent instead of the standard pipeline.
 """
 
 import os
 from typing import Any
+import httpx
+import json
 
 from ...config.logfire_config import get_logger, safe_span
 from ...utils import get_supabase_client
@@ -84,6 +89,23 @@ class RAGService:
         value = self.get_setting(key, "false" if not default else "true")
         return value.lower() in ("true", "1", "yes", "on")
 
+    async def get_provider(self) -> str:
+        """Get the current LLM provider from settings."""
+        try:
+            from ..credential_service import credential_service
+            
+            # Check cached settings first
+            if hasattr(credential_service, "_cache") and credential_service._cache_initialized:
+                provider = credential_service._cache.get("LLM_PROVIDER", "openai")
+            else:
+                # Fallback to environment variable
+                provider = os.getenv("LLM_PROVIDER", "openai")
+            
+            return provider.lower() if isinstance(provider, str) else "openai"
+        except Exception as e:
+            logger.warning(f"Failed to get provider: {e}, defaulting to openai")
+            return "openai"
+
     async def search_documents(
         self,
         query: str,
@@ -112,8 +134,11 @@ class RAGService:
             hybrid_enabled=use_hybrid_search,
         ) as span:
             try:
-                # Create embedding for the query
-                query_embedding = await create_embedding(query)
+                # Get the provider for embedding creation
+                provider = await self.get_provider()
+                
+                # Create embedding for the query using the correct provider
+                query_embedding = await create_embedding(query, provider=provider)
 
                 if not query_embedding:
                     logger.error("Failed to create embedding for query")
@@ -168,20 +193,135 @@ class RAGService:
             query=query,
             match_count=match_count,
             filter_metadata=filter_metadata,
-            source_id=source_id,
-            use_enhancement=True,
+            source_id=source_id
         )
 
+    async def _perform_langgraph_rag_query(
+        self, query: str, source: str | None = None, match_count: int = 5
+    ) -> tuple[bool, dict[str, Any]]:
+        """
+        Perform RAG query using the LangGraph-based Ollama agent.
+        
+        Args:
+            query: The search query
+            source: Optional source domain to filter results
+            match_count: Maximum number of results to return
+            
+        Returns:
+            Tuple of (success, result_dict)
+        """
+        try:
+            # Get agents service port
+            agents_port = os.getenv("ARCHON_AGENTS_PORT", "8052")
+            
+            # Prepare request to agents service
+            request_data = {
+                "agent_type": "ollama_rag",
+                "prompt": query,
+                "context": {
+                    "source": source,
+                    "match_count": match_count
+                }
+            }
+            
+            # Call the Ollama RAG agent via HTTP
+            async with httpx.AsyncClient(timeout=httpx.Timeout(60.0)) as client:
+                response = await client.post(
+                    f"http://archon-agents:{agents_port}/agents/run",
+                    json=request_data
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    
+                    if result.get("success"):
+                        # Extract the agent's response
+                        agent_result = result.get("result", {})
+                        
+                        # Handle both string and dict responses
+                        if isinstance(agent_result, str):
+                            # If the agent returned a string, use it as the answer
+                            return True, {
+                                "results": [],
+                                "query": query,
+                                "source": source,
+                                "match_count": match_count,
+                                "total_found": 0,
+                                "execution_path": "langgraph_ollama_agent",
+                                "search_mode": "langgraph_react",
+                                "answer": agent_result,
+                                "reasoning_steps": []
+                            }
+                        elif isinstance(agent_result, dict):
+                            # If it's a dict, extract the structured data
+                            return True, {
+                                "results": agent_result.get("results", []),
+                                "query": query,
+                                "source": source,
+                                "match_count": match_count,
+                                "total_found": len(agent_result.get("results", [])),
+                                "execution_path": "langgraph_ollama_agent",
+                                "search_mode": "langgraph_react",
+                                "answer": agent_result.get("answer", ""),
+                                "reasoning_steps": agent_result.get("reasoning_steps", [])
+                            }
+                        else:
+                            # Fallback for unexpected types
+                            return True, {
+                                "results": [],
+                                "query": query,
+                                "source": source,
+                                "match_count": match_count,
+                                "total_found": 0,
+                                "execution_path": "langgraph_ollama_agent",
+                                "search_mode": "langgraph_react",
+                                "answer": str(agent_result) if agent_result else "No response",
+                                "reasoning_steps": []
+                            }
+                    else:
+                        error_msg = result.get("error", "Unknown error from agent")
+                        logger.error(f"Ollama RAG agent failed: {error_msg}")
+                        return False, {
+                            "error": error_msg,
+                            "query": query,
+                            "source": source,
+                            "execution_path": "langgraph_ollama_agent"
+                        }
+                else:
+                    logger.error(f"Agents service returned status {response.status_code}")
+                    return False, {
+                        "error": f"Agents service error: {response.status_code}",
+                        "query": query,
+                        "source": source,
+                        "execution_path": "langgraph_ollama_agent"
+                    }
+                    
+        except Exception as e:
+            logger.error(f"Failed to call Ollama RAG agent: {e}", exc_info=True)
+            return False, {
+                "error": str(e),
+                "error_type": type(e).__name__,
+                "query": query,
+                "source": source,
+                "execution_path": "langgraph_ollama_agent"
+            }
+
     async def perform_rag_query(
-        self, query: str, source: str = None, match_count: int = 5
+        self, query: str, source: str | None = None, match_count: int = 5
     ) -> tuple[bool, dict[str, Any]]:
         """
         Perform a comprehensive RAG query that combines all enabled strategies.
+        
+        When Ollama is detected as the provider, automatically routes to the
+        LangGraph-based OllamaReActRagAgent for better performance with local models.
 
         Pipeline:
-        1. Start with vector search
-        2. Apply hybrid search if enabled
-        3. Apply reranking if enabled
+        1. Check if Ollama provider is active
+        2. If Ollama: Use LangGraph agent
+        3. Otherwise: Use standard pipeline
+           a. Start with vector search
+           b. Apply hybrid search if enabled
+           c. Apply reranking if enabled
 
         Args:
             query: The search query
@@ -191,6 +331,13 @@ class RAGService:
         Returns:
             Tuple of (success, result_dict)
         """
+        # Check if we should use Ollama LangGraph agent
+        provider = await self.get_provider()
+        if provider == "ollama":
+            logger.info(f"Using LangGraph Ollama agent for RAG query")
+            return await self._perform_langgraph_rag_query(query, source, match_count)
+        
+        # Otherwise, continue with standard RAG pipeline
         with safe_span(
             "rag_query_pipeline", query_length=len(query), source=source, match_count=match_count
         ) as span:

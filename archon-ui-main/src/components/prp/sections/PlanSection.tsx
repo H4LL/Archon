@@ -16,7 +16,7 @@ export const PlanSection: React.FC<SectionProps> = ({
   if (!data || typeof data !== 'object') return null;
   
   const getPhaseColor = (index: number): string => {
-    const colors = ['orange', 'yellow', 'green', 'blue', 'purple'];
+    const colors = ['orange', 'yellow', 'green', 'green', 'green'];
     return colors[index % colors.length];
   };
   
@@ -26,8 +26,8 @@ export const PlanSection: React.FC<SectionProps> = ({
       orange: 'from-orange-50/50 to-yellow-50/50 dark:from-orange-900/20 dark:to-yellow-900/20 border-orange-200 dark:border-orange-800',
       yellow: 'from-yellow-50/50 to-amber-50/50 dark:from-yellow-900/20 dark:to-amber-900/20 border-yellow-200 dark:border-yellow-800',
       green: 'from-green-50/50 to-emerald-50/50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800',
-      blue: 'from-blue-50/50 to-cyan-50/50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800',
-      purple: 'from-purple-50/50 to-pink-50/50 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-200 dark:border-purple-800',
+      blue: 'from-green-50/50 to-green-50/50 dark:from-green-900/20 dark:to-green-900/20 border-green-200 dark:border-green-800',
+      green: 'from-green-50/50 to-green-50/50 dark:from-green-900/20 dark:to-green-900/20 border-green-200 dark:border-green-800',
     };
     
     return (

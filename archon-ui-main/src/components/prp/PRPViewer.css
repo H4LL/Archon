@@ -95,7 +95,7 @@
   top: 50%;
   width: 8px;
   height: 8px;
-  background: linear-gradient(135deg, #3b82f6, #a855f7);
+  background: linear-gradient(135deg, #50c878, #50c878);
   border-radius: 50%;
   transform: translateY(-50%);
   box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
@@ -208,7 +208,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, #3b82f6, #a855f7, #ec4899, #3b82f6);
+  background: linear-gradient(45deg, #50c878, #50c878, #50c878, #50c878);
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -273,7 +273,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, #3b82f6, #a855f7);
+  background: linear-gradient(to bottom, #50c878, #50c878);
 }
 
 .prp-viewer .phase-progress .phase-dot {
@@ -283,7 +283,7 @@
   width: 10px;
   height: 10px;
   background: white;
-  border: 2px solid #3b82f6;
+  border: 2px solid #50c878;
   border-radius: 50%;
   z-index: 1;
 }

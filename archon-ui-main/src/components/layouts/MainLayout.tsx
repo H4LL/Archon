@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import { useToast } from '../../contexts/ToastContext';
 import { credentialsService } from '../../services/credentialsService';
 import { isLmConfigured } from '../../utils/onboarding';
+import { XanaduLogo } from '../ui/XanaduLogo';
 /**
  * Props for the MainLayout component
  */
@@ -155,8 +156,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
   }, [backendReady, location.pathname, navigate, showToast]);
 
   return <div className="relative min-h-screen bg-white dark:bg-black overflow-hidden">
-      {/* Fixed full-page background grid that doesn't scroll */}
-      <div className="fixed inset-0 neon-grid pointer-events-none z-0"></div>
+
       {/* Floating Navigation */}
       <div className="fixed left-6 top-1/2 -translate-y-1/2 z-50">
         <SideNavigation />
@@ -172,9 +172,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
         <div className="fixed bottom-6 right-6 z-50 group">
           <button 
             disabled
-            className="w-14 h-14 rounded-full flex items-center justify-center backdrop-blur-md bg-gradient-to-b from-gray-100/80 to-gray-50/60 dark:from-gray-700/30 dark:to-gray-800/30 shadow-[0_0_10px_rgba(156,163,175,0.3)] dark:shadow-[0_0_10px_rgba(156,163,175,0.3)] cursor-not-allowed opacity-60 overflow-hidden border border-gray-300 dark:border-gray-600" 
+            className="w-14 h-14 rounded-full flex items-center justify-center bg-white dark:bg-black bg-gradient-to-b from-gray-100/80 to-gray-50/60 dark:from-gray-700/30 dark:to-gray-800/30 shadow-[0_0_10px_rgba(156,163,175,0.3)] dark:shadow-[0_0_10px_rgba(156,163,175,0.3)] cursor-not-allowed opacity-60 overflow-hidden border border-gray-300 dark:border-gray-600" 
             aria-label="Knowledge Assistant - Coming Soon">
-            <img src="/logo-neon.svg" alt="Archon" className="w-7 h-7 grayscale opacity-50" />
+            <XanaduLogo className="text-gray-400 dark:text-gray-500" />
           </button>
           {/* Tooltip */}
           <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-800 dark:bg-gray-900 text-white text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
@@ -189,8 +189,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
       transform: isChatOpen ? 'translateX(0)' : 'translateX(100%)'
     }}>
         {/* Close button - Only visible when chat is open */}
-        {isChatOpen && <button onClick={() => setIsChatOpen(false)} className="absolute -left-14 bottom-6 z-50 w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-md bg-gradient-to-b from-white/10 to-black/30 dark:from-white/10 dark:to-black/30 from-pink-100/80 to-pink-50/60 border border-pink-200 dark:border-pink-500/30 shadow-[0_0_15px_rgba(236,72,153,0.2)] dark:shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] dark:hover:shadow-[0_0_20px_rgba(236,72,153,0.7)] transition-all duration-300" aria-label="Close Knowledge Assistant">
-            <X className="w-5 h-5 text-pink-500" />
+        {isChatOpen && <button onClick={() => setIsChatOpen(false)} className="absolute -left-14 bottom-6 z-50 w-12 h-12 rounded-full flex items-center justify-center bg-white dark:bg-black bg-white dark:bg-black dark:from-white/10 dark:to-black/30 from-green-100/80 to-green-50/60 border border-green-200 dark:border-green-500/30 shadow-[0_0_15px_rgba(80,200,120,0.2)] dark:shadow-[0_0_15px_rgba(80,200,120,0.5)] hover:shadow-[0_0_20px_rgba(80,200,120,0.4)] dark:hover:shadow-[0_0_20px_rgba(80,200,120,0.7)] transition-all duration-300" aria-label="Close Knowledge Assistant">
+            <X className="w-5 h-5 text-green-500" />
           </button>}
         {/* Knowledge Chat Panel */}
         <ArchonChatPanel data-id="archon-chat" />

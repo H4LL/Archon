@@ -116,7 +116,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 flex items-center justify-center z-50 bg-black/60 bg-white dark:bg-black"
       onClick={onClose}
     >
       <motion.div
@@ -127,14 +127,14 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Pink accent line at the top */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-pink-500 to-purple-500 shadow-[0_0_20px_5px_rgba(236,72,153,0.5)]"></div>
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-green-500 to-green-500 shadow-lg"></div>
         
         {/* Sidebar */}
         <div className={`${sidebarCollapsed ? 'w-0' : 'w-80'} transition-all duration-300 bg-gray-950/50 border-r border-gray-800 flex flex-col overflow-hidden`}>
           {/* Sidebar Header */}
           <div className="p-4 border-b border-gray-800">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-pink-400">
+              <h3 className="text-sm font-semibold text-green-400">
                 Code Examples ({filteredExamples.length})
               </h3>
               <button
@@ -153,7 +153,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                 placeholder="Search examples..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 bg-gray-900/70 border border-gray-800 rounded-lg text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-pink-500/50 focus:ring-1 focus:ring-pink-500/20 transition-all"
+                className="w-full pl-10 pr-3 py-2 bg-gray-900/70 border border-gray-800 rounded-lg text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/20 transition-all"
               />
             </div>
           </div>
@@ -171,17 +171,17 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                   onClick={() => setActiveExampleIndex(index)}
                   className={`w-full text-left p-3 mb-1 rounded-lg transition-all duration-200 ${
                     index === activeExampleIndex
-                      ? 'bg-pink-500/20 border border-pink-500/40 shadow-[0_0_15px_rgba(236,72,153,0.2)]'
+                      ? 'bg-green-500/20 border border-green-500/40 shadow-[0_0_15px_rgba(80,200,120,0.2)]'
                       : 'hover:bg-gray-800/50 border border-transparent'
                   }`}
                 >
                   <div className="flex items-start gap-2">
                     <FileCode className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
-                      index === activeExampleIndex ? 'text-pink-400' : 'text-gray-500'
+                      index === activeExampleIndex ? 'text-green-400' : 'text-gray-500'
                     }`} />
                     <div className="flex-1 min-w-0">
                       <div className={`text-sm font-medium ${
-                        index === activeExampleIndex ? 'text-pink-300' : 'text-gray-300'
+                        index === activeExampleIndex ? 'text-green-300' : 'text-gray-300'
                       } line-clamp-1`}>
                         {example.title}
                       </div>
@@ -200,7 +200,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                       </div>
                     </div>
                     {index === activeExampleIndex && (
-                      <ChevronRight className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                      <ChevronRight className="w-4 h-4 text-green-400 flex-shrink-0" />
                     )}
                   </div>
                 </button>
@@ -224,7 +224,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b border-gray-800">
             <div className="flex-1">
-              <h2 className="text-2xl font-bold text-pink-400">
+              <h2 className="text-2xl font-bold text-green-400">
                 {activeExample?.title || 'Code Example'}
               </h2>
               <p className="text-gray-400 mt-1 max-w-2xl line-clamp-2">
@@ -242,7 +242,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
           {/* Toolbar */}
           <div className="flex justify-between items-center p-4 border-b border-gray-800">
             <div className="flex items-center gap-2">
-              <Badge color="pink" variant="outline" className="text-xs">
+              <Badge color="green" variant="outline" className="text-xs">
                 {activeExample?.language || 'unknown'}
               </Badge>
               {activeExample?.tags?.map((tag) => (
@@ -263,7 +263,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
               </span>
               <Button
                 variant="outline"
-                accentColor="pink"
+                accentColor="green"
                 size="sm"
                 onClick={handleCopyCode}
               >
@@ -289,14 +289,14 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
               onClick={() => setActiveTab('code')}
               icon={<CodeIcon className="w-4 h-4" />}
               label="Code"
-              color="pink"
+              color="green"
             />
             <TabButton
               active={activeTab === 'metadata'}
               onClick={() => setActiveTab('metadata')}
               icon={<Info className="w-4 h-4" />}
               label="Metadata"
-              color="pink"
+              color="green"
             />
           </div>
           
@@ -305,7 +305,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
             {isLoading ? (
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-400 mx-auto mb-4"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-400 mx-auto mb-4"></div>
                   <p className="text-gray-400">Loading code examples...</p>
                 </div>
               </div>
@@ -332,7 +332,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
             {activeTab === 'metadata' && activeExample && (
               <div className="h-full p-4">
                 <div className="bg-gray-900/70 rounded-lg border border-gray-800 p-6 h-full overflow-auto">
-                  <h3 className="text-lg font-medium text-pink-400 mb-4">
+                  <h3 className="text-lg font-medium text-green-400 mb-4">
                     {activeExample.title} Metadata
                   </h3>
                   <p className="text-gray-300 mb-6">
@@ -345,7 +345,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                         Language
                       </h4>
                       <div className="flex items-center gap-2">
-                        <Badge color="pink" variant="outline">
+                        <Badge color="green" variant="outline">
                           {activeExample.language}
                         </Badge>
                         <span className="text-sm text-gray-500">
@@ -360,13 +360,13 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                       </h4>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-gray-800/50 rounded-lg p-3">
-                          <div className="text-2xl font-bold text-pink-400">
+                          <div className="text-2xl font-bold text-green-400">
                             {activeExample.code.split('\n').length}
                           </div>
                           <div className="text-xs text-gray-500">Lines of code</div>
                         </div>
                         <div className="bg-gray-800/50 rounded-lg p-3">
-                          <div className="text-2xl font-bold text-pink-400">
+                          <div className="text-2xl font-bold text-green-400">
                             {activeExample.code.length}
                           </div>
                           <div className="text-xs text-gray-500">Characters</div>
@@ -381,7 +381,7 @@ export const CodeViewerModal: React.FC<CodeViewerModalProps> = ({
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {activeExample.tags.map((tag) => (
-                            <Badge key={tag} color="pink" variant="outline">
+                            <Badge key={tag} color="green" variant="outline">
                               {tag}
                             </Badge>
                           ))}
@@ -417,12 +417,12 @@ const TabButton: React.FC<TabButtonProps> = ({
 }) => {
   const colorMap: Record<string, string> = {
     green: 'text-green-400 border-green-500',
-    blue: 'text-blue-400 border-blue-500',
-    pink: 'text-pink-400 border-pink-500',
-    purple: 'text-purple-400 border-purple-500',
+    blue: 'text-green-400 border-green-500',
+    green: 'text-green-400 border-green-500',
+    green: 'text-green-400 border-green-500',
   }
   
-  const activeColor = colorMap[color] || 'text-pink-400 border-pink-500'
+  const activeColor = colorMap[color] || 'text-green-400 border-green-500'
   
   return (
     <button
@@ -435,7 +435,7 @@ const TabButton: React.FC<TabButtonProps> = ({
       {icon}
       {label}
       {active && (
-        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${color === 'pink' ? 'bg-pink-500' : 'bg-green-500'}`}></div>
+        <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${color === 'green' ? 'bg-green-500' : 'bg-green-500'}`}></div>
       )}
     </button>
   )

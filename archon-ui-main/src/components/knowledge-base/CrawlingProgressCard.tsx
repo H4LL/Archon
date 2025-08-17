@@ -347,7 +347,7 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
       case 'starting':
         return {
           text: isUpload ? 'Starting upload...' : 'Starting crawl...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Clock className="w-4 h-4" />
         };
       case 'completed':
@@ -359,55 +359,55 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
       case 'error':
         return {
           text: isUpload ? 'Upload failed' : 'Crawling failed',
-          color: 'pink' as const,
+          color: 'green' as const,
           icon: <AlertTriangle className="w-4 h-4" />
         };
       case 'stale':
         return {
           text: isUpload ? 'Upload appears stuck' : 'Crawl appears stuck',
-          color: 'pink' as const,
+          color: 'green' as const,
           icon: <AlertTriangle className="w-4 h-4" />
         };
       case 'reading':
         return {
           text: 'Reading file...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Download className="w-4 h-4" />
         };
       case 'extracting':
         return {
           text: 'Extracting text...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <FileText className="w-4 h-4" />
         };
       case 'chunking':
         return {
           text: 'Processing content...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Cpu className="w-4 h-4" />
         };
       case 'creating_source':
         return {
           text: 'Creating source...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Database className="w-4 h-4" />
         };
       case 'summarizing':
         return {
           text: 'Generating summary...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Search className="w-4 h-4" />
         };
       case 'storing':
         return {
           text: 'Storing chunks...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Database className="w-4 h-4" />
         };
       case 'source_creation':
         return {
           text: 'Creating source records...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <FileText className="w-4 h-4" />
         };
       case 'document_storage':
@@ -415,39 +415,39 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
           text: progressData.completedBatches !== undefined && progressData.totalBatches 
             ? `Document Storage: ${progressData.completedBatches}/${progressData.totalBatches} batches`
             : 'Storing documents...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Database className="w-4 h-4" />
         };
       case 'code_storage':
       case 'code_extraction':
         return {
           text: 'Processing code examples...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Code className="w-4 h-4" />
         };
       case 'finalization':
         return {
           text: 'Finalizing...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: <Zap className="w-4 h-4" />
         };
       case 'cancelled':
         return {
           text: isUpload ? 'Upload cancelled' : 'Crawling cancelled',
-          color: 'pink' as const,
+          color: 'green' as const,
           icon: <Square className="w-4 h-4" />
         };
       case 'stopping':
         return {
           text: isUpload ? 'Stopping upload...' : 'Stopping crawl...',
-          color: 'pink' as const,
+          color: 'green' as const,
           icon: <Square className="w-4 h-4" />
         };
       default:
         const activeStep = progressSteps.find(step => step.status === 'active');
         return {
           text: activeStep ? activeStep.label : 'Processing...',
-          color: 'blue' as const,
+          color: 'green' as const,
           icon: activeStep ? activeStep.icon : <Clock className="w-4 h-4" />
         };
     }
@@ -466,9 +466,9 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
           ? 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-500/10 animate-pulse'
           : 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-500/10';
       case 'active':
-        return 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-500/10';
+        return 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-500/10';
       case 'error':
-        return 'text-pink-600 dark:text-pink-400 bg-pink-100 dark:bg-pink-500/10';
+        return 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-500/10';
       default:
         return 'text-gray-400 dark:text-gray-600 bg-gray-100 dark:bg-gray-500/10';
     }
@@ -479,9 +479,9 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
       {/* Status Header */}
       <div className="flex items-center gap-3 mb-4">
         <div className={`p-2 rounded-md ${
-          status.color === 'blue' ? 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' :
           status.color === 'green' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400' :
-          status.color === 'pink' ? 'bg-pink-100 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400' :
+          status.color === 'green' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400' :
+          status.color === 'green' ? 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400' :
           'bg-gray-100 dark:bg-gray-500/10 text-gray-600 dark:text-gray-400'
         }`}>
           {status.icon}
@@ -517,7 +517,7 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
                 border-red-400 hover:border-red-300
                 ${isStopping ? 
                   'bg-gray-100 dark:bg-gray-800 opacity-50 cursor-not-allowed' : 
-                  'bg-gradient-to-b from-gray-900 to-black cursor-pointer'
+                  'bg-white dark:bg-black cursor-pointer'
                 }
                 shadow-[0_0_8px_rgba(239,68,68,0.6)] hover:shadow-[0_0_12px_rgba(239,68,68,0.8)]
               `}
@@ -581,7 +581,7 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
           </div>
           <div className="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2" data-testid="crawling-progress-bar">
             <motion.div
-              className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600"
+              className="h-2 rounded-full bg-gradient-to-r from-green-500 to-green-600"
               initial={{ width: 0 }}
               animate={{ width: `${Math.max(0, Math.min(100, progressData.percentage || 0))}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -593,15 +593,15 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
       {/* Show parallel workers info when available */}
       {progressData.parallelWorkers && progressData.parallelWorkers > 1 && 
        progressData.status === 'document_storage' && (
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-md">
+        <div className="mb-4 p-3 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-md">
           <div className="flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-medium text-blue-700 dark:text-blue-400">
+            <Cpu className="w-4 h-4 text-green-600 dark:text-green-400" />
+            <span className="text-sm font-medium text-green-700 dark:text-green-400">
               Processing with {progressData.parallelWorkers} parallel workers
             </span>
           </div>
           {progressData.totalJobs && (
-            <div className="mt-1 text-xs text-blue-600 dark:text-blue-400/80">
+            <div className="mt-1 text-xs text-green-600 dark:text-green-400/80">
               Total batches to process: {progressData.totalJobs}
             </div>
           )}
@@ -610,10 +610,10 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
 
       {/* Show info when crawling is complete but processing continues */}
       {progressData.status === 'document_storage' && progressData.percentage < 30 && (
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-md">
+        <div className="mb-4 p-3 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-md">
           <div className="flex items-center gap-2">
-            <Cpu className="w-4 h-4 text-blue-600 dark:text-blue-400 animate-pulse" />
-            <span className="text-sm text-blue-700 dark:text-blue-400">
+            <Cpu className="w-4 h-4 text-green-600 dark:text-green-400 animate-pulse" />
+            <span className="text-sm text-green-700 dark:text-green-400">
               Content fetched successfully. Processing and storing documents...
             </span>
           </div>
@@ -677,8 +677,8 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
                         <motion.div
                           className={`h-1.5 rounded-full ${
                             step.status === 'completed' ? 'bg-green-500' :
-                            step.status === 'active' ? 'bg-blue-500' :
-                            step.status === 'error' ? 'bg-pink-500' :
+                            step.status === 'active' ? 'bg-green-500' :
+                            step.status === 'error' ? 'bg-green-500' :
                             'bg-gray-300 dark:bg-gray-600'
                           }`}
                           initial={{ width: 0 }}
@@ -712,7 +712,7 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
                           </span>
                           <div className="flex items-center gap-2">
                             {progressData.active_workers && progressData.active_workers > 0 && (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-500/10 text-blue-800 dark:text-blue-400">
+                              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-500/10 text-green-800 dark:text-green-400">
                                 <Cpu className="w-3 h-3 mr-1" />
                                 {progressData.active_workers} {progressData.active_workers === 1 ? 'worker' : 'workers'}
                               </span>
@@ -726,7 +726,7 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
                         {/* Single batch progress bar */}
                         <div className="w-full bg-gray-200 dark:bg-zinc-700 rounded-full h-2">
                           <motion.div
-                            className="h-2 rounded-full bg-blue-500 dark:bg-blue-400"
+                            className="h-2 rounded-full bg-green-500 dark:bg-green-400"
                             initial={{ width: 0 }}
                             animate={{ 
                               width: `${Math.round(((progressData.completed_batches || 0) / (progressData.total_batches || 1)) * 100)}%` 
@@ -854,8 +854,8 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
 
       {/* Error Message */}
       {progressData.status === 'error' && progressData.error && (
-        <div className="mb-4 p-3 bg-pink-50 dark:bg-pink-500/10 border border-pink-200 dark:border-pink-500/20 rounded-md">
-          <p className="text-pink-700 dark:text-pink-400 text-sm">
+        <div className="mb-4 p-3 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-md">
+          <p className="text-green-700 dark:text-green-400 text-sm">
             {progressData.error}
           </p>
         </div>

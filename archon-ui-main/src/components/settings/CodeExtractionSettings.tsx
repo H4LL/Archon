@@ -284,16 +284,16 @@ const CustomCheckbox = ({
         <label 
           htmlFor={id}
           className="relative w-5 h-5 rounded-md transition-all duration-200 cursor-pointer
-            bg-gradient-to-b from-white/80 to-white/60 dark:from-white/5 dark:to-black/40
+            bg-white dark:bg-black dark:from-white/5 dark:to-black/40
             border border-gray-300 dark:border-gray-700
-            peer-checked:border-purple-500 dark:peer-checked:border-purple-500/50
-            peer-checked:bg-gradient-to-b peer-checked:from-purple-500/20 peer-checked:to-purple-600/20
-            group-hover:border-purple-500/50 dark:group-hover:border-purple-500/30
-            peer-checked:shadow-[0_0_10px_rgba(168,85,247,0.2)] dark:peer-checked:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+            peer-checked:border-green-500 dark:peer-checked:border-green-500/50
+            peer-checked:bg-gradient-to-b peer-checked:from-green-500/20 peer-checked:to-green-600/20
+            group-hover:border-green-500/50 dark:group-hover:border-green-500/30
+            peer-checked:shadow-[0_0_10px_rgba(#50c878,0.2)] dark:peer-checked:shadow-[0_0_15px_rgba(#50c878,0.3)]"
         >
           <Check className={`
               w-3.5 h-3.5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-              transition-all duration-200 text-purple-500 pointer-events-none
+              transition-all duration-200 text-green-500 pointer-events-none
               ${checked ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}
             `} />
         </label>

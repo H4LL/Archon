@@ -198,7 +198,7 @@ export const FeaturesSection = () => {
     <>
       <div className="grid grid-cols-2 gap-4">
           {/* Theme Toggle */}
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 backdrop-blur-sm border border-purple-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 bg-white dark:bg-black border border-green-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 Dark Mode
@@ -208,12 +208,12 @@ export const FeaturesSection = () => {
               </p>
             </div>
             <div className="flex-shrink-0">
-              <Toggle checked={isDarkMode} onCheckedChange={handleThemeToggle} accentColor="purple" icon={isDarkMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />} />
+              <Toggle checked={isDarkMode} onCheckedChange={handleThemeToggle} accentColor="green" icon={isDarkMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />} />
             </div>
           </div>
 
           {/* Projects Toggle */}
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 backdrop-blur-sm border border-blue-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 bg-white dark:bg-black border border-green-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 Projects
@@ -240,7 +240,7 @@ export const FeaturesSection = () => {
 
           {/* COMMENTED OUT FOR FUTURE RELEASE - AG-UI Library Toggle */}
           {/*
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-pink-500/10 to-pink-600/5 backdrop-blur-sm border border-pink-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 bg-white dark:bg-black border border-green-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 AG-UI Library
@@ -250,14 +250,14 @@ export const FeaturesSection = () => {
               </p>
             </div>
             <div className="flex-shrink-0">
-              <Toggle checked={agUILibraryEnabled} onCheckedChange={setAgUILibraryEnabled} accentColor="pink" icon={<Layout className="w-5 h-5" />} />
+              <Toggle checked={agUILibraryEnabled} onCheckedChange={setAgUILibraryEnabled} accentColor="green" icon={<Layout className="w-5 h-5" />} />
             </div>
           </div>
           */}
 
           {/* COMMENTED OUT FOR FUTURE RELEASE - Agents Toggle */}
           {/*
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-sm border border-green-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 bg-white dark:bg-black border border-green-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 Agents
@@ -273,7 +273,7 @@ export const FeaturesSection = () => {
           */}
 
           {/* Pydantic Logfire Toggle */}
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-orange-500/10 to-orange-600/5 backdrop-blur-sm border border-orange-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-orange-500/10 to-orange-600/5 bg-white dark:bg-black border border-orange-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 Pydantic Logfire
@@ -294,7 +294,7 @@ export const FeaturesSection = () => {
           </div>
 
           {/* Disconnect Screen Toggle */}
-          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 backdrop-blur-sm border border-green-500/20 shadow-lg">
+          <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/5 bg-white dark:bg-black border border-green-500/20 shadow-lg">
             <div className="flex-1 min-w-0">
               <p className="font-medium text-gray-800 dark:text-white">
                 Disconnect Screen

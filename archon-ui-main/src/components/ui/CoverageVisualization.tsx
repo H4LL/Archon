@@ -152,7 +152,7 @@ const FileBreakdown: React.FC<{ files: Record<string, CoverageMetrics> }> = ({ f
   return (
     <div className="mt-6">
       <h4 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-        <BarChart className="w-5 h-5 text-blue-500" />
+        <BarChart className="w-5 h-5 text-green-500" />
         File Coverage Breakdown
       </h4>
       
@@ -261,7 +261,7 @@ export const CoverageVisualization: React.FC<CoverageVisualizationProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Target className="w-6 h-6 text-blue-500" />
+          <Target className="w-6 h-6 text-green-500" />
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
             Coverage Analysis
           </h3>
@@ -314,7 +314,7 @@ export const CoverageVisualization: React.FC<CoverageVisualizationProps> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800"
+        className="bg-gradient-to-r from-green-50 to-green-50 dark:from-green-900/20 dark:to-green-900/20 p-6 rounded-lg border border-green-200 dark:border-green-800"
       >
         <div className="flex items-center justify-between">
           <div>
@@ -326,7 +326,7 @@ export const CoverageVisualization: React.FC<CoverageVisualizationProps> = ({
             </p>
           </div>
           <div className="text-right">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400">
               {((total.lines.pct + total.statements.pct + total.functions.pct + total.branches.pct) / 4).toFixed(1)}%
             </div>
             <div className="text-sm text-gray-500 dark:text-gray-400">

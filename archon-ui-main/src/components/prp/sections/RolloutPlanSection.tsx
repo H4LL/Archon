@@ -21,24 +21,24 @@ export const RolloutPlanSection: React.FC<PRPSectionProps> = ({
   if (!data) return null;
 
   const colorMap = {
-    blue: 'from-blue-400 to-blue-600 border-blue-500',
-    purple: 'from-purple-400 to-purple-600 border-purple-500',
+    blue: 'from-green-400 to-green-600 border-green-500',
+    green: 'from-green-400 to-green-600 border-green-500',
     green: 'from-green-400 to-green-600 border-green-500',
     orange: 'from-orange-400 to-orange-600 border-orange-500',
-    pink: 'from-pink-400 to-pink-600 border-pink-500',
-    cyan: 'from-cyan-400 to-cyan-600 border-cyan-500',
-    indigo: 'from-indigo-400 to-indigo-600 border-indigo-500',
+    green: 'from-green-400 to-green-600 border-green-500',
+    cyan: 'from-green-400 to-green-600 border-green-500',
+    indigo: 'from-green-400 to-green-600 border-green-500',
     emerald: 'from-emerald-400 to-emerald-600 border-emerald-500',
   };
 
   const bgColorMap = {
-    blue: 'bg-blue-50 dark:bg-blue-950',
-    purple: 'bg-purple-50 dark:bg-purple-950',
+    blue: 'bg-green-50 dark:bg-green-950',
+    green: 'bg-green-50 dark:bg-green-950',
     green: 'bg-green-50 dark:bg-green-950',
     orange: 'bg-orange-50 dark:bg-orange-950',
-    pink: 'bg-pink-50 dark:bg-pink-950',
-    cyan: 'bg-cyan-50 dark:bg-cyan-950',
-    indigo: 'bg-indigo-50 dark:bg-indigo-950',
+    green: 'bg-green-50 dark:bg-green-950',
+    cyan: 'bg-green-50 dark:bg-green-950',
+    indigo: 'bg-green-50 dark:bg-green-950',
     emerald: 'bg-emerald-50 dark:bg-emerald-950',
   };
 
