@@ -20,12 +20,14 @@ from typing import Any
 import httpx
 import uvicorn
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 # Import our PydanticAI agents
 from .document_agent import DocumentAgent
 from .rag_agent import RagAgent
+from .ollama_react_rag_agent import OllamaReActRagAgent
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -55,6 +57,7 @@ class AgentResponse(BaseModel):
 AVAILABLE_AGENTS = {
     "document": DocumentAgent,
     "rag": RagAgent,
+    "ollama_rag": OllamaReActRagAgent,
 }
 
 # Global credentials storage
@@ -124,9 +127,16 @@ async def lifespan(app: FastAPI):
     app.state.agents = {}
     for name, agent_class in AVAILABLE_AGENTS.items():
         try:
-            # Pass model configuration from credentials
-            model_key = f"{name.upper()}_AGENT_MODEL"
-            model = AGENT_CREDENTIALS.get(model_key, "openai:gpt-4o-mini")
+            # Special handling for ollama_rag agent - use MODEL_CHOICE
+            if name == "ollama_rag":
+                model = AGENT_CREDENTIALS.get("MODEL_CHOICE")
+                if not model:
+                    model = os.getenv("MODEL_CHOICE", "qwen3:0.6b")
+                logger.info(f"Using MODEL_CHOICE for ollama_rag: {model}")
+            else:
+                # Pass model configuration from credentials for other agents
+                model_key = f"{name.upper()}_AGENT_MODEL"
+                model = AGENT_CREDENTIALS.get(model_key, "openai:gpt-4o-mini")
 
             app.state.agents[name] = agent_class(model=model)
             logger.info(f"Initialized {name} agent with model: {model}")
@@ -145,6 +155,15 @@ app = FastAPI(
     description="Lightweight service hosting PydanticAI agents",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+# Add CORS middleware to allow frontend access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3737", "http://localhost:5173", "*"],  # Allow frontend origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 
@@ -174,11 +193,21 @@ async def run_agent(request: AgentRequest):
         agent = app.state.agents[request.agent_type]
 
         # Prepare dependencies for the agent
-        deps = {
-            "context": request.context or {},
-            "options": request.options or {},
-            "mcp_endpoint": os.getenv("MCP_SERVICE_URL", "http://archon-mcp:8051"),
-        }
+        if request.agent_type == "ollama_rag":
+            # Ollama agent expects specific structure
+            context = request.context or {}
+            deps = {
+                "source_filter": context.get("source"),
+                "match_count": context.get("match_count", 5),
+                "max_iterations": 3
+            }
+        else:
+            # Standard agents
+            deps = {
+                "context": request.context or {},
+                "options": request.options or {},
+                "mcp_endpoint": os.getenv("MCP_SERVICE_URL", "http://archon-mcp:8051"),
+            }
 
         # Run the agent
         result = await agent.run(request.prompt, deps)
@@ -210,6 +239,12 @@ async def list_agents():
     return {"agents": agents_info, "total": len(agents_info)}
 
 
+@app.options("/agents/{agent_type}/stream")
+async def stream_agent_options(agent_type: str):
+    """Handle preflight requests for CORS"""
+    return {"message": "OK"}
+
+
 @app.post("/agents/{agent_type}/stream")
 async def stream_agent(agent_type: str, request: AgentRequest):
     """
@@ -235,6 +270,14 @@ async def stream_agent(agent_type: str, request: AgentRequest):
                     source_filter=request.context.get("source_filter") if request.context else None,
                     match_count=request.context.get("match_count", 5) if request.context else 5,
                     project_id=request.context.get("project_id") if request.context else None,
+                )
+            elif agent_type == "ollama_rag":
+                from .ollama_react_rag_agent import OllamaRagDependencies
+
+                deps = OllamaRagDependencies(
+                    source_filter=request.context.get("source_filter") if request.context else None,
+                    match_count=request.context.get("match_count", 5) if request.context else 5,
+                    max_iterations=request.context.get("max_iterations", 3) if request.context else 3,
                 )
             elif agent_type == "document":
                 from .document_agent import DocumentDependencies
