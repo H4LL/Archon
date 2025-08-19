@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
-import { Send, Bot, User, Sparkles, Loader2, ChevronRight, Maximize2, Minimize2 } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -39,7 +39,6 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
     const [socket, setSocket] = useState<Socket | null>(null);
     const [isTyping, setIsTyping] = useState(false);
     const [streamingContent, setStreamingContent] = useState('');
-    const [isFullscreen, setIsFullscreen] = useState(false);
     const [unreadCount, setUnreadCount] = useState(0);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -133,7 +132,14 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
 
     // Auto-scroll to bottom
     useEffect(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      // Small delay to ensure DOM is updated
+      const scrollTimeout = setTimeout(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+      }, 100);
+      
+      return () => clearTimeout(scrollTimeout);
     }, [messages, streamingContent]);
 
     const sendMessage = async (message?: string, context?: any) => {
@@ -191,25 +197,37 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
       }
     };
 
-    const toggleFullscreen = () => {
-      setIsFullscreen(!isFullscreen);
-    };
+    // Don't render anything if not expanded
+    if (!isExpanded) return null;
 
     return (
       <AnimatePresence mode="wait">
         <motion.div
-          initial={{ height: isExpanded ? 0 : 80 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ 
-            height: isExpanded ? (isFullscreen ? '100vh' : '66vh') : 80,
-            width: '100%'
+            opacity: 1, 
+            scale: 1
           }}
-          exit={{ height: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className={`${isFullscreen ? 'fixed inset-0 z-50' : 'relative'} ${className}`}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          onClick={(e) => {
+            // Close when clicking outside the card
+            if (e.target === e.currentTarget) {
+              onToggleExpand();
+            }
+          }}
         >
-          <Card className={`h-full flex flex-col bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 border-purple-500/20 ${isFullscreen ? '' : 'rounded-lg'}`}>
-            {/* Header - Only show when expanded */}
-            {isExpanded && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed inset-4 md:inset-8 lg:inset-12 flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Card className="w-full h-full flex flex-col bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 border-purple-500/20 rounded-lg shadow-2xl bg-white dark:bg-gray-900">
+              {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-purple-500" />
@@ -219,32 +237,20 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
                     <Badge color="orange" variant="solid">{unreadCount}</Badge>
                   )}
                 </div>
-                <div className="flex items-center gap-2">
-                    <Button
-                      onClick={toggleFullscreen}
-                      variant="ghost"
-                      size="sm"
-                      accentColor="blue"
-                    >
-                      {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-                    </Button>
-                    <Button
-                      onClick={onToggleExpand}
-                      variant="ghost"
-                      size="sm"
-                      accentColor="blue"
-                    >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
+                <Button
+                  onClick={onToggleExpand}
+                  variant="ghost"
+                  size="sm"
+                  accentColor="red"
+                  className="hover:bg-red-50 dark:hover:bg-red-900/20"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
               </div>
-            )}
 
-            {/* Chat Content - Only visible when expanded */}
-            {isExpanded && (
-              <>
+              {/* Chat Content */}
                 {/* Messages Area */}
-                <div className={`flex-1 overflow-y-auto p-4 ${isFullscreen ? 'max-h-[calc(100vh-180px)]' : 'h-[calc(66vh-180px)]'}`}>
+                <div className="flex-1 overflow-y-auto p-4 scroll-smooth">
                   {messages.length === 0 && !streamingContent ? (
                     <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
                       <div className="text-center">
@@ -416,9 +422,8 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
                     </Button>
                   </div>
                 </div>
-              </>
-            )}
-          </Card>
+            </Card>
+          </motion.div>
         </motion.div>
       </AnimatePresence>
     );

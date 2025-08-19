@@ -104,7 +104,14 @@ export const RAGChatSection = () => {
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Small delay to ensure DOM is updated
+    const scrollTimeout = setTimeout(() => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }, 100);
+    
+    return () => clearTimeout(scrollTimeout);
   }, [messages, streamingContent]);
 
   const sendMessage = async () => {
@@ -151,7 +158,7 @@ export const RAGChatSection = () => {
         </div>
 
         {/* Chat Messages */}
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 mb-4 h-96 overflow-y-auto p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 mb-4 h-96 overflow-y-auto p-4 scroll-smooth">
           {messages.length === 0 && !streamingContent ? (
             <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
               <div className="text-center">

@@ -179,7 +179,8 @@ class KnowledgeBaseService {
    * Delete a knowledge item by source_id
    */
   async deleteKnowledgeItem(sourceId: string) {
-    return apiRequest(`/knowledge-items/${sourceId}`, {
+    const encodedSourceId = encodeURIComponent(sourceId);
+    return apiRequest(`/knowledge-items/${encodedSourceId}`, {
       method: 'DELETE'
     })
   }
@@ -188,7 +189,8 @@ class KnowledgeBaseService {
    * Update knowledge item metadata
    */
   async updateKnowledgeItem(sourceId: string, updates: Partial<KnowledgeItemMetadata>) {
-    return apiRequest(`/knowledge-items/${sourceId}`, {
+    const encodedSourceId = encodeURIComponent(sourceId);
+    return apiRequest(`/knowledge-items/${encodedSourceId}`, {
       method: 'PUT',
       body: JSON.stringify(updates)
     })
@@ -200,7 +202,10 @@ class KnowledgeBaseService {
   async refreshKnowledgeItem(sourceId: string) {
     console.log('🔄 [KnowledgeBase] Refreshing knowledge item:', sourceId);
     
-    return apiRequest(`/knowledge-items/${sourceId}/refresh`, {
+    // URL encode the sourceId to handle special characters
+    const encodedSourceId = encodeURIComponent(sourceId);
+    
+    return apiRequest(`/knowledge-items/${encodedSourceId}/refresh`, {
       method: 'POST'
     })
   }
@@ -255,7 +260,8 @@ class KnowledgeBaseService {
    * Get detailed information about a knowledge item
    */
   async getKnowledgeItemDetails(sourceId: string) {
-    return apiRequest(`/knowledge-items/${sourceId}/details`)
+    const encodedSourceId = encodeURIComponent(sourceId);
+    return apiRequest(`/knowledge-items/${encodedSourceId}/details`)
   }
 
   /**
@@ -277,7 +283,8 @@ class KnowledgeBaseService {
   async stopCrawl(progressId: string) {
     console.log('🛑 [KnowledgeBase] Stopping crawl:', progressId);
     
-    return apiRequest(`/knowledge-items/stop/${progressId}`, {
+    const encodedProgressId = encodeURIComponent(progressId);
+    return apiRequest(`/knowledge-items/stop/${encodedProgressId}`, {
       method: 'POST'
     });
   }
@@ -288,12 +295,13 @@ class KnowledgeBaseService {
   async getCodeExamples(sourceId: string) {
     console.log('📚 [KnowledgeBase] Fetching code examples for:', sourceId);
     
+    const encodedSourceId = encodeURIComponent(sourceId);
     return apiRequest<{
       success: boolean
       source_id: string
       code_examples: any[]
       count: number
-    }>(`/knowledge-items/${sourceId}/code-examples`);
+    }>(`/knowledge-items/${encodedSourceId}/code-examples`);
   }
 
   /**

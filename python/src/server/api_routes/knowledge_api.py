@@ -266,12 +266,100 @@ async def get_knowledge_item_code_examples(source_id: str):
 
 
 @router.post("/knowledge-items/{source_id}/refresh")
-async def refresh_knowledge_item(source_id: str):
-    """Refresh a knowledge item by re-crawling its URL with the same metadata."""
+async def refresh_knowledge_item(source_id: str, background_tasks: BackgroundTasks):
+    """Refresh a knowledge item by re-crawling its URL or re-searching with the same metadata."""
     try:
         safe_logfire_info(f"Starting knowledge item refresh | source_id={source_id}")
 
-        # Get the existing knowledge item
+        # Check if this is a search-based source
+        if source_id.startswith("search:"):
+            # Extract the search term from the source_id
+            search_term = source_id.replace("search:", "", 1)
+            safe_logfire_info(f"Refreshing search-based source | search_term={search_term}")
+            
+            # Get the existing knowledge item to extract metadata
+            service = KnowledgeItemService(get_supabase_client())
+            existing_item = await service.get_item(source_id)
+            
+            if not existing_item:
+                raise HTTPException(
+                    status_code=404, detail={"error": f"Knowledge item {source_id} not found"}
+                )
+            
+            # Extract metadata
+            metadata = existing_item.get("metadata", {})
+            knowledge_type = metadata.get("knowledge_type", "technical")
+            tags = metadata.get("tags", [])
+            # Remove the search tag to avoid duplicates
+            tags = [tag for tag in tags if not tag.startswith("search:")]
+            max_results = metadata.get("max_results", 5)
+            crawl_depth = metadata.get("crawl_depth", 1)
+            freshness = metadata.get("freshness")
+            
+            # Check if Brave Search is configured
+            if not brave_search_service.is_configured():
+                raise HTTPException(
+                    status_code=503,
+                    detail="Brave Search API is not configured. Please add BRAVE_SEARCH_API_KEY to environment variables."
+                )
+            
+            # Perform the search
+            logger.info(f"Re-searching for '{search_term}' with max_results={max_results}")
+            search_data = await brave_search_service.search_for_crawling(
+                query=search_term,
+                max_results=max_results,
+                freshness=freshness
+            )
+            
+            if not search_data["urls_to_crawl"]:
+                return {
+                    "success": False,
+                    "message": "No search results found",
+                    "search_term": search_term,
+                    "urls_found": [],
+                    "progressId": None
+                }
+            
+            # Prepare tags - always include search term as a tag
+            final_tags = tags or []
+            final_tags.append(f"search:{search_term}")
+            
+            # Generate a single progress ID for the entire search crawl operation
+            progress_id = f"search_{hashlib.md5(f'{search_term}_{datetime.utcnow().isoformat()}'.encode()).hexdigest()[:12]}"
+            
+            # Start progress tracking with initial state
+            await start_crawl_progress(progress_id, {
+                "progressId": progress_id,
+                "currentUrl": f"Search: {search_term} (Refresh)",
+                "searchTerm": search_term,
+                "totalPages": len(search_data["urls_to_crawl"]),
+                "processedPages": 0,
+                "percentage": 0,
+                "status": "starting",
+                "message": f"Refreshing crawl of {len(search_data['urls_to_crawl'])} search results",
+                "logs": [f"Found {len(search_data['urls_to_crawl'])} URLs to refresh from search: {search_term}"],
+                "workers": []
+            })
+            
+            # Start the unified crawl in the background
+            background_tasks.add_task(
+                crawl_search_results_unified,
+                search_term=search_term,
+                urls=search_data["urls_to_crawl"],
+                search_results=search_data["search_results"],
+                progress_id=progress_id,
+                knowledge_type=knowledge_type,
+                tags=final_tags,
+                crawl_depth=crawl_depth
+            )
+            
+            return {
+                "progressId": progress_id,
+                "message": f"Started refresh search for: {search_term}",
+                "urls_found": search_data["urls_to_crawl"]
+            }
+        
+        # Regular URL-based refresh
         service = KnowledgeItemService(get_supabase_client())
         existing_item = await service.get_item(source_id)
 
