@@ -44,6 +44,9 @@ export interface CrawlProgressData {
   fileName?: string;
   fileType?: string;
   currentUrl?: string;
+  searchTerm?: string;
+  resultIndex?: number;
+  totalResults?: number;
   chunksStored?: number;
   processedPages?: number;
   totalPages?: number;

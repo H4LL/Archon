@@ -168,19 +168,23 @@ class RecursiveCrawlStrategy:
                                     totalPages=total_processed + batch_idx,
                                     processedPages=len(results_all))
                 
+                # Transform URLs before crawling (like batch strategy does)
+                url_mapping = {}  # Map transformed URLs back to original
+                transformed_batch_urls = []
+                for url in batch_urls:
+                    transformed = transform_url_func(url)
+                    transformed_batch_urls.append(transformed)
+                    url_mapping[transformed] = url
+                
                 # Use arun_many for native parallel crawling with streaming
-                logger.info(f"Starting parallel crawl of {len(batch_urls)} URLs with arun_many")
-                batch_results = await self.crawler.arun_many(urls=batch_urls, config=run_config, dispatcher=dispatcher)
+                logger.info(f"Starting parallel crawl of {len(transformed_batch_urls)} URLs with arun_many")
+                batch_results = await self.crawler.arun_many(urls=transformed_batch_urls, config=run_config, dispatcher=dispatcher)
                 
                 # Handle streaming results from arun_many
                 i = 0
                 async for result in batch_results:
-                    # Map back to original URL if transformed
-                    original_url = result.url
-                    for orig_url in batch_urls:
-                        if transform_url_func(orig_url) == result.url:
-                            original_url = orig_url
-                            break
+                    # Map back to original URL using our mapping
+                    original_url = url_mapping.get(result.url, result.url)
                     
                     norm_url = normalize_url(original_url)
                     visited.add(norm_url)

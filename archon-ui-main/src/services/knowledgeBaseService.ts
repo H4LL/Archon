@@ -295,6 +295,52 @@ class KnowledgeBaseService {
       count: number
     }>(`/knowledge-items/${sourceId}/code-examples`);
   }
+
+  /**
+   * Search the web and crawl top results
+   */
+  async searchAndCrawl(request: {
+    search_term: string
+    max_results?: number
+    knowledge_type?: 'technical' | 'business'
+    tags?: string[]
+    crawl_depth?: number
+    freshness?: string
+  }) {
+    console.log('🔍 [KnowledgeBase] Search and crawl request:', request);
+    
+    return apiRequest<{
+      success: boolean
+      message: string
+      search_term: string
+      urls_found: string[]
+      crawl_progress_ids: string[]
+      search_results: Array<{
+        url: string
+        title: string
+        description: string
+        favicon?: string
+        age?: string
+      }>
+      crawl_tasks: Array<{
+        url: string
+        progress_id: string
+        title: string
+        description: string
+      }>
+      skipped_count: number
+    }>('/knowledge-items/search-and-crawl', {
+      method: 'POST',
+      body: JSON.stringify({
+        search_term: request.search_term,
+        max_results: request.max_results || 5,
+        knowledge_type: request.knowledge_type || 'technical',
+        tags: request.tags || [],
+        crawl_depth: request.crawl_depth || 1,
+        freshness: request.freshness
+      })
+    });
+  }
 }
 
 // Export singleton instance

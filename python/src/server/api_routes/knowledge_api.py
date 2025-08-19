@@ -23,6 +23,7 @@ from ..services.storage import DocumentStorageService
 from ..services.search.rag_service import RAGService
 from ..services.knowledge import KnowledgeItemService, DatabaseMetricsService
 from ..services.crawling import CrawlOrchestrationService
+from ..services.crawling.document_storage_operations import DocumentStorageOperations
 from ..services.crawler_manager import get_crawler
 
 # Import unified logging
@@ -36,6 +37,12 @@ from ..utils.document_processing import extract_text_from_document
 # Get logger for this module
 logger = get_logger(__name__)
 from ..socketio_app import get_socketio_instance
+
+# Brave Search Integration
+from typing import List, Optional
+from fastapi import Body, Request, BackgroundTasks
+from ..services.brave_search_service import brave_search_service
+import hashlib
 from .socketio_handlers import (
     complete_crawl_progress,
     error_crawl_progress,
@@ -961,3 +968,311 @@ async def stop_crawl_task(progress_id: str):
             f"Failed to stop crawl task | error={str(e)} | progress_id={progress_id}"
         )
         raise HTTPException(status_code=500, detail={"error": str(e)})
+
+@router.post("/knowledge-items/search-and-crawl")
+async def search_and_crawl(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    search_term: str = Body(..., description="Search query to find websites"),
+    max_results: int = Body(5, ge=1, le=20, description="Number of results to crawl"),
+    knowledge_type: Optional[str] = Body("technical", description="Type of knowledge"),
+    tags: Optional[List[str]] = Body(default=None, description="Tags to apply to crawled content"),
+    crawl_depth: int = Body(1, ge=1, le=3, description="Depth of crawling for each URL"),
+    freshness: Optional[str] = Body(None, description="Time range for results (pd=past day, pw=past week)")
+):
+    """
+    Search the web for a query and automatically crawl the top results as a single unified operation.
+    
+    This endpoint:
+    1. Uses Brave Search API to find relevant URLs
+    2. Creates a single crawl operation that processes all URLs
+    3. Returns a single progress ID for tracking the entire operation
+    """
+    try:
+        # Check if Brave Search is configured
+        if not brave_search_service.is_configured():
+            raise HTTPException(
+                status_code=503,
+                detail="Brave Search API is not configured. Please add BRAVE_SEARCH_API_KEY to environment variables."
+            )
+        
+        # Perform the search
+        logger.info(f"Searching for '{search_term}' with max_results={max_results}")
+        search_data = await brave_search_service.search_for_crawling(
+            query=search_term,
+            max_results=max_results,
+            freshness=freshness
+        )
+        
+        if not search_data["urls_to_crawl"]:
+            return {
+                "success": False,
+                "message": "No search results found",
+                "search_term": search_term,
+                "urls_found": [],
+                "crawl_progress_id": None
+            }
+        
+        # Prepare tags - always include search term as a tag
+        final_tags = tags or []
+        final_tags.append(f"search:{search_term}")
+        
+        # Initialize services
+        supabase = get_supabase_client()
+        knowledge_service = KnowledgeItemService(supabase)
+        
+        # Filter out URLs that already exist in knowledge base
+        urls_to_crawl = []
+        for url in search_data["urls_to_crawl"]:
+            try:
+                # Check if URL already exists (this would need to be implemented)
+                # For now, just add all URLs
+                urls_to_crawl.append(url)
+            except:
+                urls_to_crawl.append(url)
+        
+        if not urls_to_crawl:
+            return {
+                "success": False,
+                "message": "All search results are already in the knowledge base",
+                "search_term": search_term,
+                "urls_found": search_data["urls_to_crawl"],
+                "crawl_progress_id": None,
+                "skipped_count": len(search_data["urls_to_crawl"])
+            }
+        
+        # Generate a single progress ID for the entire search crawl operation
+        progress_id = f"search_{hashlib.md5(f'{search_term}_{datetime.utcnow().isoformat()}'.encode()).hexdigest()[:12]}"
+        
+        # Start progress tracking with initial state
+        await start_crawl_progress(progress_id, {
+            "progressId": progress_id,
+            "currentUrl": f"Search: {search_term}",
+            "searchTerm": search_term,
+            "totalPages": len(urls_to_crawl),
+            "processedPages": 0,
+            "percentage": 0,
+            "status": "starting",
+            "message": f"Starting crawl of {len(urls_to_crawl)} search results",
+            "logs": [f"Found {len(urls_to_crawl)} URLs to crawl from search: {search_term}"],
+            "workers": []
+        })
+        
+        # Start the unified crawl in the background
+        background_tasks.add_task(
+            crawl_search_results_unified,
+            search_term=search_term,
+            urls=urls_to_crawl,
+            search_results=search_data["search_results"],
+            progress_id=progress_id,
+            knowledge_type=knowledge_type,
+            tags=final_tags,
+            crawl_depth=crawl_depth
+        )
+        
+        # Return response with single progress ID
+        return {
+            "success": True,
+            "message": f"Started unified crawl of {len(urls_to_crawl)} search results",
+            "search_term": search_term,
+            "urls_found": urls_to_crawl,
+            "crawl_progress_id": progress_id,  # Single progress ID instead of array
+            "search_results": search_data["search_results"],
+            "total_results": len(urls_to_crawl)
+        }
+        
+    except ValueError as e:
+        # Handle API key or configuration errors
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        import traceback
+        logger.error(f"Error in search_and_crawl: {e}\n{traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Failed to search and crawl: {str(e)}")
+
+
+async def crawl_search_results_unified(
+    search_term: str,
+    urls: List[str],
+    search_results: List[dict],
+    progress_id: str,
+    knowledge_type: str,
+    tags: List[str],
+    crawl_depth: int
+):
+    """
+    Crawl multiple search result URLs as a single unified operation.
+    Uses the batch crawl strategy to process all URLs together with worker progress.
+    """
+    try:
+        # Initialize services
+        supabase = get_supabase_client()
+        crawler = await get_crawler()
+        orchestration_service = CrawlOrchestrationService(crawler, supabase)
+        orchestration_service.set_progress_id(progress_id)
+        
+        # Start progress tracking
+        await start_crawl_progress(progress_id, {
+            "progressId": progress_id,
+            "currentUrl": f"Search: {search_term}",
+            "searchTerm": search_term,
+            "status": "starting",
+            "percentage": 0,
+            "message": f"Starting unified crawl of {len(urls)} search results"
+        })
+        
+        # Add a small delay to allow the UI to establish WebSocket subscription
+        # This prevents the crawl from completing before the UI can subscribe
+        await asyncio.sleep(2.0)
+        
+        # For search results, we should use batch crawling since we have multiple independent URLs
+        # Initialize workers for progress tracking
+        workers = []
+        for idx, url in enumerate(urls):
+            workers.append({
+                "worker_id": f"url_{idx + 1}",
+                "status": "pending",
+                "progress": 0,
+                "current_url": url,
+                "pages_crawled": 0,
+                "total_pages": 1,
+                "message": f"Pending: {search_results[idx].get('title', url) if idx < len(search_results) else url}"
+            })
+        
+        # Update progress to show we're starting with worker information
+        await update_crawl_progress(progress_id, {
+            "status": "processing",
+            "percentage": 10,
+            "currentStep": f"Starting crawl of {len(urls)} search results",
+            "message": f"Processing search results for: {search_term}",
+            "workers": workers,
+            "searchTerm": search_term,
+            "totalResults": len(urls)
+        })
+        
+        # Create a progress callback to update workers
+        urls_completed = 0
+        async def crawl_progress_callback(status: str, percentage: int, message: str, **kwargs):
+            nonlocal urls_completed
+            
+            # Map batch progress to overall progress (10% to 90%)
+            overall_percentage = 10 + int((percentage / 100) * 80)
+            
+            # Calculate which workers should be active/completed
+            completed_urls = 0
+            if percentage > 0 and len(urls) > 0:
+                progress_per_url = 100 / len(urls)
+                completed_urls = int(percentage / progress_per_url)
+                
+                for idx in range(len(workers)):
+                    if idx < completed_urls:
+                        workers[idx]["status"] = "completed"
+                        workers[idx]["progress"] = 100
+                        workers[idx]["message"] = f"Completed: {workers[idx]['current_url']}"
+                    elif idx == completed_urls and completed_urls < len(urls):
+                        workers[idx]["status"] = "active"
+                        workers[idx]["progress"] = int((percentage % progress_per_url) * (100 / progress_per_url))
+                        workers[idx]["message"] = f"Crawling: {workers[idx]['current_url']}"
+                    else:
+                        workers[idx]["status"] = "pending"
+                        workers[idx]["progress"] = 0
+            
+            # Send progress update with workers
+            current_url_index = min(completed_urls, len(urls) - 1) if urls else 0
+            await update_crawl_progress(progress_id, {
+                "status": "processing",
+                "percentage": overall_percentage,
+                "currentStep": f"Crawling {completed_urls} of {len(urls)} URLs",
+                "message": message,
+                "workers": workers,
+                "currentUrl": urls[current_url_index] if urls and current_url_index >= 0 else None
+            })
+        
+        # Use batch crawling for all URLs at once with progress callback
+        crawl_results = await orchestration_service.crawl_batch_with_progress(
+            urls=urls,
+            max_concurrent=3,  # Process 3 URLs concurrently  
+            progress_callback=crawl_progress_callback,
+            start_progress=0,
+            end_progress=100
+        )
+        
+        # Update workers to all completed
+        for worker in workers:
+            worker["status"] = "completed"
+            worker["progress"] = 100
+            worker["message"] = f"Completed: {worker['current_url']}"
+        
+        # Store the crawl results in the database using existing service
+        if crawl_results:
+            doc_storage = DocumentStorageOperations(supabase)
+            
+            # Create request dict for storage operation
+            storage_request = {
+                "url": urls[0] if len(urls) == 1 else urls,
+                "knowledge_type": knowledge_type,
+                "tags": tags,
+                "search_term": search_term,
+                "is_search_crawl": True
+            }
+            
+            stored_result = await doc_storage.process_and_store_documents(
+                crawl_results=crawl_results,
+                request=storage_request,
+                crawl_type="search_results",
+                original_source_id=f"search:{search_term}",
+                progress_callback=None
+            )
+            logger.info(f"Stored documents from {len(crawl_results)} crawled pages")
+        
+        # Mark crawl as complete with final worker status
+        await complete_crawl_progress(progress_id, {
+            "status": "completed",
+            "percentage": 100,
+            "message": f"Successfully crawled {len(crawl_results)} pages from {len(urls)} search results",
+            "completed": True,
+            "workers": workers,
+            "currentStep": f"Completed: Crawled all {len(urls)} search results",
+            "searchTerm": search_term,
+            "totalResults": len(urls)
+        })
+        
+        result = {"task_id": progress_id, "results_count": len(crawl_results)}
+        
+        logger.info(f"Started unified search crawl with task_id={result.get('task_id')}")
+        
+    except Exception as e:
+        logger.error(f"Error in unified search crawl: {e}")
+        await update_crawl_progress(progress_id, {
+            "status": "error",
+            "error": str(e),
+            "completed": True
+        })
+
+
+async def crawl_website_with_progress(request: KnowledgeItemRequest, progress_id: str, metadata: dict = None):
+    """Helper function to crawl a website with progress tracking"""
+    try:
+        # Initialize services
+        supabase = get_supabase_client()
+        knowledge_service = KnowledgeItemService(supabase)
+        crawler = await get_crawler()
+        orchestration_service = CrawlOrchestrationService(crawler, supabase)
+        orchestration_service.set_progress_id(progress_id)
+        
+        # Perform the crawl using orchestrate_crawl method
+        request_dict = {
+            "url": request.url,
+            "knowledge_type": request.knowledge_type,
+            "tags": request.tags,
+            "max_depth": request.max_depth,
+            "extract_code_examples": True,
+            "generate_summary": True
+        }
+        result = await orchestration_service.orchestrate_crawl(request_dict)
+        
+        # Complete the progress
+        await complete_crawl_progress(progress_id, result)
+        
+    except Exception as e:
+        logger.error(f"Error crawling {request.url}: {e}")
+        await error_crawl_progress(progress_id, str(e))

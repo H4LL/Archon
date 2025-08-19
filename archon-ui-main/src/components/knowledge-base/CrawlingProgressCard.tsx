@@ -488,11 +488,15 @@ export const CrawlingProgressCard: React.FC<CrawlingProgressCardProps> = ({
         </div>
         <div className="flex-1 min-w-0 overflow-hidden">
           <h3 className="font-medium text-gray-800 dark:text-white" data-testid="crawling-progress-title">
-            {status.text}
+            {progressData.searchTerm ? 
+              `Search: ${progressData.searchTerm}` : 
+              status.text}
           </h3>
           {progressData.currentUrl && (
             <p className="text-sm text-gray-500 dark:text-zinc-400 truncate">
-              {progressData.currentUrl}
+              {progressData.searchTerm && progressData.resultIndex ? 
+                `Result ${progressData.resultIndex} of ${progressData.totalResults}: ${progressData.currentUrl}` :
+                progressData.currentUrl}
             </p>
           )}
         </div>

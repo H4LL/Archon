@@ -1246,8 +1246,10 @@ const AddKnowledgeModal = ({
   onSuccess,
   onStartCrawl
 }: AddKnowledgeModalProps) => {
-  const [method, setMethod] = useState<'url' | 'file'>('url');
+  const [method, setMethod] = useState<'url' | 'file' | 'search'>('url');
   const [url, setUrl] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [maxResults, setMaxResults] = useState(5);
   const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState('');
   const [knowledgeType, setKnowledgeType] = useState<'technical' | 'business'>('technical');
@@ -1326,7 +1328,52 @@ const AddKnowledgeModal = ({
     try {
       setLoading(true);
       
-      if (method === 'url') {
+      if (method === 'search') {
+        if (!searchTerm.trim()) {
+          showToast('Please enter a search query', 'error');
+          return;
+        }
+        
+        showToast('Searching the web...', 'info');
+        
+        const result = await knowledgeBaseService.searchAndCrawl({
+          search_term: searchTerm,
+          max_results: maxResults,
+          knowledge_type: knowledgeType,
+          tags,
+          crawl_depth: crawlDepth
+        });
+        
+        if (result.success && result.crawl_progress_id) {
+          // Start tracking progress for the unified crawl
+          onStartCrawl(result.crawl_progress_id, {
+            status: 'initializing',
+            percentage: 0,
+            currentStep: `Starting unified crawl of ${result.total_results} search results`,
+            currentUrl: `Search: ${searchTerm}`,
+            searchTerm: searchTerm,
+            totalResults: result.total_results,
+            logs: [`Starting unified crawl for search: ${searchTerm}`],
+            workers: result.urls_found.map((url, idx) => ({
+              worker_id: `url_${idx + 1}`,
+              status: 'pending',
+              progress: 0,
+              current_url: url,
+              pages_crawled: 0,
+              total_pages: 1,
+              message: `Pending: ${result.search_results?.[idx]?.title || url}`
+            }))
+          });
+          
+          showToast(`Started unified crawl of ${result.total_results} search results`, 'success');
+          onClose();
+        } else if (result.skipped_count === result.urls_found.length) {
+          showToast('All search results are already in the knowledge base', 'info');
+        } else {
+          showToast(result.message || 'Search completed', 'success');
+          onSuccess();
+        }
+      } else if (method === 'url') {
         if (!url.trim()) {
           showToast('Please enter a URL', 'error');
           return;
@@ -1459,6 +1506,10 @@ const AddKnowledgeModal = ({
             <LinkIcon className="w-4 h-4" />
             <span>URL / Website</span>
           </button>
+          <button onClick={() => setMethod('search')} className={`flex-1 p-4 rounded-md border ${method === 'search' ? 'border-green-500 text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-green-300 dark:hover:border-green-500/30'} transition flex items-center justify-center gap-2`}>
+            <Search className="w-4 h-4" />
+            <span>Web Search</span>
+          </button>
           <button onClick={() => setMethod('file')} className={`flex-1 p-4 rounded-md border ${method === 'file' ? 'border-pink-500 text-pink-600 dark:text-pink-500 bg-pink-50 dark:bg-pink-500/5' : 'border-gray-200 dark:border-zinc-900 text-gray-500 dark:text-zinc-400 hover:border-pink-300 dark:hover:border-pink-500/30'} transition flex items-center justify-center gap-2`}>
             <Upload className="w-4 h-4" />
             <span>Upload File</span>
@@ -1519,8 +1570,38 @@ const AddKnowledgeModal = ({
             </p>
           </div>
         )}
-        {/* Crawl Depth - Only for URLs */}
-        {method === 'url' && (
+        {/* Web Search Input */}
+        {method === 'search' && (
+          <div className="space-y-4 mb-6">
+            <div>
+              <Input 
+                label="Search Query" 
+                type="text" 
+                value={searchTerm} 
+                onChange={e => setSearchTerm(e.target.value)} 
+                placeholder="e.g., React best practices, Python async programming..." 
+                accentColor="green" 
+              />
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <label className="text-gray-600 dark:text-zinc-400 text-sm">
+                Number of results to crawl:
+              </label>
+              <select 
+                value={maxResults} 
+                onChange={e => setMaxResults(Number(e.target.value))}
+                className="px-3 py-1 rounded-md border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-800 dark:text-white"
+              >
+                <option value={3}>Top 3</option>
+                <option value={5}>Top 5</option>
+                <option value={10}>Top 10</option>
+              </select>
+            </div>
+          </div>
+        )}
+        {/* Crawl Depth - Only for URLs and Search */}
+        {(method === 'url' || method === 'search') && (
           <div className="mb-6">
             <label className="block text-gray-600 dark:text-zinc-400 text-sm mb-4">
               Crawl Depth
@@ -1567,7 +1648,7 @@ const AddKnowledgeModal = ({
           <Button onClick={onClose} variant="ghost" disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} variant="primary" accentColor={method === 'url' ? 'blue' : 'pink'} disabled={loading}>
+          <Button onClick={handleSubmit} variant="primary" accentColor={method === 'url' ? 'blue' : method === 'search' ? 'green' : 'pink'} disabled={loading}>
             {loading ? 'Adding...' : 'Add Source'}
           </Button>
         </div>
