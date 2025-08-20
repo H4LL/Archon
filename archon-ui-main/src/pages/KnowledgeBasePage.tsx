@@ -1344,6 +1344,8 @@ const AddKnowledgeModal = ({
           crawl_depth: crawlDepth
         });
         
+        console.log('Search and crawl result:', result);
+        
         if (result.success && result.crawl_progress_id) {
           // Start tracking progress for the unified crawl
           onStartCrawl(result.crawl_progress_id, {
@@ -1465,6 +1467,12 @@ const AddKnowledgeModal = ({
       }
     } catch (error) {
       console.error('Failed to add knowledge:', error);
+      console.error('Error details:', {
+        method,
+        searchTerm,
+        url,
+        error: error instanceof Error ? error.message : String(error)
+      });
       showToast('Failed to add knowledge source', 'error');
     } finally {
       setLoading(false);

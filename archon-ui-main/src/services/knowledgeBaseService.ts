@@ -322,7 +322,7 @@ class KnowledgeBaseService {
       message: string
       search_term: string
       urls_found: string[]
-      crawl_progress_ids: string[]
+      crawl_progress_id: string
       search_results: Array<{
         url: string
         title: string
@@ -330,13 +330,8 @@ class KnowledgeBaseService {
         favicon?: string
         age?: string
       }>
-      crawl_tasks: Array<{
-        url: string
-        progress_id: string
-        title: string
-        description: string
-      }>
-      skipped_count: number
+      total_results: number
+      skipped_count?: number
     }>('/knowledge-items/search-and-crawl', {
       method: 'POST',
       body: JSON.stringify({

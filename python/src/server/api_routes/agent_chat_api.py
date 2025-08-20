@@ -168,7 +168,7 @@ async def process_agent_response(session_id: str, message: str, context: dict):
             )
         
         # First, get agent info to determine if we're using Ollama
-        async with httpx.AsyncClient(timeout=httpx.Timeout(60.0)) as client:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(120.0)) as client:
             # Quick call to get the agent metadata
             response = await client.post(
                 f"http://archon-agents:{agents_port}/agents/run",
@@ -227,6 +227,7 @@ async def process_agent_response(session_id: str, message: str, context: dict):
                         f"http://archon-agents:{agents_port}/agents/stream",
                         json={"agent_type": agent_type, "prompt": message, "context": context},
                         headers={"Accept": "text/event-stream"},
+                        timeout=httpx.Timeout(120.0),
                     ) as stream_response:
                         if stream_response.status_code == 200:
                             # Successfully using streaming endpoint

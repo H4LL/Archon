@@ -154,7 +154,7 @@ class OllamaRagAgent(BaseAgent[RagDependencies, str]):
                     source_filter = ctx.deps.source_filter
 
                 # Call the main server's RAG API directly
-                async with httpx.AsyncClient(timeout=30.0) as client:
+                async with httpx.AsyncClient(timeout=120.0) as client:
                     response = await client.post(
                         f"{ctx.deps.api_base_url}/api/rag/query",
                         json={
@@ -219,7 +219,7 @@ class OllamaRagAgent(BaseAgent[RagDependencies, str]):
             """List all available sources that can be searched."""
             try:
                 # Call the main server's sources API directly
-                async with httpx.AsyncClient(timeout=30.0) as client:
+                async with httpx.AsyncClient(timeout=120.0) as client:
                     response = await client.get(f"{ctx.deps.api_base_url}/api/rag/sources")
 
                     if response.status_code != 200:
@@ -268,7 +268,7 @@ class OllamaRagAgent(BaseAgent[RagDependencies, str]):
                     source_filter = ctx.deps.source_filter
 
                 # Call the main server's code examples API directly
-                async with httpx.AsyncClient(timeout=30.0) as client:
+                async with httpx.AsyncClient(timeout=120.0) as client:
                     response = await client.post(
                         f"{ctx.deps.api_base_url}/api/rag/code-examples",
                         json={

@@ -3,7 +3,7 @@ import { Send, Bot, User, Sparkles, Loader2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Card } from '../ui/Card';
+
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { useToast } from '../../contexts/ToastContext';
@@ -210,7 +210,7 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
           }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center"
           onClick={(e) => {
             // Close when clicking outside the card
             if (e.target === e.currentTarget) {
@@ -223,12 +223,12 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-4 md:inset-8 lg:inset-12 flex items-center justify-center"
+            className="w-full max-w-6xl h-[90vh] flex"
             onClick={(e) => e.stopPropagation()}
           >
-            <Card className="w-full h-full flex flex-col bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 border-purple-500/20 rounded-lg shadow-2xl bg-white dark:bg-gray-900">
+            <div className="flex flex-col w-full h-full bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 border border-purple-500/20 rounded-lg shadow-2xl bg-white dark:bg-gray-900 overflow-hidden">
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-purple-500" />
                   <h3 className="font-semibold text-gray-800 dark:text-white">RAG Assistant</h3>
@@ -248,9 +248,8 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
                 </Button>
               </div>
 
-              {/* Chat Content */}
-                {/* Messages Area */}
-                <div className="flex-1 overflow-y-auto p-4 scroll-smooth">
+              {/* Chat Content - Messages Area */}
+              <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-4 scroll-smooth">
                   {messages.length === 0 && !streamingContent ? (
                     <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
                       <div className="text-center">
@@ -392,37 +391,37 @@ const IntegratedRAGChat = forwardRef<IntegratedRAGChatRef, IntegratedRAGChatProp
                       <div ref={messagesEndRef} />
                     </div>
                   )}
-                </div>
+              </div>
 
-                {/* Input Area */}
-                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                  <div className="flex gap-2">
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      onKeyDown={handleKeyPress}
-                      placeholder="Ask about your knowledge base..."
-                      disabled={loading || !sessionId}
-                      className="flex-1 px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white placeholder-gray-400"
-                    />
-                    <Button
-                      onClick={() => sendMessage()}
-                      variant="primary"
-                      accentColor="purple"
-                      disabled={loading || !input.trim() || !sessionId}
-                      size="sm"
-                    >
-                      {loading ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Send className="w-4 h-4" />
-                      )}
-                    </Button>
-                  </div>
+              {/* Input Area */}
+              <div className="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex gap-2">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                    placeholder="Ask about your knowledge base..."
+                    disabled={loading || !sessionId}
+                    className="flex-1 px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-white placeholder-gray-400"
+                  />
+                  <Button
+                    onClick={() => sendMessage()}
+                    variant="primary"
+                    accentColor="purple"
+                    disabled={loading || !input.trim() || !sessionId}
+                    size="sm"
+                  >
+                    {loading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4" />
+                    )}
+                  </Button>
                 </div>
-            </Card>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </AnimatePresence>
